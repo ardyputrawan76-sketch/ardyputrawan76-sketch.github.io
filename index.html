@@ -106,9 +106,7 @@
 <body>
 
     <!-- AUDIO ELEMENT (Sudah bersih tanpa tanda bintang) -->
-      <audio id="bg-music" loop preload="auto">
-        <source src="https://assets.mixkit.co/music/preview/mixkit-wedding-march-2530.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="bg-music" src="musik-pernikahan.mp3" loop></audio>
 
     <!-- TOMBOL MUSIK MELAYANG -->
     <div id="music-control" onclick="toggleMusik()">🎵</div>
@@ -288,19 +286,24 @@
         }
 
         // FUNGSI UTAMA OTOMATIS: Berputar tepat saat ketukan "Buka Undangan" masuk
-        function bukaUndangan() {
+                function bukaUndangan() {
+            // 1. Langsung singkirkan cover undangan
             document.getElementById('cover').classList.add('opened');
-
-            if (music) {
-                music.muted = false;
-
-                // Eksekusi instan tanpa fungsi penengah agar disetujui Safari iOS
-                music.play().then(() => {
-                    musicBtn.style.animationPlayState = 'running';
-                    musicBtn.innerText = "🎵";
-                }).catch(err => {
-                    console.log("Autoplay diblokir, sistem bersiap menanti ketukan alternatif.");
-                });
+            
+            // 2. Perintah putar murni tanpa syarat (Langsung ditembak saat jari mengetuk)
+            var laguPernikahan = document.getElementById('bg-music');
+            if (laguPernikahan) {
+                laguPernikahan.muted = false; // Buka kunci suara
+                
+                // Perintah putar langsung tanpa fungsi penengah (Anti-Blokir Browser)
+                laguPernikahan.play();
+                
+                // Hidupkan animasi tombol lingkaran berputar di pojok bawah
+                var tombolMusik = document.getElementById('music-control');
+                if (tombolMusik) {
+                    tombolMusik.style.animationPlayState = 'running';
+                    tombolMusik.innerText = "🎵";
+                }
             }
         }
 
