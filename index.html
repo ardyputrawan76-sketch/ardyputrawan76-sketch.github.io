@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Pernikahan Ardy & Ana</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+ 
+
+
     
-    <style>
+    
+    Undangan Pernikahan Ardy & Ana
+    
+    
+    
+
+    
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Montserrat', sans-serif; background-color: #f7f5f0; color: #333; overflow-x: hidden; }
-        
+
         /* Cover Style */
         #cover {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
@@ -25,13 +25,13 @@
         .guest-name { font-size: 1.5rem; font-weight: 600; margin-top: 5px; color: #fff; }
         .btn-open { background-color: #d4af37; color: white; border: none; padding: 12px 28px; font-size: 1rem; font-weight: 600; border-radius: 25px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; }
         .btn-open:hover { background-color: #aa8c2c; transform: scale(1.05); }
-        
+
         /* Content Style */
         #main-content { padding: 80px 20px; text-align: center; max-width: 600px; margin: 0 auto; }
         .section-salam { margin-bottom: 50px; }
         .salam-arab { font-size: 1.5rem; margin-bottom: 15px; font-weight: 500; }
         .salam-teks { font-size: 0.9rem; line-height: 1.6; color: #666; }
-        
+
         /* Mempelai Style */
         .section-mempelai { display: flex; flex-direction: column; align-items: center; gap: 40px; margin-bottom: 60px; }
         @media (min-width: 768px) { .section-mempelai { flex-direction: row; justify-content: space-around; } }
@@ -42,7 +42,7 @@
         .info-ortu { font-size: 0.85rem; color: #777; line-height: 1.6; }
         .dan-simbol { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #d4af37; margin: 10px 0; }
         .pembatas { border: 0; height: 1px; background: linear-gradient(to right, transparent, #d4af37, transparent); margin: 40px 0; }
-        
+
         /* Countdown Timer */
         .section-countdown { background-color: #fff; padding: 30px 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 50px; }
         .timer-container { display: flex; justify-content: center; gap: 15px; }
@@ -82,7 +82,9 @@
 
         /* Form RSVP Style */
         .section-rsvp { background-color: #fff; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); text-align: left; }
-        .form-group { margin-bottom: 15px; }
+        .form-group {
+            margin-bottom: 15px;
+        }
         .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; color: #555; }
         .form-control { width: 100%; padding: 12px; border: 1px solid #eadecc; border-radius: 8px; font-family: inherit; font-size: 0.9rem; background-color: #fbfbfa; }
         .form-control:focus { outline: none; border-color: #d4af37; }
@@ -99,164 +101,173 @@
             animation: putarMusik 4s linear infinite; animation-play-state: paused;
         }
         @keyframes putarMusik { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    </style>
-</head>
-<body>
+    
 
-    <!-- AUDIO ELEMENT -->
-   <audio id="bg-music" loop preload="auto">
-    <source src="musik-pernikahan.mp3" type="audio/mpeg">
-    <source src="https://feeds.soundcloud.com/stream/1254330643-user-650085449-beautiful-romantic-piano-wedding-background-music.mp3" type="audio/mpeg">
-</audio>
 
-    <!-- TOMBOL MUSIK MELAYANG -->
-    <div id="music-control" onclick="toggleMusik()">🎵</div>
 
-    <!-- STRUKTUR OVERLAY POP-UP PEMBESAR FOTO -->
-    <div id="lightbox-overlay" onclick="tutupFoto()">
-        <img id="lightbox-img" src="" alt="Foto Diperbesar">
-        <p class="lightbox-hint">Ketuk di mana saja untuk menutup</p>
-    </div>
+    
+    
+        
+        
+    
 
-    <!-- 2. HALAMAN COVER -->
-    <div id="cover">
-        <p style="letter-spacing: 3px; font-size: 0.9rem;">THE WEDDING OF</p>
-        <h1 class="wedding-title">Ardy & Ana</h1>
-        <div class="guest-box">
-            <p style="font-size: 0.9rem; font-style: italic;">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
-            <h2 id="nama-tamu" class="guest-name">Tamu Undangan</h2>
-        </div>
-        <button class="btn-open" onclick="bukaUndangan()">Buka Undangan</button>
-    </div>
+    
+    🎵
 
-    <!-- 3. KONTEN UTAMA -->
-    <div id="main-content">
-        <section class="section-salam">
-            <p class="salam-arab">Om Swastyastu</p>
-            <p class="salam-teks">Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri Acara Pernikahan kami:</p>
-        </section>
+    
+    
+        
+        Ketuk di mana saja untuk menutup
+    
 
-        <!-- PROFIL MEMPELAI -->
-        <section class="section-mempelai">
-            <div class="mempelai-card">
-                <div class="avatar-frame"><img src="foto-ardy.jpg" alt="Foto Ardy"></div>
-                <h3 class="nama-lengkap">Gede Ardy Putrawan</h3>
-                <p class="info-ortu">Putra dari Pasangan:<br>Bapak Ketut Sariana (Alm.)<br>& Ibu Ketut Arsih</p>
-            </div>
-            <div class="dan-simbol">&</div>
-            <div class="mempelai-card">
-                <div class="avatar-frame"><img src="foto-ana.jpg" alt="Foto Ana"></div>
-                <h3 class="nama-lengkap">Komang Ana Oktaviani</h3>
-                <p class="info-ortu">Putri dari Pasangan:<br>Bapak I Wayan Sugiantara<br>& Ibu Ni Ketut Wartini</p>
-            </div>
-        </section>
+    
+    
+        THE WEDDING OF
+        Ardy & Ana
+        
+            Kepada Yth. Bapak/Ibu/Saudara/i:
+            Tamu Undangan
+        
+        Buka Undangan
+    
 
-        <hr class="pembatas">
+    
+    
+        
+            Om Swastyastu
+            Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri Acara Pernikahan kami:
+        
 
-        <!-- COUNTDOWN TIMER -->
-        <section class="section-countdown">
-            <h4 style="font-size: 1rem; letter-spacing: 2px; margin-bottom: 20px; color: #aa8c2c;">MENUJU HARI BAHAGIA</h4>
-            <div class="timer-container">
-                <div class="timer-box"><span id="days">00</span><p>Hari</p></div>
-                <div class="timer-box"><span id="hours">00</span><p>Jam</p></div>
-                <div class="timer-box"><span id="minutes">00</span><p>Menit</p></div>
-                <div class="timer-box"><span id="seconds">00</span><p>Detik</p></div>
-            </div>
-        </section>
-
-        <hr class="pembatas">
-
-        <!-- DETAIL ACARA -->
-        <section class="section-acara">
-            <h2 class="acara-title">Pawiwahan / Acara</h2>
-            <p style="font-weight: 600; margin-bottom: 5px;">Hari, Tanggal</p>
-            <p style="color: #666; font-size: 0.9rem; margin-bottom: 20px;">Kamis, 31 Desember 2026</p>
+        
+        
             
-            <p style="font-weight: 600; margin-bottom: 5px;">Waktu</p>
-            <p style="color: #666; font-size: 0.9rem; margin-bottom: 20px;">09.00 WITA - Selesai</p>
-            
-            <p style="font-weight: 600; margin-bottom: 5px;">Tempat / Lokasi</p>
-            <p style="color: #666; font-size: 0.9rem; padding: 0 20px; margin-bottom: 15px;">Kediaman Mempelai Pria, Tabanan, Bali</p>
-            
-            <a href="https://goo.gl/maps/bz8HRTQSsVTxnEum9" target="_blank" class="btn-maps">📍 Buka Google Maps Lokasi Acara</a>
-        </section>
-
-        <hr class="pembatas">
-
-        <!-- GALERI FOTO (BISA DI-KLIK UNTUK MEMBESAR) -->
-        <section class="section-galeri">
-            <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin-bottom: 5px;">Galeri Kebersamaan</h3>
-            <p style="font-size: 0.8rem; color: #777; margin-bottom: 5px;">Kisah cinta dalam bingkai potret kebahagiaan kami</p>
-            <p style="font-size: 0.7rem; color: #bfa36b; font-style: italic;">(Ketuk foto untuk memperbesar)</p>
-            
-            <div class="galeri-grid">
-                <div class="galeri-item" onclick="perbesarFoto('galeri1.jpg')"><img src="galeri1.jpg" alt="Foto Wedding 1"></div>
-                <div class="galeri-item" onclick="perbesarFoto('galeri2.jpg')"><img src="galeri2.jpg" alt="Foto Wedding 2"></div>
-                <div class="galeri-item" onclick="perbesarFoto('galeri3.jpg')"><img src="galeri3.jpg" alt="Foto Wedding 3"></div>
-                <div class="galeri-item" onclick="perbesarFoto('galeri4.jpg')"><img src="galeri4.jpg" alt="Foto Wedding 4"></div>
-            </div>
-        </section>
-
-        <hr class="pembatas">
-
-        <!-- KADO DIGITAL (VIRTUAL ACCOUNT DANA) -->
-        <section class="section-kado">
-            <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c;">Kado Digital</h3>
-            <p style="font-size: 0.85rem; color: #777; line-height: 1.5; margin-top: 10px;">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika ingin memberikan tanda kasih, Anda dapat mengirimkannya melalui Virtual Account DANA di bawah ini:</p>
-            
-            <div class="card-rekening">
-                <p style="font-weight: 600; color: #d4af37; letter-spacing: 1px;">VIRTUAL ACCOUNT PERMATA (DANA)</p>
-                <p id="nomor-rek" class="no-rek">852808XXXXXXXXXX</p>
-                <p style="font-size: 0.85rem; color: #555;">a.n Gede Ardy Putrawan</p>
                 
-                <div style="margin-top: 10px; background-color: #fff; padding: 10px; border-radius: 6px; text-align: left; font-size: 0.75rem; color: #666; line-height: 1.4;">
-                    <strong>💡 Cara Transfer via M-Banking BPD Bali:</strong><br>
-                    1. Pilih menu <strong>Transfer Antar Bank</strong><br>
-                    2. Pilih Bank Tujuan: <strong>Bank Permata (013)</strong><br>
-                    3. Masukkan nomor Virtual Account di atas selaku nomor rekening tujuan.
-                </div>
-            </div>
-        </section>
-
-        <hr class="pembatas">
-
-        <!-- FORM RSVP SPREADSHEET GOOGLE -->
-        <section class="section-rsvp">
-            <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-align: center; color: #aa8c2c; margin-bottom: 5px;">Konfirmasi Kehadiran</h3>
-            <p style="font-size: 0.8rem; text-align: center; color: #777; margin-bottom: 25px;">Mohon konfirmasikan kehadiran Anda melalui form di bawah ini:</p>
+                Gede Ardy Putrawan
+                Putra dari Pasangan:Bapak Ketut Sariana (Alm.)& Ibu Ketut Arsih
             
-            <form id="rsvp-form" action="https://api.web3forms.com/submit" method="POST">
-                <input type="hidden" name="access_key" value="MASUKKAN_ACCESS_KEY_ANDA_DISINI">
-                <input type="hidden" name="subject" value="Konfirmasi RSVP Undangan Ardy & Ana">
-                <input type="hidden" name="from_name" value="Sistem Undangan ArdyAna">
+            &
+            
+                
+                Komang Ana Oktaviani
+                Putri dari Pasangan:Bapak I Wayan Sugiantara& Ibu Ni Ketut Wartini
+            
+        
 
-                <div class="form-group">
-                    <label for="name">Nama Tamu</label>
-                    <input type="text" name="Nama Tamu" id="form-nama-tamu" class="form-control" required readonly>
-                </div>
-                <div class="form-group">
-                    <label for="status">Konfirmasi Kehadiran</label>
-                    <select name="Konfirmasi Kehadiran" id="status" class="form-control" required>
-                        <option value="">-- Pilih Acara Konfirmasi --</option>
-                        <option value="Hadir">Siaap, Saya Akan Hadir</option>
-                        <option value="Tidak Hadir">Maaf, Belum Bisa Hadir</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="message">Ucapan & Doa Restu</label>
-                    <textarea name="Ucapan dan Doa" id="message" rows="4" class="form-control" placeholder="Tulis ucapan selamat Anda untuk kedua mempelai..." required></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Kirim Konfirmasi</button>
-                <div id="form-status"></div>
-            </form>
-        </section>
-    </div>
+        
 
-    <script>
+        
+        
+            MENUJU HARI BAHAGIA
+            
+                216Hari
+                08Jam
+                22Menit
+                22Detik
+            
+        
+
+        
+
+        
+        
+            Pawiwahan / Acara
+            Hari, Tanggal
+            Kamis, 31 Desember 2026
+
+            Waktu
+            09.00 WITA - Selesai
+
+            Tempat / Lokasi
+            Kediaman Mempelai Pria, Tabanan, Bali
+
+            📍 Buka Google Maps Lokasi Acara
+        
+
+        
+
+        
+        
+            Galeri Kebersamaan
+            Kisah cinta dalam bingkai potret kebahagiaan kami
+            (Ketuk foto untuk memperbesar)
+
+            
+                
+                
+                
+                
+            
+        
+
+        
+
+        
+        
+            Kado Digital
+            Doa restu Anda merupakan karunia terindah bagi kami. Namun jika ingin memberikan tanda kasih, Anda dapat mengirimkannya secara Bebas Biaya Admin (Rp0) melalui QRIS DANA di bawah ini:
+
+            
+                QRIS DANA (ALL BANK & E-WALLET)
+
+                
+                
+
+                a.n Gede Ardy Putrawan
+
+                
+                
+                    📸 Simpan QRIS ke Galeri HP
+                
+
+                
+                    💡 Cara Transfer Gratis via HP:
+                    1. Klik tombol "Simpan QRIS ke Galeri HP" di atas.
+                    2. Buka M-Banking Anda (BPD Bali, BCA, Mandiri, dll) atau e-wallet lainnya.
+                    3. Pilih menu Scan / QRIS.
+                    4. Ketuk ikon Galeri/Foto di pojok menu scan, lalu pilih foto QRIS yang baru di-download tadi.
+                    5. Masukkan nominal transfer (Bebas biaya admin).
+                
+            
+        
+
+        
+
+        
+        
+            Konfirmasi Kehadiran
+            Mohon konfirmasikan kehadiran Anda melalui form di bawah ini:
+
+            
+                
+                
+                
+
+                
+                    Nama Tamu
+                    
+                
+                
+                    Konfirmasi Kehadiran
+                    
+                        -- Pilih Acara Konfirmasi --
+                        Siaap, Saya Akan Hadir
+                        Maaf, Belum Bisa Hadir
+                    
+                
+                
+                    Ucapan & Doa Restu
+                    
+                
+                Kirim Konfirmasi
+                
+            
+        
+    
+
+    
         const music = document.getElementById('bg-music');
         const musicBtn = document.getElementById('music-control');
 
-        // Fungsi Membuka dan Menutup Foto
         function perbesarFoto(srcDanLokasi) {
             const overlay = document.getElementById('lightbox-overlay');
             const imgTarget = document.getElementById('lightbox-img');
@@ -272,36 +283,31 @@
             const urlParams = new URLSearchParams(window.location.search);
             const guestName = urlParams.get('to');
             const penampungNama = guestName ? decodeURIComponent(guestName) : "Tamu Undangan";
-            
+
             document.getElementById('nama-tamu').innerText = penampungNama;
             document.getElementById('form-nama-tamu').value = penampungNama;
         }
 
-                function bukaUndangan() {
+        // FUNGSI UTAMA OTOMATIS: Berputar tepat saat ketukan "Buka Undangan" masuk
+        function bukaUndangan() {
             document.getElementById('cover').classList.add('opened');
-            
-            // Logika baru yang lebih kuat untuk mendobrak proteksi Safari/iOS
+
             if (music) {
-                music.removeAttribute('muted'); // Pastikan tidak ter-mute sistem
                 music.muted = false;
-                
-                // Paksa putar langsung
-                music.play().then(_ => {
+
+                // Eksekusi instan tanpa fungsi penengah agar disetujui Safari iOS
+                music.play().then(() => {
                     musicBtn.style.animationPlayState = 'running';
                     musicBtn.innerText = "🎵";
                 }).catch(err => {
-                    // Jika browser memblokir, kita tembak ulang dalam waktu 50 milidetik
-                    setTimeout(() => {
-                        music.play();
-                        musicBtn.style.animationPlayState = 'running';
-                    }, 50);
+                    console.log("Autoplay diblokir, sistem bersiap menanti ketukan alternatif.");
                 });
             }
         }
 
-
         function toggleMusik() {
             if (music.paused) {
+                music.muted = false;
                 music.play();
                 musicBtn.style.animationPlayState = 'running';
                 musicBtn.innerText = "🎵";
@@ -366,6 +372,6 @@
         }, 1000);
 
         window.onload = getGuestName;
-    </script>
-</body>
-</html>
+    
+
+
