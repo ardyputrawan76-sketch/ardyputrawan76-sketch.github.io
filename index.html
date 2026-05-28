@@ -59,9 +59,21 @@
         /* Galeri Foto Style */
         .section-galeri { background-color: #fff; padding: 35px 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 50px; }
         .galeri-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
-        .galeri-item { width: 100%; height: 180px; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .galeri-item { width: 100%; height: 180px; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: pointer; }
         .galeri-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
         .galeri-item img:hover { transform: scale(1.08); }
+
+        /* Pop-up Pembesar Foto (Lightbox Overlay) */
+        #lightbox-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); z-index: 10000;
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+        }
+        #lightbox-overlay.active { opacity: 1; pointer-events: auto; }
+        #lightbox-img { max-width: 90%; max-height: 85vh; border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transform: scale(0.9); transition: transform 0.4s ease; }
+        #lightbox-overlay.active #lightbox-img { transform: scale(1); }
+        .lightbox-hint { position: absolute; bottom: 20px; color: #ccc; font-size: 0.8rem; letter-spacing: 1px; }
 
         /* Kado Digital Style */
         .section-kado { background-color: #fff; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 50px; }
@@ -91,7 +103,7 @@
 </head>
 <body>
 
-    <!-- 1. AUDIO ELEMENT (Membaca file musik internal di dalam GitHub Anda) -->
+    <!-- AUDIO ELEMENT -->
     <audio id="bg-music" loop preload="auto">
         <source src="musik-pernikahan.mp3" type="audio/mpeg">
         <source src="https://feeds.soundcloud.com/stream/1254330643-user-650085449-beautiful-romantic-piano-wedding-background-music.mp3" type="audio/mpeg">
@@ -99,6 +111,12 @@
 
     <!-- TOMBOL MUSIK MELAYANG -->
     <div id="music-control" onclick="toggleMusik()">🎵</div>
+
+    <!-- STRUKTUR OVERLAY POP-UP PEMBESAR FOTO -->
+    <div id="lightbox-overlay" onclick="tutupFoto()">
+        <img id="lightbox-img" src="" alt="Foto Diperbesar">
+        <p class="lightbox-hint">Ketuk di mana saja untuk menutup</p>
+    </div>
 
     <!-- 2. HALAMAN COVER -->
     <div id="cover">
@@ -148,7 +166,7 @@
 
         <hr class="pembatas">
 
-        <!-- DETAIL ACARA DENGAN MAPS ASLI USER -->
+        <!-- DETAIL ACARA -->
         <section class="section-acara">
             <h2 class="acara-title">Pawiwahan / Acara</h2>
             <p style="font-weight: 600; margin-bottom: 5px;">Hari, Tanggal</p>
@@ -165,30 +183,38 @@
 
         <hr class="pembatas">
 
-        <!-- SEKSI GALERI FOTO WEDDING BARU -->
+        <!-- GALERI FOTO (BISA DI-KLIK UNTUK MEMBESAR) -->
         <section class="section-galeri">
             <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin-bottom: 5px;">Galeri Kebersamaan</h3>
-            <p style="font-size: 0.8rem; color: #777;">Kisah cinta dalam bingkai potret kebahagiaan kami</p>
+            <p style="font-size: 0.8rem; color: #777; margin-bottom: 5px;">Kisah cinta dalam bingkai potret kebahagiaan kami</p>
+            <p style="font-size: 0.7rem; color: #bfa36b; font-style: italic;">(Ketuk foto untuk memperbesar)</p>
             
             <div class="galeri-grid">
-                <div class="galeri-item"><img src="galeri1.jpg" alt="Foto Wedding 1"></div>
-                <div class="galeri-item"><img src="galeri2.jpg" alt="Foto Wedding 2"></div>
-                <div class="galeri-item"><img src="galeri3.jpg" alt="Foto Wedding 3"></div>
-                <div class="galeri-item"><img src="galeri4.jpg" alt="Foto Wedding 4"></div>
+                <div class="galeri-item" onclick="perbesarFoto('galeri1.jpg')"><img src="galeri1.jpg" alt="Foto Wedding 1"></div>
+                <div class="galeri-item" onclick="perbesarFoto('galeri2.jpg')"><img src="galeri2.jpg" alt="Foto Wedding 2"></div>
+                <div class="galeri-item" onclick="perbesarFoto('galeri3.jpg')"><img src="galeri3.jpg" alt="Foto Wedding 3"></div>
+                <div class="galeri-item" onclick="perbesarFoto('galeri4.jpg')"><img src="galeri4.jpg" alt="Foto Wedding 4"></div>
             </div>
         </section>
 
         <hr class="pembatas">
 
-        <!-- KADO DIGITAL (DIGITAL GIFT) -->
+        <!-- KADO DIGITAL (VIRTUAL ACCOUNT DANA) -->
         <section class="section-kado">
             <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c;">Kado Digital</h3>
-            <p style="font-size: 0.85rem; color: #777; line-height: 1.5; margin-top: 10px;">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika ingin memberikan tanda kasih, Anda dapat mengirimkannya secara cashless melalui rekening di bawah ini:</p>
+            <p style="font-size: 0.85rem; color: #777; line-height: 1.5; margin-top: 10px;">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika ingin memberikan tanda kasih, Anda dapat mengirimkannya melalui Virtual Account DANA di bawah ini:</p>
             
             <div class="card-rekening">
-                <p style="font-weight: 600; color: #aa8c2c;">BANK BPD BALI</p>
-                <p id="nomor-rek" class="no-rek">123-0456-789</p>
+                <p style="font-weight: 600; color: #d4af37; letter-spacing: 1px;">VIRTUAL ACCOUNT PERMATA (DANA)</p>
+                <p id="nomor-rek" class="no-rek">852808XXXXXXXXXX</p>
                 <p style="font-size: 0.85rem; color: #555;">a.n Gede Ardy Putrawan</p>
+                
+                <div style="margin-top: 10px; background-color: #fff; padding: 10px; border-radius: 6px; text-align: left; font-size: 0.75rem; color: #666; line-height: 1.4;">
+                    <strong>💡 Cara Transfer via M-Banking BPD Bali:</strong><br>
+                    1. Pilih menu <strong>Transfer Antar Bank</strong><br>
+                    2. Pilih Bank Tujuan: <strong>Bank Permata (013)</strong><br>
+                    3. Masukkan nomor Virtual Account di atas selaku nomor rekening tujuan.
+                </div>
             </div>
         </section>
 
@@ -230,6 +256,18 @@
         const music = document.getElementById('bg-music');
         const musicBtn = document.getElementById('music-control');
 
+        // Fungsi Membuka dan Menutup Foto
+        function perbesarFoto(srcDanLokasi) {
+            const overlay = document.getElementById('lightbox-overlay');
+            const imgTarget = document.getElementById('lightbox-img');
+            imgTarget.src = srcDanLokasi;
+            overlay.classList.add('active');
+        }
+
+        function tutupFoto() {
+            document.getElementById('lightbox-overlay').classList.remove('active');
+        }
+
         function getGuestName() {
             const urlParams = new URLSearchParams(window.location.search);
             const guestName = urlParams.get('to');
@@ -250,7 +288,7 @@
                 music.play().then(_ => {
                     musicBtn.style.animationPlayState = 'running';
                 }).catch(err => {
-                    console.log("Safari memblokir auto-play awal. Menunggu klik manual tombol musik.");
+                    console.log("Proteksi iOS aktif, memicu kontrol manual.");
                 });
             }
         }
