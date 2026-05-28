@@ -22,20 +22,19 @@
         }
         
         /* 👇 KOTAK EFEK KACA BURAM ELEGAN (IPHONE STYLE) 👇 */
-        .container {
+               .container {
             max-width: 500px;
-            background: rgba(255, 255, 255, 0.15); /* Putih transparan tipis */
-            padding: 30px;
-            border-radius: 24px; /* Sudut melengkung halus khas iOS */
-            border: 1px solid rgba(255, 255, 255, 0.25); /* Garis tepi kaca tipis */
-            
-            /* Mantra Sakti untuk Efek Blur Kaca */
+            width: 90%; /* Biar kotak melebar fleksibel mengikuti layar HP */
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px 15px; /* Mengurangi jarak kanan-kiri agar ruang tulisan lebih luas */
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(20px); 
             -webkit-backdrop-filter: blur(20px); 
-            
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             margin: 50px auto 0 auto;
         }
+
                 h1 {
             font-size: clamp(1.6rem, 5.5vw, 2.5rem); /* Huruf otomatis mengecil di HP */
             margin-bottom: 5px;
