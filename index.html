@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-
+    
     <style>
         * {
             margin: 0;
@@ -79,71 +79,246 @@
             background-color: #aa8c2c;
             transform: scale(1.05);
         }
-        /* Konten Utama setelah cover terbuka */
+        
+        /* Style Konten Utama */
         #main-content {
             padding: 80px 20px;
             text-align: center;
             max-width: 600px;
             margin: 0 auto;
         }
+        .section-salam {
+            margin-bottom: 50px;
+            padding: 0 10px;
+        }
+        .salam-arab {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        .salam-teks {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        /* Layout Mempelai (Flexbox agar otomatis turun di layar HP) */
+        .section-mempelai {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        @media (min-width: 768px) {
+            .section-mempelai {
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+            }
+        }
+        .mempelai-card {
+            flex: 1;
+            max-width: 250px;
+        }
+        .avatar-frame {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .avatar-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .nama-lengkap {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: #aa8c2c;
+            margin-bottom: 5px;
+        }
+        .info-ortu {
+            font-size: 0.85rem;
+            color: #777;
+            line-height: 1.5;
+        }
+        .dan-simbol {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: #d4af37;
+            margin: 10px 0;
+        }
+
+        .pembatas {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #d4af37, transparent);
+            margin: 40px 0;
+        }
+
+        /* Style Countdown Timer */
+        .section-countdown {
+            background-color: #fff;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .timer-box {
+            background: #f7f5f0;
+            padding: 10px;
+            border-radius: 8px;
+            min-width: 70px;
+            border: 1px solid #eadecc;
+        }
+        .timer-box span {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #333;
+            display: block;
+        }
+        .timer-box p {
+            font-size: 0.75rem;
+            color: #777;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- 1. AUDIO (Ganti URL dengan link musik instrumen pilihan Anda) -->
+    <!-- 1. AUDIO Latar (Musik otomatis berjalan setelah cover dibuka) -->
     <audio id="bg-music" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- 2. HALAMAN COVER -->
+    <!-- 2. HALAMAN COVER INTERAKTIF -->
     <div id="cover">
         <p style="letter-spacing: 3px; font-size: 0.9rem;">THE WEDDING OF</p>
         <h1 class="wedding-title">Romeo & Juliet</h1>
-
+        
         <div class="guest-box">
             <p style="font-size: 0.9rem; font-style: italic;">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
-            <!-- Nama tamu akan muncul di sini via JS -->
             <h2 id="nama-tamu" class="guest-name">Nama Tamu</h2>
         </div>
 
         <button class="btn-open" onclick="bukaUndangan()">Buka Undangan</button>
     </div>
 
-    <!-- 3. KONTEN UTAMA (Akan terlihat setelah klik tombol) -->
+    <!-- 3. KONTEN UTAMA -->
     <div id="main-content">
-        <h2 style="font-family: 'Great Vibes', cursive; font-size: 3rem; margin-bottom: 20px;">Mempelai</h2>
-        <p>Di sinilah nanti Anda bisa memasukkan info detail acara, foto profil mempelai, maps, dan form ucapan.</p>
+        
+        <!-- SECTION 1: SALAM PEMBUKA -->
+        <section class="section-salam">
+            <p class="salam-arab">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+            <p class="salam-teks">Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami:</p>
+        </section>
+
+        <!-- SECTION 2: PROFIL MEMPELAI -->
+        <section class="section-mempelai">
+            <!-- Mempelai Pria -->
+            <div class="mempelai-card">
+                <div class="avatar-frame">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" alt="Foto Pria">
+                </div>
+                <h3 class="nama-lengkap">Romeo Montague</h3>
+                <p class="info-ortu">Putra dari Bapak Fulan <br> & Ibu Fulanah</p>
+            </div>
+
+            <div class="dan-simbol">&</div>
+
+            <!-- Mempelai Wanita -->
+            <div class="mempelai-card">
+                <div class="avatar-frame">
+                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=400" alt="Foto Wanita">
+                </div>
+                <h3 class="nama-lengkap">Juliet Capulet</h3>
+                <p class="info-ortu">Putri dari Bapak Ali <br> & Ibu Aminah</p>
+            </div>
+        </section>
+
+        <hr class="pembatas">
+
+        <!-- SECTION 3: COUNTDOWN TIMER -->
+        <section class="section-countdown">
+            <h4 style="font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 20px;">MENUJU HARI BAHAGIA</h4>
+            
+            <div class="timer-container">
+                <div class="timer-box">
+                    <span id="days">00</span>
+                    <p>Hari</p>
+                </div>
+                <div class="timer-box">
+                    <span id="hours">00</span>
+                    <p>Jam</p>
+                </div>
+                <div class="timer-box">
+                    <span id="minutes">00</span>
+                    <p>Menit</p>
+                </div>
+                <div class="timer-box">
+                    <span id="seconds">00</span>
+                    <p>Detik</p>
+                </div>
+            </div>
+        </section>
+
     </div>
 
-    <!-- 4. JAVASCRIPT -->
+    <!-- 4. JAVASCRIPT LOGIK -->
     <script>
-        // Fungsi mengambil parameter "to" dari URL
+        // Ambil nama dari parameter URL (?to=Nama+Tamu)
         function getGuestName() {
             const urlParams = new URLSearchParams(window.location.search);
             const guestName = urlParams.get('to');
-
             if (guestName) {
-                // Mengubah tanda plus (+) atau %20 menjadi spasi biasa
                 document.getElementById('nama-tamu').innerText = decodeURIComponent(guestName);
             } else {
-                // Nama default jika di URL tidak ada parameter ?to=...
                 document.getElementById('nama-tamu').innerText = "Tamu Undangan";
             }
         }
 
-        // Fungsi saat tombol "Buka Undangan" diklik
+        // Jalankan saat tombol diklik
         function bukaUndangan() {
-            // 1. Geser cover ke atas
             document.getElementById('cover').classList.add('opened');
-
-            // 2. Putar musik latar
             const music = document.getElementById('bg-music');
             music.play().catch(error => {
-                console.log("Autoplay diblokir browser, musik membutuhkan interaksi user.");
+                console.log("Musik diblokir browser sebelum ada interaksi.");
             });
         }
 
-        // Jalankan fungsi pencarian nama saat halaman dimuat
+        // Pengaturan waktu mundur (bisa diubah tanggalnya sesuai hari-H)
+        const tanggalAcara = new Date("Dec 31, 2026 09:00:00").getTime();
+
+        const hitungMundur = setInterval(function() {
+            const sekarang = new Date().getTime();
+            const selisih = tanggalAcara - brass;
+            const selisihWaktu = tanggalAcara - sekarang;
+
+            const hari = Math.floor(selisihWaktu / (1000 * 60 * 60 * 24));
+            const jam = Math.floor((selisihWaktu % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const menit = Math.floor((selisihWaktu % (1000 * 60 * 60)) / (1000 * 60));
+            const detik = Math.floor((selisihWaktu % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = hari < 10 ? "0" + hari : hari;
+            document.getElementById("hours").innerText = jam < 10 ? "0" + jam : jam;
+            document.getElementById("minutes").innerText = menit < 10 ? "0" + menit : menit;
+            document.getElementById("seconds").innerText = detik < 10 ? "0" + detik : detik;
+
+            if (selisihWaktu < 0) {
+                clearInterval(hitungMundur);
+                document.querySelector(".timer-container").innerHTML = "<h3 style='color:#d4af37;'>Acara Sedang Berlangsung!</h3>";
+            }
+        }, 1000);
+
         window.onload = getGuestName;
     </script>
 </body>
