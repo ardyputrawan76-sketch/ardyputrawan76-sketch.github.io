@@ -329,7 +329,35 @@
             <h2 id="nama-tamu" class="guest-name">Nama Tamu</h2>
         </div>
 
-        <button class="btn-open" onclick="bukaUndangan()">Buka Undangan</button>
+              // Aksi saat tombol "Buka Undangan" ditekan (Optimasi Khusus Safari iPad/iPhone)
+        function bukaUndangan() {
+            // 1. Ambil elemen audio
+            const music = document.getElementById('bg-music');
+            
+            // 2. Paksa aktifkan AudioContext/Audio lewat interaksi pertama (Trik Khusus iOS)
+            if (music) {
+                music.muted = false; // Pastikan tidak termute di sistem web
+                
+                // Coba putar audio
+                const playPromise = music.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        console.log("Musik berhasil berputar di Safari!");
+                    }).catch(error => {
+                        console.log("Gagal putar karena: ", error);
+                        // Solusi cadangan jika Safari masih keras kepala: putar ulang saat ada sentuhan berikutnya
+                        document.body.addEventListener('click', function() {
+                            music.play();
+                        }, { once: true });
+                    });
+                }
+            }
+            
+            // 3. Geser cover ke atas setelah perintah musik dijalankan
+            document.getElementById('cover').classList.add('opened');
+        }
+
     </div>
 
     <!-- KONTEN UTAMA -->
