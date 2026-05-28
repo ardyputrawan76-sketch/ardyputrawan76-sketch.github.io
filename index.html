@@ -4,242 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undangan Pernikahan Ardy & Ana</title>
-    <!-- Google Fonts untuk kombinasi font elegan -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f7f5f0; /* Warna krem elegan */
-            color: #333;
-            overflow-x: hidden;
-        }
-        /* Style untuk Cover (Overlay penuh) */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f7f5f0; color: #333; overflow-x: hidden; }
+        
+        /* Cover Style */
         #cover {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            /* Latar belakang menggunakan file bg-cover.jpg di GitHub Anda */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('bg-cover.jpg') no-repeat center center/cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            text-align: center;
-            z-index: 9999;
-            transition: transform 1s ease-in-out;
-            padding: 20px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: #fff; text-align: center; z-index: 9999; transition: transform 1s ease-in-out; padding: 20px;
         }
-        /* Efek geser ke atas saat cover dibuka */
-        #cover.opened {
-            transform: translateY(-100vh);
+        #cover.opened { transform: translateY(-100vh); }
+        .wedding-title { font-family: 'Great Vibes', cursive; font-size: 3.5rem; margin-bottom: 10px; color: #f1dfb5; }
+        .guest-box { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(5px); padding: 20px 40px; border-radius: 8px; margin: 30px 0; border: 1px solid rgba(255,255,255,0.2); }
+        .guest-name { font-size: 1.5rem; font-weight: 600; margin-top: 5px; color: #fff; }
+        .btn-open { background-color: #d4af37; color: white; border: none; padding: 12px 28px; font-size: 1rem; font-weight: 600; border-radius: 25px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; }
+        .btn-open:hover { background-color: #aa8c2c; transform: scale(1.05); }
+        
+        /* Content Style */
+        #main-content { padding: 80px 20px; text-align: center; max-width: 600px; margin: 0 auto; }
+        .section-salam { margin-bottom: 50px; }
+        .salam-arab { font-size: 1.5rem; margin-bottom: 15px; font-weight: 500; }
+        .salam-teks { font-size: 0.9rem; line-height: 1.6; color: #666; }
+        
+        /* Mempelai Style */
+        .section-mempelai { display: flex; flex-direction: column; align-items: center; gap: 40px; margin-bottom: 60px; }
+        @media (min-width: 768px) { .section-mempelai { flex-direction: row; justify-content: space-around; } }
+        .mempelai-card { flex: 1; max-width: 280px; }
+        .avatar-frame { width: 180px; height: 180px; margin: 0 auto 20px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .avatar-frame img { width: 100%; height: 100%; object-fit: cover; }
+        .nama-lengkap { font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #aa8c2c; margin-bottom: 5px; }
+        .info-ortu { font-size: 0.85rem; color: #777; line-height: 1.6; }
+        .dan-simbol { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #d4af37; margin: 10px 0; }
+        .pembatas { border: 0; height: 1px; background: linear-gradient(to right, transparent, #d4af37, transparent); margin: 40px 0; }
+        
+        /* Countdown Timer */
+        .section-countdown { background-color: #fff; padding: 30px 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 50px; }
+        .timer-container { display: flex; justify-content: center; gap: 15px; }
+        .timer-box { background: #f7f5f0; padding: 10px; border-radius: 8px; min-width: 70px; border: 1px solid #eadecc; }
+        .timer-box span { font-size: 1.6rem; font-weight: 600; color: #333; display: block; }
+        .timer-box p { font-size: 0.75rem; color: #777; text-transform: uppercase; }
+
+        /* Detail Acara Style */
+        .section-acara { background-color: #fff; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 50px; }
+        .acara-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin-bottom: 15px; }
+        .btn-maps { display: inline-block; background-color: #25d366; color: #fff; text-decoration: none; padding: 12px 25px; border-radius: 25px; font-size: 0.9rem; margin-top: 15px; transition: 0.3s; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .btn-maps:hover { background-color: #1ebd58; transform: scale(1.03); }
+
+        /* Kado Digital Style */
+        .section-kado { background-color: #fff; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 50px; }
+        .card-rekening { background-color: #f7f5f0; border: 1px dashed #d4af37; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center; }
+        .no-rek { font-size: 1.3rem; font-weight: 600; color: #333; letter-spacing: 1px; margin: 10px 0; }
+
+        /* Form RSVP Style */
+        .section-rsvp { background-color: #fff; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); text-align: left; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; color: #555; }
+        .form-control { width: 100%; padding: 12px; border: 1px solid #eadecc; border-radius: 8px; font-family: inherit; font-size: 0.9rem; background-color: #fbfbfa; }
+        .form-control:focus { outline: none; border-color: #d4af37; }
+        .btn-submit { background-color: #d4af37; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn-submit:hover { background-color: #aa8c2c; }
+        #form-status { margin-top: 15px; font-size: 0.9rem; text-align: center; font-weight: 600; }
+
+        /* Tombol Musik Melayang Kontrol */
+        #music-control {
+            position: fixed; bottom: 25px; right: 25px; width: 50px; height: 50px;
+            background-color: rgba(212, 175, 55, 0.9); color: white; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; z-index: 999;
+            cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 1.2rem;
+            animation: putarMusik 4s linear infinite; animation-play-state: paused;
         }
-        .wedding-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            color: #f1dfb5; /* Warna gold lembut */
-        }
-        .guest-box {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(5px);
-            padding: 20px 40px;
-            border-radius: 8px;
-            margin: 30px 0;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        .guest-name {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-top: 5px;
-            color: #fff;
-        }
-        .btn-open {
-            background-color: #d4af37;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 25px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: 0.3s;
-        }
-        .btn-open:hover {
-            background-color: #aa8c2c;
-            transform: scale(1.05);
-        }
-        /* Style Konten Utama */
-        #main-content {
-            padding: 80px 20px;
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .section-salam {
-            margin-bottom: 50px;
-            padding: 0 10px;
-        }
-        .salam-arab {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-        .salam-teks {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            color: #666;
-        }
-        /* Layout Mempelai (Flexbox) */
-        .section-mempelai {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-        @media (min-width: 768px) {
-            .section-mempelai {
-                flex-direction: row;
-                justify-content: space-around;
-                align-items: center;
-            }
-        }
-        .mempelai-card {
-            flex: 1;
-            max-width: 280px;
-        }
-        .avatar-frame {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid #fff;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-        .avatar-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .nama-lengkap {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.2rem;
-            color: #aa8c2c;
-            margin-bottom: 5px;
-        }
-        .info-ortu {
-            font-size: 0.85rem;
-            color: #777;
-            line-height: 1.6;
-        }
-        .dan-simbol {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
-            color: #d4af37;
-            margin: 10px 0;
-        }
-        .pembatas {
-            border: 0;
-            height: 1px;
-            background: linear-gradient(to right, transparent, #d4af37, transparent);
-            margin: 40px 0;
-        }
-        /* Style Countdown Timer */
-        .section-countdown {
-            background-color: #fff;
-            padding: 30px 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-        }
-        .timer-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-        .timer-box {
-            background: #f7f5f0;
-            padding: 10px;
-            border-radius: 8px;
-            min-width: 70px;
-            border: 1px solid #eadecc;
-        }
-        .timer-box span {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: #333;
-            display: block;
-        }
-        .timer-box p {
-            font-size: 0.75rem;
-            color: #777;
-            text-transform: uppercase;
-            margin-top: 2px;
-        }
+        @keyframes putarMusik { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <!-- 1. AUDIO INSTRUMEN: KISS SMILE - WITHOUT YOU -->
+    <!-- 1. AUDIO ELEMENT (Membaca file musik internal di dalam GitHub Anda) -->
     <audio id="bg-music" loop preload="auto">
-        <source src="https://files.catbox.moe/k37h9u.mp3" type="audio/mpeg">
+        <source src="musik-pernikahan.mp3" type="audio/mpeg">
+        <!-- Cadangan jika file lokal belum diunggah -->
+        <source src="https://feeds.soundcloud.com/stream/1254330643-user-650085449-beautiful-romantic-piano-wedding-background-music.mp3" type="audio/mpeg">
     </audio>
+
+    <!-- TOMBOL MUSIK MELAYANG -->
+    <div id="music-control" onclick="toggleMusik()">🎵</div>
 
     <!-- 2. HALAMAN COVER -->
     <div id="cover">
         <p style="letter-spacing: 3px; font-size: 0.9rem;">THE WEDDING OF</p>
         <h1 class="wedding-title">Ardy & Ana</h1>
-        
         <div class="guest-box">
             <p style="font-size: 0.9rem; font-style: italic;">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
-            <!-- Teks nama tamu dinamis -->
             <h2 id="nama-tamu" class="guest-name">Tamu Undangan</h2>
         </div>
-
         <button class="btn-open" onclick="bukaUndangan()">Buka Undangan</button>
     </div>
 
     <!-- 3. KONTEN UTAMA -->
     <div id="main-content">
-        
-        <!-- SECTION 1: SALAM -->
         <section class="section-salam">
             <p class="salam-arab">Om Swastyastu</p>
             <p class="salam-teks">Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri Acara Pernikahan kami:</p>
         </section>
 
-        <!-- SECTION 2: PROFIL MEMPELAI -->
+        <!-- PROFIL MEMPELAI -->
         <section class="section-mempelai">
-            <!-- Mempelai Pria -->
             <div class="mempelai-card">
-                <div class="avatar-frame">
-                    <!-- Mengarah ke file foto-ardy.jpg di GitHub Anda -->
-                    <img src="foto-ardy.jpg" alt="Foto Ardy">
-                </div>
+                <div class="avatar-frame"><img src="foto-ardy.jpg" alt="Foto Ardy"></div>
                 <h3 class="nama-lengkap">Gede Ardy Putrawan</h3>
                 <p class="info-ortu">Putra dari Pasangan:<br>Bapak Ketut Sariana (Alm.)<br>& Ibu Ketut Arsih</p>
             </div>
-
             <div class="dan-simbol">&</div>
-
-            <!-- Mempelai Wanita -->
             <div class="mempelai-card">
-                <div class="avatar-frame">
-                    <!-- Mengarah ke file foto-ana.jpg di GitHub Anda -->
-                    <img src="foto-ana.jpg" alt="Foto Ana">
-                </div>
+                <div class="avatar-frame"><img src="foto-ana.jpg" alt="Foto Ana"></div>
                 <h3 class="nama-lengkap">Komang Ana Oktaviani</h3>
                 <p class="info-ortu">Putri dari Pasangan:<br>Bapak I Wayan Sugiantara<br>& Ibu Ni Ketut Wartini</p>
             </div>
@@ -247,77 +129,166 @@
 
         <hr class="pembatas">
 
-        <!-- SECTION 3: COUNTDOWN TIMER -->
+        <!-- COUNTDOWN TIMER -->
         <section class="section-countdown">
-            <h4 style="font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 20px;">MENUJU HARI BAHAGIA</h4>
-            
+            <h4 style="font-size: 1rem; letter-spacing: 2px; margin-bottom: 20px; color: #aa8c2c;">MENUJU HARI BAHAGIA</h4>
             <div class="timer-container">
-                <div class="timer-box">
-                    <span id="days">00</span>
-                    <p>Hari</p>
-                </div>
-                <div class="timer-box">
-                    <span id="hours">00</span>
-                    <p>Jam</p>
-                </div>
-                <div class="timer-box">
-                    <span id="minutes">00</span>
-                    <p>Menit</p>
-                </div>
-                <div class="timer-box">
-                    <span id="seconds">00</span>
-                    <p>Detik</p>
-                </div>
+                <div class="timer-box"><span id="days">00</span><p>Hari</p></div>
+                <div class="timer-box"><span id="hours">00</span><p>Jam</p></div>
+                <div class="timer-box"><span id="minutes">00</span><p>Menit</p></div>
+                <div class="timer-box"><span id="seconds">00</span><p>Detik</p></div>
             </div>
         </section>
 
+        <hr class="pembatas">
+
+        <!-- DETAIL ACARA DENGAN MAPS ASLI USER -->
+        <section class="section-acara">
+            <h2 class="acara-title">Pawiwahan / Acara</h2>
+            <p style="font-weight: 600; margin-bottom: 5px;">Hari, Tanggal</p>
+            <p style="color: #666; font-size: 0.9rem; margin-bottom: 20px;">Kamis, 31 Desember 2026</p>
+            
+            <p style="font-weight: 600; margin-bottom: 5px;">Waktu</p>
+            <p style="color: #666; font-size: 0.9rem; margin-bottom: 20px;">09.00 WITA - Selesai</p>
+            
+            <p style="font-weight: 600; margin-bottom: 5px;">Tempat / Lokasi</p>
+            <p style="color: #666; font-size: 0.9rem; padding: 0 20px; margin-bottom: 15px;">Kediaman Mempelai Pria, Tabanan, Bali</p>
+            
+            <!-- Menggunakan Link Google Maps yang Diberikan User -->
+            <a href="https://goo.gl/maps/bz8HRTQSsVTxnEum9" target="_blank" class="btn-maps">📍 Buka Google Maps Lokasi Acara</a>
+        </section>
+
+        <hr class="pembatas">
+
+        <!-- KADO DIGITAL (DIGITAL GIFT) -->
+        <section class="section-kado">
+            <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c;">Kado Digital</h3>
+            <p style="font-size: 0.85rem; color: #777; line-height: 1.5; margin-top: 10px;">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika ingin memberikan tanda kasih, Anda dapat mengirimkannya secara cashless melalui rekening di bawah ini:</p>
+            
+            <div class="card-rekening">
+                <p style="font-weight: 600; color: #aa8c2c;">BANK BPD BALI</p>
+                <p id="nomor-rek" class="no-rek">123-0456-789</p>
+                <p style="font-size: 0.85rem; color: #555;">a.n Gede Ardy Putrawan</p>
+            </div>
+        </section>
+
+        <hr class="pembatas">
+
+        <!-- FORM RSVP SPREADSHEET GOOGLE -->
+        <section class="section-rsvp">
+            <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-align: center; color: #aa8c2c; margin-bottom: 5px;">Konfirmasi Kehadiran</h3>
+            <p style="font-size: 0.8rem; text-align: center; color: #777; margin-bottom: 25px;">Mohon konfirmasikan kehadiran Anda melalui form di bawah ini:</p>
+            
+            <form id="rsvp-form" action="https://api.web3forms.com/submit" method="POST">
+                <!-- TOKEN INPUT SPREADSHEET -->
+                <input type="hidden" name="access_key" value="MASUKKAN_ACCESS_KEY_ANDA_DISINI">
+                <input type="hidden" name="subject" value="Konfirmasi RSVP Undangan Ardy & Ana">
+                <input type="hidden" name="from_name" value="Sistem Undangan ArdyAna">
+
+                <div class="form-group">
+                    <label for="name">Nama Tamu</label>
+                    <input type="text" name="Nama Tamu" id="form-nama-tamu" class="form-control" required readonly>
+                </div>
+                <div class="form-group">
+                    <label for="status">Konfirmasi Kehadiran</label>
+                    <select name="Konfirmasi Kehadiran" id="status" class="form-control" required>
+                        <option value="">-- Pilih Acara Konfirmasi --</option>
+                        <option value="Hadir">Siaap, Saya Akan Hadir</option>
+                        <option value="Tidak Hadir">Maaf, Belum Bisa Hadir</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Ucapan & Doa Restu</label>
+                    <textarea name="Ucapan dan Doa" id="message" rows="4" class="form-control" placeholder="Tulis ucapan selamat Anda untuk kedua mempelai..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Kirim Konfirmasi</button>
+                <div id="form-status"></div>
+            </form>
+        </section>
     </div>
 
-    <!-- 4. JAVASCRIPT LOGIC -->
     <script>
-        // Ambil nama tamu otomatis dari URL (?to=Nama+Tamu)
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-control');
+
         function getGuestName() {
             const urlParams = new URLSearchParams(window.location.search);
             const guestName = urlParams.get('to');
+            const penampungNama = guestName ? decodeURIComponent(guestName) : "Tamu Undangan";
             
-            if (guestName) {
-                document.getElementById('nama-tamu').innerText = decodeURIComponent(guestName);
-            } else {
-                document.getElementById('nama-tamu').innerText = "Tamu Undangan";
-            }
+            document.getElementById('nama-tamu').innerText = penampungNama;
+            document.getElementById('form-nama-tamu').value = penampungNama;
         }
 
-        // Aksi saat tombol "Buka Undangan" ditekan
         function bukaUndangan() {
-            const music = document.getElementById('bg-music');
+            document.getElementById('cover').classList.add('opened');
             
             if (music) {
-                music.muted = false; 
-                const playPromise = music.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise.then(_ => {
-                        console.log("Musik diputar dengan sukses!");
-                    }).catch(error => {
-                        console.log("Safari memblokir pemutaran instan. Memicu sistem cadangan touch.");
-                        document.body.addEventListener('click', function() {
-                            music.play();
-                        }, { once: true });
-                    });
-                }
+                music.muted = false;
+                // Mengaktifkan paksa audio context perangkat Apple
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioContext.state === 'suspended') { audioContext.resume(); }
+
+                music.play().then(_ => {
+                    musicBtn.style.animationPlayState = 'running';
+                }).catch(err => {
+                    console.log("Safari memblokir auto-play awal. Memicu klik manual.");
+                });
             }
-            
-            // Geser cover ke atas
-            document.getElementById('cover').classList.add('opened');
         }
 
-        // COUNTDOWN TIMER otomatis (Atur tanggal hari-H di bawah ini jika tanggalnya sudah pasti)
-        const tanggalAcara = new Date("Dec 31, 2026 09:00:00").getTime();
+        function toggleMusik() {
+            if (music.paused) {
+                music.play();
+                musicBtn.style.animationPlayState = 'running';
+                musicBtn.innerText = "🎵";
+            } else {
+                music.pause();
+                musicBtn.style.animationPlayState = 'paused';
+                musicBtn.innerText = "🔇";
+            }
+        }
 
+        // Logic Submit Form -> Google Sheets via Web3Forms
+        const form = document.getElementById('rsvp-form');
+        const statusDiv = document.getElementById('form-status');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            statusDiv.textContent = "Sedang mengirim konfirmasi...";
+            statusDiv.style.color = "#333";
+
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: json
+            })
+            .then(async (response) => {
+                if (response.status == 200) {
+                    statusDiv.textContent = "Konfirmasi berhasil masuk ke Spreadsheet! Terima kasih.";
+                    statusDiv.style.color = "green";
+                    form.reset();
+                    getGuestName();
+                } else {
+                    statusDiv.textContent = "Terjadi gangguan transmisi data, coba lagi.";
+                    statusDiv.style.color = "red";
+                }
+            })
+            .catch(error => {
+                statusDiv.textContent = "Koneksi lambat.";
+                statusDiv.style.color = "red";
+            });
+        });
+
+        // Countdown Timer
+        const tanggalAcara = new Date("Dec 31, 2026 09:00:00").getTime();
         const hitungMundur = setInterval(function() {
             const sekarang = new Date().getTime();
             const selisih = tanggalAcara - sekarang;
-
             const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
             const jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
@@ -328,10 +299,7 @@
             document.getElementById("minutes").innerText = menit < 10 ? "0" + menit : menit;
             document.getElementById("seconds").innerText = detik < 10 ? "0" + detik : detik;
 
-            if (selisih < 0) {
-                clearInterval(hitungMundur);
-                document.querySelector(".timer-container").innerHTML = "<h3 style='color:#d4af37;'>Acara Sedang Berlangsung!</h3>";
-            }
+            if (selisih < 0) { clearInterval(hitungMundur); document.querySelector(".timer-container").innerHTML = "<h3>Acara Berlangsung!</h3>"; }
         }, 1000);
 
         window.onload = getGuestName;
