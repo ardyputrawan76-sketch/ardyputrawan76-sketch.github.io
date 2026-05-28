@@ -277,21 +277,28 @@
             document.getElementById('form-nama-tamu').value = penampungNama;
         }
 
-        function bukaUndangan() {
+                function bukaUndangan() {
             document.getElementById('cover').classList.add('opened');
             
+            // Logika baru yang lebih kuat untuk mendobrak proteksi Safari/iOS
             if (music) {
+                music.removeAttribute('muted'); // Pastikan tidak ter-mute sistem
                 music.muted = false;
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                if (audioContext.state === 'suspended') { audioContext.resume(); }
-
+                
+                // Paksa putar langsung
                 music.play().then(_ => {
                     musicBtn.style.animationPlayState = 'running';
+                    musicBtn.innerText = "🎵";
                 }).catch(err => {
-                    console.log("Proteksi iOS aktif, memicu kontrol manual.");
+                    // Jika browser memblokir, kita tembak ulang dalam waktu 50 milidetik
+                    setTimeout(() => {
+                        music.play();
+                        musicBtn.style.animationPlayState = 'running';
+                    }, 50);
                 });
             }
         }
+
 
         function toggleMusik() {
             if (music.paused) {
