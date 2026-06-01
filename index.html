@@ -254,15 +254,14 @@
 </section>
 
 <script>
-    <script>
-    // 1. Variabel Global
+    // 1. Variabel & Setup Awal
     const music = document.getElementById('bg-music');
     const musicBtn = document.getElementById('music-control');
     const form = document.getElementById('rsvp-form');
     const statusDiv = document.getElementById('form-status');
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyo0Jv7gNqmCAjrVTcNnWyaAU50AuTuDPTrxJG6pqQaU05LPFzvaUTuy7IG1QQCimqyCA/exec';
 
-    // 2. Fungsi Musik & Cover
+    // 2. Fungsi Tombol "Buka Undangan"
     function bukaUndangan() {
         document.getElementById('cover').classList.add('opened');
         music.muted = false;
@@ -271,46 +270,57 @@
         musicBtn.innerText = "🎵";
     }
 
+    // 3. Fungsi Musik
     function toggleMusik() {
-        if (music.paused) { music.play(); musicBtn.style.animationPlayState = 'running'; musicBtn.innerText = "🎵"; } 
-        else { music.pause(); musicBtn.style.animationPlayState = 'paused'; musicBtn.innerText = "🔇"; }
+        if (music.paused) { 
+            music.play(); 
+            musicBtn.style.animationPlayState = 'running'; 
+            musicBtn.innerText = "🎵"; 
+        } else { 
+            music.pause(); 
+            musicBtn.style.animationPlayState = 'paused'; 
+            musicBtn.innerText = "🔇"; 
+        }
     }
 
-    // 3. Fungsi RSVP (Kurir Pribadi)
+    // 4. Fungsi Foto (Lightbox)
+    function perbesarFoto(src) {
+        document.getElementById('lightbox-img').src = src;
+        document.getElementById('lightbox-overlay').classList.add('active');
+    }
+    function tutupFoto() { 
+        document.getElementById('lightbox-overlay').classList.remove('active'); 
+    }
+
+    // 5. Fungsi RSVP & Komentar (Ke Google Sheets)
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        statusDiv.textContent = "Sedang mengirim...";
+        statusDiv.textContent = "Mengirim...";
         const data = new FormData(form);
         
         fetch(SCRIPT_URL, { method: 'POST', body: data })
         .then(res => res.json())
         .then(data => {
-            alert("Terima kasih, ucapan Anda sudah tersimpan!");
+            alert("Terima kasih, konfirmasi Anda sudah tersimpan!");
             form.reset();
-            muatKomentar();
+            muatKomentar(); 
         })
         .catch(err => { alert("Gagal kirim."); console.error(err); });
     });
 
-    // 4. Fungsi Komentar
     async function muatKomentar() {
         const wadah = document.getElementById('wadahKomentar');
-        const res = await fetch(SCRIPT_URL);
-        const data = await res.json();
-        wadah.innerHTML = '<h4 style="text-align:center;">Riwayat Ucapan Tamu</h4>';
-        for (let i = data.length - 1; i > 0 && i > data.length - 6; i--) {
-            wadah.innerHTML += "<div style='margin:10px 0; padding:10px; background:#f9f9f9; border-radius:5px;'><strong>"+data[i][1]+"</strong><br>"+data[i][3]+"</div>";
-        }
+        try {
+            const res = await fetch(SCRIPT_URL);
+            const data = await res.json();
+            wadah.innerHTML = '<h4 style="text-align:center;">Riwayat Ucapan Tamu</h4>';
+            for (let i = data.length - 1; i > 0 && i > data.length - 6; i--) {
+                wadah.innerHTML += "<div style='margin:10px 0; padding:10px; background:#f9f9f9; border-radius:5px;'><strong>"+data[i][1]+"</strong><br>"+data[i][3]+"</div>";
+            }
+        } catch(err) { console.error("Gagal memuat:", err); }
     }
 
-    // 5. Fungsi Lainnya
-    function perbesarFoto(src) {
-        document.getElementById('lightbox-img').src = src;
-        document.getElementById('lightbox-overlay').classList.add('active');
-    }
-    function tutupFoto() { document.getElementById('lightbox-overlay').classList.remove('active'); }
-
-    // Countdown Timer
+    // 6. Countdown Timer
     setInterval(function() {
         const selisih = new Date("Dec 31, 2026 09:00:00").getTime() - new Date().getTime();
         document.getElementById("days").innerText = Math.floor(selisih / (1000 * 60 * 60 * 24));
@@ -320,121 +330,6 @@
     }, 1000);
 
     muatKomentar();
-</script>
-    <script>
-        const music = document.getElementById('bg-music');
-        const musicBtn = document.getElementById('music-control');
-
-        function perbesarFoto(srcDanLokasi) {
-            const overlay = document.getElementById('lightbox-overlay');
-            const imgTarget = document.getElementById('lightbox-img');
-            imgTarget.src = srcDanLokasi;
-            overlay.classList.add('active');
-        }
-
-        function tutupFoto() {
-            document.getElementById('lightbox-overlay').classList.remove('active');
-        }
-
-        function getGuestName() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const guestName = urlParams.get('to');
-            const penampungNama = guestName ? decodeURIComponent(guestName) : "Tamu Undangan";
-
-            document.getElementById('nama-tamu').innerText = penampungNama;
-            document.getElementById('form-nama-tamu').value = penampungNama;
-        }
-
-        // FUNGSI UTAMA OTOMATIS: Berputar tepat saat ketukan "Buka Undangan" masuk
-                function bukaUndangan() {
-            // 1. Langsung singkirkan cover undangan
-            document.getElementById('cover').classList.add('opened');
-            
-            // 2. Perintah putar murni tanpa syarat (Langsung ditembak saat jari mengetuk)
-            var laguPernikahan = document.getElementById('bg-music');
-            if (laguPernikahan) {
-                laguPernikahan.muted = false; // Buka kunci suara
-                
-                // Perintah putar langsung tanpa fungsi penengah (Anti-Blokir Browser)
-                laguPernikahan.play();
-                
-                // Hidupkan animasi tombol lingkaran berputar di pojok bawah
-                var tombolMusik = document.getElementById('music-control');
-                if (tombolMusik) {
-                    tombolMusik.style.animationPlayState = 'running';
-                    tombolMusik.innerText = "🎵";
-                }
-            }
-        }
-
-        function toggleMusik() {
-            if (music.paused) {
-                music.muted = false;
-                music.play();
-                musicBtn.style.animationPlayState = 'running';
-                musicBtn.innerText = "🎵";
-            } else {
-                music.pause();
-                musicBtn.style.animationPlayState = 'paused';
-                musicBtn.innerText = "🔇";
-            }
-        }
-
-        // Logic Submit Form -> Google Sheets via Web3Forms
-        const form = document.getElementById('rsvp-form');
-        const statusDiv = document.getElementById('form-status');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            statusDiv.textContent = "Sedang mengirim konfirmasi...";
-            statusDiv.style.color = "#333";
-
-            const formData = new FormData(form);
-            const object = Object.fromEntries(formData);
-            const json = JSON.stringify(object);
-
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: json
-            })
-            .then(async (response) => {
-                if (response.status == 200) {
-                    statusDiv.textContent = "Konfirmasi berhasil masuk ke Spreadsheet! Terima kasih.";
-                    statusDiv.style.color = "green";
-                    form.reset();
-                    getGuestName();
-                } else {
-                    statusDiv.textContent = "Terjadi gangguan transmisi data, coba lagi.";
-                    statusDiv.style.color = "red";
-                }
-            })
-            .catch(error => {
-                statusDiv.textContent = "Koneksi lambat.";
-                statusDiv.style.color = "red";
-            });
-        });
-
-        // Countdown Timer
-        const tanggalAcara = new Date("Dec 31, 2026 09:00:00").getTime();
-        const hitungMundur = setInterval(function() {
-            const sekarang = new Date().getTime();
-            const selisih = tanggalAcara - sekarang;
-            const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
-            const jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
-            const detik = Math.floor((selisih % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = hari < 10 ? "0" + hari : hari;
-            document.getElementById("hours").innerText = jam < 10 ? "0" + jam : jam;
-            document.getElementById("minutes").innerText = menit < 10 ? "0" + menit : menit;
-            document.getElementById("seconds").innerText = detik < 10 ? "0" + detik : detik;
-
-            if (selisih < 0) { clearInterval(hitungMundur); document.querySelector(".timer-container").innerHTML = "<h3>Acara Berlangsung!</h3>"; }
-        }, 1000);
-
-        window.onload = getGuestName;
-    </script>
-</body>
+</script></body>
 </html>
 ''')
