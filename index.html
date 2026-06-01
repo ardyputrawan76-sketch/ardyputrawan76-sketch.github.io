@@ -237,50 +237,46 @@
         <section class="section-rsvp">
             <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-align: center; color: #aa8c2c; margin-bottom: 5px;">Konfirmasi Kehadiran</h3>
             <p style="font-size: 0.8rem; text-align: center; color: #777; margin-bottom: 25px;">Mohon konfirmasikan kehadiran Anda melalui form di bawah ini:</p>
-
-            <form id="rsvp-form" action="https://api.web3forms.com/submit" method="POST">
-                <input type="hidden" name="access_key" value="44108280-e2b9-485a-b257-17276c2f99a0">
-                <input type="hidden" name="subject" value="Konfirmasi RSVP Undangan Ardy & Ana">
-                <input type="hidden" name="from_name" value="Sistem Undangan ArdyAna">
-
-                <div class="form-group">
-                    <label for="name">Nama Tamu</label>
-                    <input type="text" name="Nama Tamu" id="form-nama-tamu" class="form-control" required readonly>
-                </div>
-                <div class="form-group">
-                    <label for="status">Konfirmasi Kehadiran</label>
-                    <select name="Konfirmasi Kehadiran" id="status" class="form-control" required>
-                        <option value="">-- Pilih Acara Konfirmasi --</option>
-                        <option value="Hadir">Siap, Saya Akan Hadir</option>
-                        <option value="Tidak Hadir">Maaf, Belum Bisa Hadir</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="message">Ucapan & Doa Restu</label>
-                    <textarea name="Ucapan dan Doa" id="message" rows="4" class="form-control" placeholder="Tulis ucapan selamat Anda untuk kedua mempelai..." required></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Kirim Konfirmasi</button>
-                <div id="form-status"></div>
-            </form>
+    <form id="rsvp-form">
+    <input type="text" name="Nama Tamu" placeholder="Nama Anda" required>
+    
+    <select name="Status Kehadiran" required>
+        <option value="">-- Pilih Kehadiran --</option>
+        <option value="Hadir">Hadir</option>
+        <option value="Tidak Hadir">Tidak Hadir</option>
+    </select>
+    
+    <textarea name="Ucapan" placeholder="Tulis ucapan/doa di sini..."></textarea>
+    
+    <button type="submit">Kirim Konfirmasi</button>
+</form>   
     <div id="wadahKomentar" style="margin-top: 20px; padding: 10px; border-top: 2px solid #aa8c2c; color: black !important;">
     <h4 style="text-align: center; color: black !important;">Riwayat Ucapan Tamu</h4>
 </div>
-    <script>
-    function tambahKomentarVisual(nama, pesan) {
-        let divBaru = document.createElement("div");
-        divBaru.style.borderBottom = "1px solid #eee";
-        divBaru.style.padding = "10px 0";
-        divBaru.style.marginTop = "10px";
-        divBaru.innerHTML = "<strong style='color:black !important;'>" + nama + "</strong><p style='color:black !important;'>" + pesan + "</p>";
-        let wadah = document.getElementById("wadahKomentar");
-        wadah.prepend(divBaru);
-    }
 
-    const rsvpForm = document.getElementById('rsvp-form');
-    rsvpForm.addEventListener('submit', function(e) {
-        let nama = document.getElementById('form-nama-tamu').value;
-        let pesan = document.getElementById('message').value;
-        tambahKomentarVisual(nama, pesan);
+    <script>
+    const form = document.getElementById('rsvp-form');
+    // GANTI TULISAN DI BAWAH DENGAN URL WEB APP BAPAK
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyo0Jv7gNqmCAjrVTcNnWyaAU50AuTuDPTrxJG6pqQaU05LPFzvaUTuy7IG1QQCimqyCA/exec'; 
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Mengubah data form menjadi format yang bisa dibaca Google Sheets
+        const data = new FormData(form);
+        
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: data
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert("Terima kasih, konfirmasi Anda sudah tersimpan!");
+            form.reset(); // Mengosongkan form setelah berhasil
+        })
+        .catch(err => {
+            alert("Oops, ada masalah. Coba lagi ya.");
+            console.error(err);
+        });
     });
 </script>
     <script>
