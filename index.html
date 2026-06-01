@@ -254,45 +254,35 @@
 </section>
 
 <script>
-    // 1. Variabel & Setup Awal
     const music = document.getElementById('bg-music');
     const musicBtn = document.getElementById('music-control');
     const form = document.getElementById('rsvp-form');
     const statusDiv = document.getElementById('form-status');
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyo0Jv7gNqmCAjrVTcNnWyaAU50AuTuDPTrxJG6pqQaU05LPFzvaUTuy7IG1QQCimqyCA/exec';
 
-    // 2. Fungsi Tombol "Buka Undangan"
+    // 1. Fungsi Nama Tamu (Sambut Tamu)
+    function getGuestName() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const guestName = urlParams.get('to');
+        if (guestName) {
+            document.getElementById('nama-tamu').innerText = decodeURIComponent(guestName);
+        }
+    }
+
+    // 2. Fungsi Buka & Musik
     function bukaUndangan() {
         document.getElementById('cover').classList.add('opened');
         music.muted = false;
         music.play();
         musicBtn.style.animationPlayState = 'running';
-        musicBtn.innerText = "🎵";
     }
 
-    // 3. Fungsi Musik
     function toggleMusik() {
-        if (music.paused) { 
-            music.play(); 
-            musicBtn.style.animationPlayState = 'running'; 
-            musicBtn.innerText = "🎵"; 
-        } else { 
-            music.pause(); 
-            musicBtn.style.animationPlayState = 'paused'; 
-            musicBtn.innerText = "🔇"; 
-        }
+        if (music.paused) { music.play(); musicBtn.style.animationPlayState = 'running'; } 
+        else { music.pause(); musicBtn.style.animationPlayState = 'paused'; }
     }
 
-    // 4. Fungsi Foto (Lightbox)
-    function perbesarFoto(src) {
-        document.getElementById('lightbox-img').src = src;
-        document.getElementById('lightbox-overlay').classList.add('active');
-    }
-    function tutupFoto() { 
-        document.getElementById('lightbox-overlay').classList.remove('active'); 
-    }
-
-    // 5. Fungsi RSVP & Komentar (Ke Google Sheets)
+    // 3. Fungsi RSVP
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         statusDiv.textContent = "Mengirim...";
@@ -301,35 +291,35 @@
         fetch(SCRIPT_URL, { method: 'POST', body: data })
         .then(res => res.json())
         .then(data => {
-            alert("Terima kasih, konfirmasi Anda sudah tersimpan!");
+            alert("Berhasil!");
             form.reset();
-            muatKomentar(); 
+            muatKomentar();
         })
-        .catch(err => { alert("Gagal kirim."); console.error(err); });
+        .catch(err => { 
+            statusDiv.textContent = "Gangguan transmisi. Cek setelan Apps Script."; 
+            console.error(err); 
+        });
     });
 
+    // 4. Fungsi Komentar
     async function muatKomentar() {
         const wadah = document.getElementById('wadahKomentar');
         try {
             const res = await fetch(SCRIPT_URL);
             const data = await res.json();
-            wadah.innerHTML = '<h4 style="text-align:center;">Riwayat Ucapan Tamu</h4>';
+            wadah.innerHTML = '<h4 style="text-align:center;">Riwayat Ucapan</h4>';
             for (let i = data.length - 1; i > 0 && i > data.length - 6; i--) {
-                wadah.innerHTML += "<div style='margin:10px 0; padding:10px; background:#f9f9f9; border-radius:5px;'><strong>"+data[i][1]+"</strong><br>"+data[i][3]+"</div>";
+                wadah.innerHTML += "<div style='margin:10px 0; padding:10px; background:#f9f9f9;'><strong>"+data[i][1]+"</strong><br>"+data[i][3]+"</div>";
             }
-        } catch(err) { console.error("Gagal memuat:", err); }
+        } catch(err) { console.log("Gagal memuat komentar"); }
     }
 
-    // 6. Countdown Timer
-    setInterval(function() {
-        const selisih = new Date("Dec 31, 2026 09:00:00").getTime() - new Date().getTime();
-        document.getElementById("days").innerText = Math.floor(selisih / (1000 * 60 * 60 * 24));
-        document.getElementById("hours").innerText = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        document.getElementById("minutes").innerText = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
-        document.getElementById("seconds").innerText = Math.floor((selisih % (1000 * 60)) / 1000);
-    }, 1000);
-
-    muatKomentar();
-</script></body>
+    // Jalankan otomatis
+    window.onload = function() {
+        getGuestName();
+        muatKomentar();
+    };
+</script>
+</body>
 </html>
 ''')
