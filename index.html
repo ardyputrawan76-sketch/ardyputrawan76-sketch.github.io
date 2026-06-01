@@ -9,8 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Montserrat', sans-serif; background-color: #f7f5f0; color: #333; overflow-x: hidden; }
+        /* Styling untuk pesan status yang rapi */
+        .status-success { color: #155724; background-color: #d4edda; padding: 15px; border-radius: 8px; border: 1px solid #c3e6cb; margin-top: 15px; }
+        .status-error { color: #721c24; background-color: #f8d7da; padding: 15px; border-radius: 8px; border: 1px solid #f5c6cb; margin-top: 15px; }
 
         /* Cover Style */
         #cover {
@@ -260,7 +261,7 @@
     const statusDiv = document.getElementById('form-status');
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXrTVtcTbtvKaX0oXEUg-8-yUaSBUQ-XGonT91lbD-jq00YUaphpF5n9Ey-qGQ3kK0kg/exec';
 
-    // 1. Fungsi Nama Tamu (Sambut Tamu)
+    // 1. Fungsi Nama Tamu
     function getGuestName() {
         const urlParams = new URLSearchParams(window.location.search);
         const guestName = urlParams.get('to');
@@ -275,29 +276,33 @@
         music.muted = false;
         music.play();
         musicBtn.style.animationPlayState = 'running';
+        musicBtn.innerText = "🎵";
     }
 
     function toggleMusik() {
-        if (music.paused) { music.play(); musicBtn.style.animationPlayState = 'running'; } 
-        else { music.pause(); musicBtn.style.animationPlayState = 'paused'; }
+        if (music.paused) { music.play(); musicBtn.style.animationPlayState = 'running'; musicBtn.innerText = "🎵"; } 
+        else { music.pause(); musicBtn.style.animationPlayState = 'paused'; musicBtn.innerText = "🔇"; }
     }
 
-    // 3. Fungsi RSVP
+    // 3. Fungsi RSVP dengan tampilan ala Web3Forms
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        statusDiv.textContent = "Mengirim...";
+        statusDiv.textContent = "Sedang mengirim konfirmasi...";
+        statusDiv.className = ""; 
+
         const data = new FormData(form);
         
         fetch(SCRIPT_URL, { method: 'POST', body: data })
         .then(res => res.json())
         .then(data => {
-            alert("Berhasil!");
+            statusDiv.textContent = "Konfirmasi berhasil masuk ke Spreadsheet! Terima kasih.";
+            statusDiv.className = "status-success";
             form.reset();
             muatKomentar();
         })
         .catch(err => { 
-            statusDiv.textContent = "Gangguan transmisi. Cek setelan Apps Script."; 
-            console.error(err); 
+            statusDiv.textContent = "Terjadi gangguan transmisi data, coba lagi.";
+            statusDiv.className = "status-error";
         });
     });
 
@@ -307,14 +312,17 @@
         try {
             const res = await fetch(SCRIPT_URL);
             const data = await res.json();
-            wadah.innerHTML = '<h4 style="text-align:center;">Riwayat Ucapan</h4>';
+            wadah.innerHTML = '<h4 style="text-align:center;">Riwayat Ucapan Tamu</h4>';
             for (let i = data.length - 1; i > 0 && i > data.length - 6; i--) {
-                wadah.innerHTML += "<div style='margin:10px 0; padding:10px; background:#f9f9f9;'><strong>"+data[i][1]+"</strong><br>"+data[i][3]+"</div>";
+                wadah.innerHTML += "<div style='margin:10px 0; padding:10px; background:#f9f9f9; border-radius:5px;'><strong>"+data[i][1]+"</strong><br>"+data[i][3]+"</div>";
             }
         } catch(err) { console.log("Gagal memuat komentar"); }
     }
 
-    // Jalankan otomatis
+    // Fungsi Foto (Lightbox)
+    function perbesarFoto(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox-overlay').classList.add('active'); }
+    function tutupFoto() { document.getElementById('lightbox-overlay').classList.remove('active'); }
+
     window.onload = function() {
         getGuestName();
         muatKomentar();
