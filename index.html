@@ -9,25 +9,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-       /* Gabungkan semua pengaturan body agar browser tidak bingung */
-        body { margin: 0; padding: 0; background-color: #f7f5f0; overflow-x: hidden; overflow-y: hidden; /* Awalnya dikunci agar tidak bisa di-scroll sebelum buka */font-family: 'Montserrat', sans-serif;}/* Styling untuk pesan status yang rapi */
-        .status-success { color: #155724; background-color: #d4edda; padding: 15px; border-radius: 8px; border: 1px solid #c3e6cb; margin-top: 15px; }
-        .status-error { color: #721c24; background-color: #f8d7da; padding: 15px; border-radius: 8px; border: 1px solid #f5c6cb; margin-top: 15px; }
-
-        /* Cover Style */
-        #cover {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-    min-height: 100vh; /* Tambahkan ini */
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('bg-cover.jpg') no-repeat center center/cover;
-    /* ... kode lainnya tetap ... */
+       /* 1. Paksa scrollbar selalu muncul agar lebar tidak berubah saat cover dibuka */
+html {
+    overflow-y: scroll;
 }
-        #cover.opened { transform: translateY(-100vh); }
-        .wedding-title { font-family: 'Great Vibes', cursive; font-size: 3.5rem; margin-bottom: 10px; color: #f1dfb5; }
-        .guest-box { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(5px); padding: 20px 40px; border-radius: 8px; margin: 30px 0; border: 1px solid rgba(255,255,255,0.2); }
-        .guest-name { font-size: 1.5rem; font-weight: 600; margin-top: 5px; color: #fff; }
-        .btn-open { background-color: #d4af37; color: white; border: none; padding: 12px 28px; font-size: 1rem; font-weight: 600; border-radius: 25px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; }
-        .btn-open:hover { background-color: #aa8c2c; transform: scale(1.05); }
 
+/* 2. Gabungkan pengaturan body agar rapi */
+body { margin: 0; padding: 0; background-color: #f7f5f0; overflow-x: hidden; overflow-y: hidden; /* Awalnya dikunci supaya tidak bisa di-scroll sebelum buka */font-family: 'Montserrat', sans-serif;
+}
+
+/* 3. Pastikan cover menutupi layar sepenuhnya tanpa celah */
+#cover {position: fixed; top: 0; left: 0; width: 100%; height: 100vh;background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('bg-cover.jpg') no-repeat center center/cover;display: flex; 
+    flex-direction: column; justify-content: center; align-items: center;color: #fff; text-align: center; z-index: 9999; transition: transform 1s ease-in-out; padding: 20px;
+}
         /* Content Style */
         /* Update Content Style Bapak */
         #main-content {padding: 80px 20px; text-align: center; max-width: 600px; margin: 0 auto; opacity: 0; transition: opacity 0.5s ease-in; }
