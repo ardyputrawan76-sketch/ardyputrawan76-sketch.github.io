@@ -234,66 +234,56 @@
         <hr class="pembatas">
 
         <!-- FORM RSVP SPREADSHEET GOOGLE -->
-       <section class="section-rsvp">
-    <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-align: center; color: #aa8c2c; margin-bottom: 5px;">Konfirmasi Kehadiran</h3>
-    <p style="font-size: 0.8rem; text-align: center; color: #777; margin-bottom: 25px;">Mohon konfirmasikan kehadiran Anda melalui form di bawah ini:</p>
+        <section class="section-rsvp">
+            <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-align: center; color: #aa8c2c; margin-bottom: 5px;">Konfirmasi Kehadiran</h3>
+            <p style="font-size: 0.8rem; text-align: center; color: #777; margin-bottom: 25px;">Mohon konfirmasikan kehadiran Anda melalui form di bawah ini:</p>
 
-    <form id="rsvp-form" action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="MASUKKAN_ACCESS_KEY_ANDA_DISINI">
-        <input type="hidden" name="subject" value="Konfirmasi RSVP Undangan Ardy & Ana">
-        
-        <div class="form-group">
-            <label for="form-nama-tamu">Nama Tamu</label>
-            <input type="text" name="Nama Tamu" id="form-nama-tamu" class="form-control" required readonly>
-        </div>
+            <form id="rsvp-form" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="MASUKKAN_ACCESS_KEY_ANDA_DISINI">
+                <input type="hidden" name="subject" value="Konfirmasi RSVP Undangan Ardy & Ana">
+                <input type="hidden" name="from_name" value="Sistem Undangan ArdyAna">
 
-        <div class="form-group">
-            <label for="kehadiran">Konfirmasi Kehadiran</label>
-            <select name="Kehadiran" id="kehadiran" class="form-control" required>
-                <option value="Hadir">Hadir</option>
-                <option value="Tidak Hadir">Tidak Hadir</option>
-            </select>
-        </div>
+                <div class="form-group">
+                    <label for="name">Nama Tamu</label>
+                    <input type="text" name="Nama Tamu" id="form-nama-tamu" class="form-control" required readonly>
+                </div>
+                <div class="form-group">
+                    <label for="status">Konfirmasi Kehadiran</label>
+                    <select name="Konfirmasi Kehadiran" id="status" class="form-control" required>
+                        <option value="">-- Pilih Acara Konfirmasi --</option>
+                        <option value="Hadir">Siap, Saya Akan Hadir</option>
+                        <option value="Tidak Hadir">Maaf, Belum Bisa Hadir</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Ucapan & Doa Restu</label>
+                    <textarea name="Ucapan dan Doa" id="message" rows="4" class="form-control" placeholder="Tulis ucapan selamat Anda untuk kedua mempelai..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Kirim Konfirmasi</button>
+                <div id="form-status"></div>
+            </form>
+            <section class="section-rsvp">
+            <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-align: center; color: #aa8c2c; margin-bottom: 5px;">Konfirmasi Kehadiran</h3>
+            <p style="font-size: 0.8rem; text-align: center; color: #777; margin-bottom: 25px;">Mohon konfirmasikan kehadiran Anda melalui form di bawah ini:</p>
 
-        <button type="submit" id="submit-btn" class="btn-submit">Kirim Konfirmasi</button>
-        
-        <div id="status-pesan" style="margin-top: 15px; text-align: center; font-weight: 600; color: #aa8c2c;"></div>
-    </form>
-</section>
+            <form id="rsvp-form" action="https://api.web3forms.com/submit" method="POST">
+                <button type="submit" class="btn-submit">Kirim Konfirmasi</button>
+                <div id="form-status"></div>
+            </form>
 
-<script>
-    const form = document.getElementById('rsvp-form');
-    const statusPesan = document.getElementById('status-pesan');
-    const submitBtn = document.getElementById('submit-btn');
+            <div style="text-align: center; margin: 30px 0;">
+                <p style="font-size: 14px; color: #555; margin-bottom: 10px;">Ingin melihat daftar tamu lainnya?</p>
+                <a href="https://docs.google.com/spreadsheets/d/1GQnNhjb2Bb7oZDsktD9_Y7aeBjHUpCjlJqQwMSYegCM/edit?usp=sharing" 
+                   target="_blank" 
+                   style="text-decoration: none; background-color: #25d366; color: white; padding: 12px 25px; border-radius: 25px; font-weight: bold; font-family: sans-serif; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                   Lihat Daftar Tamu
+                </a>
+            </div>
+            </section>
+        </section>
+    </div>
 
-    // Menarik nama dari URL
-    const urlParams = new URLSearchParams(window.location.search);
-    document.getElementById('form-nama-tamu').value = urlParams.get('to') || "Tamu Undangan";
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Mencegah double klik
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Mengirim...";
-        
-        const formData = new FormData(form);
-        
-        fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            body: formData
-        }).then(response => response.json())
-          .then(data => {
-            statusPesan.innerHTML = "✅ Terima kasih! Konfirmasi kehadiran Anda sudah tercatat.";
-            form.reset();
-            submitBtn.style.display = "none"; // Sembunyikan tombol setelah sukses
-        }).catch(error => {
-            statusPesan.innerHTML = "❌ Maaf, terjadi kesalahan. Silakan coba lagi.";
-            submitBtn.disabled = false;
-            submitBtn.innerText = "Kirim Konfirmasi";
-        });
-    });
-</script>       
+    <script>
         const music = document.getElementById('bg-music');
         const musicBtn = document.getElementById('music-control');
 
