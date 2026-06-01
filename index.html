@@ -265,7 +265,10 @@ body { margin: 0; padding: 0; background-color: #f7f5f0; overflow-x: hidden; ove
     // 2. Fungsi Buka & Musik
     function bukaUndangan() {
     document.getElementById('cover').classList.add('opened');
-    document.body.style.overflow = 'auto'; // Mengizinkan scroll setelah cover dibuka
+    
+    // Ini membuka kunci scroll setelah tombol diklik
+    document.body.style.overflowY = 'auto'; 
+    
     music.muted = false;
     music.play();
     musicBtn.style.animationPlayState = 'running';
