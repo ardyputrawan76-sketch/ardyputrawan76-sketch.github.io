@@ -2,48 +2,49 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undangan Pernikahan Ardy & Ana</title>
     <style>
-        body { font-family: sans-serif; background-color: #f7f5f0; padding: 20px; line-height: 1.6; }
-        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        h2 { color: #aa8c2c; text-align: center; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; }
-        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
-        .btn-submit { width: 100%; padding: 12px; background: #d4af37; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        .btn-link { display: block; text-align: center; margin-top: 20px; padding: 12px; background: #25d366; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f7f5f0; margin: 0; text-align: center; }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; background: #333; color: white; }
+        .section { padding: 50px 20px; max-width: 600px; margin: auto; }
+        .btn-link { display: inline-block; padding: 12px 25px; background: #25d366; color: white; text-decoration: none; border-radius: 25px; margin-top: 20px; }
+        input, select, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; }
+        button { padding: 12px; background: #d4af37; color: white; border: none; width: 100%; cursor: pointer; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Konfirmasi Kehadiran</h2>
-    <form id="rsvp-form" action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-        
-        <div class="form-group">
-            <label>Nama Tamu</label>
-            <input type="text" name="Nama Tamu" id="nama-tamu" class="form-control" readonly>
-        </div>
-        <div class="form-group">
-            <label>Konfirmasi</label>
-            <select name="Kehadiran" required>
+    <div class="hero">
+        <h1>Ardy & Ana</h1>
+        <p>Kami mengundang Anda</p>
+    </div>
+
+    <div class="section">
+        <h2>Mempelai</h2>
+        <p>Ardy & Ana</p>
+    </div>
+
+    <div class="section">
+        <h2>Konfirmasi Kehadiran</h2>
+        <form id="rsvp-form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="MASUKKAN_ACCESS_KEY_DISINI">
+            
+            <input type="text" name="Nama Tamu" id="nama-tamu" readonly>
+            <select name="Kehadiran">
                 <option value="Hadir">Hadir</option>
                 <option value="Tidak Hadir">Tidak Hadir</option>
             </select>
-        </div>
-        <button type="submit" class="btn-submit">Kirim Konfirmasi</button>
-    </form>
+            <button type="submit">Kirim Konfirmasi</button>
+        </form>
 
-    <a href="https://docs.google.com/spreadsheets/d/1GQnNhjb2Bb7oZDsktD9_Y7aeBjHUpCjlJqQwMSYegCM/edit?usp=sharing" target="_blank" class="btn-link">Lihat Daftar Tamu</a>
-</div>
+        <a href="https://docs.google.com/spreadsheets/d/1GQnNhjb2Bb7oZDsktD9_Y7aeBjHUpCjlJqQwMSYegCM/edit" target="_blank" class="btn-link">
+            Lihat Daftar Tamu
+        </a>
+    </div>
 
-<script>
-    // Mengambil nama dari URL
-    const params = new URLSearchParams(window.location.search);
-    document.getElementById('nama-tamu').value = params.get('to') || "Tamu Undangan";
-</script>
-
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        document.getElementById('nama-tamu').value = params.get('to') || "Tamu Undangan";
+    </script>
 </body>
 </html>
