@@ -254,14 +254,32 @@
 </section>
 
 <script>
+    <script>
+    // 1. Variabel Global
+    const music = document.getElementById('bg-music');
+    const musicBtn = document.getElementById('music-control');
     const form = document.getElementById('rsvp-form');
     const statusDiv = document.getElementById('form-status');
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyo0Jv7gNqmCAjrVTcNnWyaAU50AuTuDPTrxJG6pqQaU05LPFzvaUTuy7IG1QQCimqyCA/exec';
 
-    // 1. Fungsi Kirim Data
+    // 2. Fungsi Musik & Cover
+    function bukaUndangan() {
+        document.getElementById('cover').classList.add('opened');
+        music.muted = false;
+        music.play();
+        musicBtn.style.animationPlayState = 'running';
+        musicBtn.innerText = "🎵";
+    }
+
+    function toggleMusik() {
+        if (music.paused) { music.play(); musicBtn.style.animationPlayState = 'running'; musicBtn.innerText = "🎵"; } 
+        else { music.pause(); musicBtn.style.animationPlayState = 'paused'; musicBtn.innerText = "🔇"; }
+    }
+
+    // 3. Fungsi RSVP (Kurir Pribadi)
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        statusDiv.textContent = "Mengirim...";
+        statusDiv.textContent = "Sedang mengirim...";
         const data = new FormData(form);
         
         fetch(SCRIPT_URL, { method: 'POST', body: data })
@@ -269,28 +287,38 @@
         .then(data => {
             alert("Terima kasih, ucapan Anda sudah tersimpan!");
             form.reset();
-            muatKomentar(); // Refresh daftar komentar
+            muatKomentar();
         })
         .catch(err => { alert("Gagal kirim."); console.error(err); });
     });
 
-    // 2. Fungsi Ambil Data (Tampil Komentar)
+    // 4. Fungsi Komentar
     async function muatKomentar() {
         const wadah = document.getElementById('wadahKomentar');
         const res = await fetch(SCRIPT_URL);
         const data = await res.json();
-        
-        // Hapus isi lama, sisakan judul
         wadah.innerHTML = '<h4 style="text-align:center;">Riwayat Ucapan Tamu</h4>';
-        
-        // Tampilkan 5 komentar terakhir
         for (let i = data.length - 1; i > 0 && i > data.length - 6; i--) {
-            wadah.innerHTML += "<div style='margin:10px 0; padding:10px; background:#f9f9f9; border-radius:5px;'>"+
-                               "<strong>"+data[i][1]+"</strong><br>"+data[i][3]+"</div>";
+            wadah.innerHTML += "<div style='margin:10px 0; padding:10px; background:#f9f9f9; border-radius:5px;'><strong>"+data[i][1]+"</strong><br>"+data[i][3]+"</div>";
         }
     }
-    
-    // Panggil saat web dibuka
+
+    // 5. Fungsi Lainnya
+    function perbesarFoto(src) {
+        document.getElementById('lightbox-img').src = src;
+        document.getElementById('lightbox-overlay').classList.add('active');
+    }
+    function tutupFoto() { document.getElementById('lightbox-overlay').classList.remove('active'); }
+
+    // Countdown Timer
+    setInterval(function() {
+        const selisih = new Date("Dec 31, 2026 09:00:00").getTime() - new Date().getTime();
+        document.getElementById("days").innerText = Math.floor(selisih / (1000 * 60 * 60 * 24));
+        document.getElementById("hours").innerText = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById("minutes").innerText = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById("seconds").innerText = Math.floor((selisih % (1000 * 60)) / 1000);
+    }, 1000);
+
     muatKomentar();
 </script>
     <script>
