@@ -45,5 +45,39 @@
             .then(() => { document.getElementById('status').innerText = "✅ Terkirim!"; form.reset(); });
         });
     </script>
+    <script>
+        // 1. Pastikan fungsi bukaUndangan aktif
+        function bukaUndangan() {
+            console.log("Tombol diklik");
+            document.getElementById('cover').classList.add('opened');
+        }
+
+        // 2. Mengambil nama tamu
+        const params = new URLSearchParams(window.location.search);
+        const inputNama = document.getElementById('nama');
+        if(inputNama) {
+            inputNama.value = params.get('to') || "Tamu Undangan";
+        }
+        
+        // 3. Form submission
+        const form = document.getElementById('rsvp-form');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = form.querySelector('button');
+            btn.disabled = true;
+            btn.innerText = "Mengirim...";
+            
+            fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) })
+            .then(res => res.json())
+            .then(() => { 
+                document.getElementById('status').innerText = "✅ Terkirim!"; 
+                form.reset();
+            }).catch(() => { 
+                document.getElementById('status').innerText = "❌ Gagal, coba lagi."; 
+                btn.disabled = false;
+                btn.innerText = "Kirim Konfirmasi";
+            });
+        });
+    </script>
 </body>
 </html>
