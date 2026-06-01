@@ -9,17 +9,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
+        body {margin: 0; padding: 0; background-color: #f7f5f0; overflow-x: hidden; /* Mencegah geser kanan-kiri */}
+       body  {overflow: hidden; /* Agar tidak bisa discroll saat cover tampil */}
         /* Styling untuk pesan status yang rapi */
         .status-success { color: #155724; background-color: #d4edda; padding: 15px; border-radius: 8px; border: 1px solid #c3e6cb; margin-top: 15px; }
         .status-error { color: #721c24; background-color: #f8d7da; padding: 15px; border-radius: 8px; border: 1px solid #f5c6cb; margin-top: 15px; }
 
         /* Cover Style */
         #cover {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('bg-cover.jpg') no-repeat center center/cover;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            color: #fff; text-align: center; z-index: 9999; transition: transform 1s ease-in-out; padding: 20px;
-        }
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    min-height: 100vh; /* Tambahkan ini */
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('bg-cover.jpg') no-repeat center center/cover;
+    /* ... kode lainnya tetap ... */
+}
         #cover.opened { transform: translateY(-100vh); }
         .wedding-title { font-family: 'Great Vibes', cursive; font-size: 3.5rem; margin-bottom: 10px; color: #f1dfb5; }
         .guest-box { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(5px); padding: 20px 40px; border-radius: 8px; margin: 30px 0; border: 1px solid rgba(255,255,255,0.2); }
@@ -269,12 +271,13 @@
 
     // 2. Fungsi Buka & Musik
     function bukaUndangan() {
-        document.getElementById('cover').classList.add('opened');
-        music.muted = false;
-        music.play();
-        musicBtn.style.animationPlayState = 'running';
-        musicBtn.innerText = "🎵";
-    }
+    document.getElementById('cover').classList.add('opened');
+    document.body.style.overflow = 'auto'; // Mengizinkan scroll setelah cover dibuka
+    music.muted = false;
+    music.play();
+    musicBtn.style.animationPlayState = 'running';
+    musicBtn.innerText = "🎵";
+}
 
     function toggleMusik() {
         if (music.paused) { music.play(); musicBtn.style.animationPlayState = 'running'; musicBtn.innerText = "🎵"; } 
