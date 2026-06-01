@@ -63,61 +63,36 @@
         .galeri-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
         .galeri-item img:hover { transform: scale(1.08); }
 
-        /* Pop-up Pembesar Foto (Lightbox Overlay) */
-        #lightbox-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.9); z-index: 10000;
-            display: flex; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
-        }
+        /* Lightbox */
+        #lightbox-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9); z-index: 10000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
         #lightbox-overlay.active { opacity: 1; pointer-events: auto; }
         #lightbox-img { max-width: 90%; max-height: 85vh; border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transform: scale(0.9); transition: transform 0.4s ease; }
         #lightbox-overlay.active #lightbox-img { transform: scale(1); }
-        .lightbox-hint { position: absolute; bottom: 20px; color: #ccc; font-size: 0.8rem; letter-spacing: 1px; }
+        .lightbox-hint { position: absolute; bottom: 20px; color: #ccc; font-size: 0.8rem; }
 
         /* Kado Digital Style */
         .section-kado { background-color: #fff; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 50px; }
         .card-rekening { background-color: #f7f5f0; border: 1px dashed #d4af37; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center; }
-        .no-rek { font-size: 1.3rem; font-weight: 600; color: #333; letter-spacing: 1px; margin: 10px 0; }
 
         /* Form RSVP Style */
         .section-rsvp { background-color: #fff; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); text-align: left; }
-        .form-group {
-            margin-bottom: 15px;
-        }
+        .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; color: #555; }
         .form-control { width: 100%; padding: 12px; border: 1px solid #eadecc; border-radius: 8px; font-family: inherit; font-size: 0.9rem; background-color: #fbfbfa; }
-        .form-control:focus { outline: none; border-color: #d4af37; }
         .btn-submit { background-color: #d4af37; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; margin-top: 10px; }
         .btn-submit:hover { background-color: #aa8c2c; }
         #form-status { margin-top: 15px; font-size: 0.9rem; text-align: center; font-weight: 600; }
 
-        /* Tombol Musik Melayang Kontrol */
-        #music-control {
-            position: fixed; bottom: 25px; right: 25px; width: 50px; height: 50px;
-            background-color: rgba(212, 175, 55, 0.9); color: white; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; z-index: 999;
-            cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 1.2rem;
-            animation: putarMusik 4s linear infinite; animation-play-state: paused;
-        }
+        #music-control { position: fixed; bottom: 25px; right: 25px; width: 50px; height: 50px; background-color: rgba(212, 175, 55, 0.9); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 999; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); animation: putarMusik 4s linear infinite; animation-play-state: paused; }
         @keyframes putarMusik { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <!-- AUDIO ELEMENT (Sudah bersih tanpa tanda bintang) -->
     <audio id="bg-music" src="musik-pernikahan.mp3" loop></audio>
-
-    <!-- TOMBOL MUSIK MELAYANG -->
     <div id="music-control" onclick="toggleMusik()">🎵</div>
+    <div id="lightbox-overlay" onclick="tutupFoto()"><img id="lightbox-img" src="" alt="Foto"><p class="lightbox-hint">Ketuk untuk menutup</p></div>
 
-    <!-- OVERLAY POP-UP PEMBESAR FOTO -->
-    <div id="lightbox-overlay" onclick="tutupFoto()">
-        <img id="lightbox-img" src="" alt="Foto Diperbesar">
-        <p class="lightbox-hint">Ketuk di mana saja untuk menutup</p>
-    </div>
-
-    <!-- 2. HALAMAN COVER -->
     <div id="cover">
         <p style="letter-spacing: 3px; font-size: 0.9rem;">THE WEDDING OF</p>
         <h1 class="wedding-title">Ardy & Ana</h1>
@@ -128,278 +103,12 @@
         <button class="btn-open" onclick="bukaUndangan()">Buka Undangan</button>
     </div>
 
-    <!-- 3. KONTEN UTAMA -->
     <div id="main-content">
         <section class="section-salam">
             <p class="salam-arab">Om Swastyastu</p>
-            <p class="salam-teks">Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri Acara Pernikahan kami:</p>
+            <p class="salam-teks">Atas Asung Kertha Wara Nugraha, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri Acara Pernikahan kami.</p>
         </section>
 
-        <!-- PROFIL MEMPELAI -->
-                <section class="section-mempelai">
-            <div class="mempelai-card">
-                <div class="avatar-frame" onclick="perbesarFoto('ardy.png')" style="cursor: pointer;">
-                    <img src="ardy.png" alt="Foto Ardy">
-                </div>
-                <h3 class="nama-lengkap">Gede Ardy Putrawan</h3>
-                <p class="info-ortu">Putra dari Pasangan:<br>Bapak Ketut Sariana (Alm.)<br>& Ibu Ketut Arsih</p>
-            </div>
-            <div class="dan-simbol">&</div>
-            <div class="mempelai-card">
-                <div class="avatar-frame" onclick="perbesarFoto('ana.png')" style="cursor: pointer;">
-                    <img src="ana.png" alt="Foto Ana">
-                </div>
-                <h3 class="nama-lengkap">Komang Ana Oktaviani</h3>
-                <p class="info-ortu">Putri dari Pasangan:<br>Bapak I Wayan Sugiantara<br>& Ibu Ni Ketut Wartini</p>
-            </div>
-        </section>
-
-        <hr class="pembatas">
-
-        <!-- COUNTDOWN TIMER -->
-        <section class="section-countdown">
-            <h4 style="font-size: 1rem; letter-spacing: 2px; margin-bottom: 20px; color: #aa8c2c;">MENUJU HARI BAHAGIA</h4>
-            <div class="timer-container">
-                <div class="timer-box"><span id="days">00</span><p>Hari</p></div>
-                <div class="timer-box"><span id="hours">00</span><p>Jam</p></div>
-                <div class="timer-box"><span id="minutes">00</span><p>Menit</p></div>
-                <div class="timer-box"><span id="seconds">00</span><p>Detik</p></div>
-            </div>
-        </section>
-
-        <hr class="pembatas">
-
-        <!-- DETAIL ACARA -->
-        <section class="section-acara">
-            <h2 class="acara-title">Pawiwahan / Acara</h2>
-            <p style="font-weight: 600; margin-bottom: 5px;">Hari, Tanggal</p>
-            <p style="color: #666; font-size: 0.9rem; margin-bottom: 20px;">Kamis, 31 Desember 2026</p>
-
-            <p style="font-weight: 600; margin-bottom: 5px;">Waktu</p>
-            <p style="color: #666; font-size: 0.9rem; margin-bottom: 20px;">09.00 WITA - Selesai</p>
-
-            <p style="font-weight: 600; margin-bottom: 5px;">Tempat / Lokasi</p>
-            <p style="color: #666; font-size: 0.9rem; padding: 0 20px; margin-bottom: 15px;">Kediaman Mempelai Pria, Tabanan, Bali</p>
-
-            <a href="https://goo.gl/maps/bz8HRTQSsVTxnEum9" target="_blank" class="btn-maps">📍 Buka Google Maps Lokasi Acara</a>
-        </section>
-
-        <hr class="pembatas">
-
-        <!-- GALERI FOTO (BISA DI-KLIK UNTUK MEMBESAR) -->
-        <section class="section-galeri">
-            <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin-bottom: 5px;">Galeri Kebersamaan</h3>
-            <p style="font-size: 0.8rem; color: #777; margin-bottom: 5px;">Kisah cinta dalam bingkai potret kebahagiaan kami</p>
-            <p style="font-size: 0.7rem; color: #bfa36b; font-style: italic;">(Ketuk foto untuk memperbesar)</p>
-
-            <div class="galeri-grid">
-                <div class="galeri-item" onclick="perbesarFoto('galeri1.jpg')"><img src="galeri1.jpg" alt="Foto Wedding 1"></div>
-                <div class="galeri-item" onclick="perbesarFoto('galeri2.jpg')"><img src="galeri2.jpg" alt="Foto Wedding 2"></div>
-                <div class="galeri-item" onclick="perbesarFoto('galeri3.jpg')"><img src="galeri3.jpg" alt="Foto Wedding 3"></div>
-                <div class="galeri-item" onclick="perbesarFoto('galeri4.jpg')"><img src="galeri4.jpg" alt="Foto Wedding 4"></div>
-            </div>
-        </section>
-
-        <hr class="pembatas">
-
-        <!-- KADO DIGITAL (MENGGUNAKAN QRIS DANA - BEBAS BIAYA ADMIN) -->
-        <section class="section-kado">
-            <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c;">Kado Digital</h3>
-            <p style="font-size: 0.85rem; color: #777; line-height: 1.5; margin-top: 10px;">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika ingin memberikan tanda kasih, anda dapat menstransfer ke QRIS DANA di bawah ini:</p>
-
-            <div class="card-rekening" style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
-                <p style="font-weight: 600; color: #0086b3; letter-spacing: 1px;">QRIS DANA (ALL BANK & E-WALLET)</p>
-
-                <!-- TAMPILAN GAMBAR QRIS -->
-                <img src="qris-dana.png" alt="QRIS Kado Digital" style="width: 200px; height: 200px; object-fit: contain; border: 4px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 8px;">
-
-                <p style="font-size: 0.85rem; color: #555; font-weight: 600;">a.n Gede Ardy Putrawan</p>
-
-                <!-- TOMBOL OTOMATIS UNTUK DOWNLOAD KE GALERI HP TAMU -->
-                <a href="qris-dana.png" download="qris-dana.png" style="display: inline-block; background-color: #0086b3; color: white; text-decoration: none; padding: 10px 20px; font-size: 0.8rem; font-weight: 600; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin: 5px 0; transition: 0.3s;">
-                    📸 Simpan QRIS ke Galeri HP
-                </a>
-
-                <div style="margin-top: 5px; background-color: #fff; padding: 10px; border-radius: 6px; text-align: left; font-size: 0.75rem; color: #666; line-height: 1.4; border: 1px solid #eadecc;">
-                    <strong>💡 Cara Transfer Gratis via HP:</strong><br>
-                    1. Klik tombol <strong>"Simpan QRIS ke Galeri HP"</strong> di atas.<br>
-                    2. Buka M-Banking Anda (BPD Bali, BCA, Mandiri, dll) atau e-wallet lainnya.<br>
-                    3. Pilih menu <strong>Scan / QRIS</strong>.<br>
-                    4. Ketuk ikon <strong>Galeri/Foto</strong> di pojok menu scan, lalu pilih foto QRIS yang baru di-download tadi.<br>
-                    5. Masukkan nominal transfer (Bebas biaya admin).
-                </div>
-            </div>
-        </section>
-
-        <hr class="pembatas">
-
-        <!-- FORM RSVP SPREADSHEET GOOGLE -->
         <section class="section-rsvp">
             <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-align: center; color: #aa8c2c; margin-bottom: 5px;">Konfirmasi Kehadiran</h3>
-            <p style="font-size: 0.8rem; text-align: center; color: #777; margin-bottom: 25px;">Mohon konfirmasikan kehadiran Anda melalui form di bawah ini:</p>
-
-            <form id="rsvp-form" action="https://api.web3forms.com/submit" method="POST">
-                <input type="hidden" name="access_key" value="MASUKKAN_ACCESS_KEY_ANDA_DISINI">
-                <input type="hidden" name="subject" value="Konfirmasi RSVP Undangan Ardy & Ana">
-                <input type="hidden" name="from_name" value="Sistem Undangan ArdyAna">
-
-                <div class="form-group">
-                    <label for="name">Nama Tamu</label>
-                    <input type="text" name="Nama Tamu" id="form-nama-tamu" class="form-control" required readonly>
-                </div>
-                <div class="form-group">
-                    <label for="status">Konfirmasi Kehadiran</label>
-                    <select name="Konfirmasi Kehadiran" id="status" class="form-control" required>
-                        <option value="">-- Pilih Acara Konfirmasi --</option>
-                        <option value="Hadir">Siap, Saya Akan Hadir</option>
-                        <option value="Tidak Hadir">Maaf, Belum Bisa Hadir</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="message">Ucapan & Doa Restu</label>
-                    <textarea name="Ucapan dan Doa" id="message" rows="4" class="form-control" placeholder="Tulis ucapan selamat Anda untuk kedua mempelai..." required></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Kirim Konfirmasi</button>
-                <div id="form-status"></div>
-            </form>
-
-            <div style="text-align: center; margin: 30px 0;">
-                <p style="font-size: 14px; color: #555; margin-bottom: 10px;">Ingin melihat daftar tamu lainnya?</p>
-                <a href="https://docs.google.com/spreadsheets/d/1GQnNhjb2Bb7oZDsktD9_Y7aeBjHUpCjlJqQwMSYegCM/edit?usp=sharing" 
-                   target="_blank" 
-                   style="text-decoration: none; background-color: #25d366; color: white; padding: 12px 25px; border-radius: 25px; font-weight: bold; font-family: sans-serif; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                   Lihat Daftar Tamu
-                </a>
-            </div>
-        </section>
-            </form>
-
-            <div style="text-align: center; margin: 30px 0;">
-                <p style="font-size: 14px; color: #555; margin-bottom: 10px;">Ingin melihat daftar tamu lainnya?</p>
-                <a href="https://docs.google.com/spreadsheets/d/1GQnNhjb2Bb7oZDsktD9_Y7aeBjHUpCjlJqQwMSYegCM/edit?usp=sharing" 
-                   target="_blank" 
-                   style="text-decoration: none; background-color: #25d366; color: white; padding: 12px 25px; border-radius: 25px; font-weight: bold; font-family: sans-serif; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                   Lihat Daftar Tamu
-                </a>
-            </div>
-        </section>
-            </section>
-        </section>
-    </div>
-
-    <script>
-        const music = document.getElementById('bg-music');
-        const musicBtn = document.getElementById('music-control');
-
-        function perbesarFoto(srcDanLokasi) {
-            const overlay = document.getElementById('lightbox-overlay');
-            const imgTarget = document.getElementById('lightbox-img');
-            imgTarget.src = srcDanLokasi;
-            overlay.classList.add('active');
-        }
-
-        function tutupFoto() {
-            document.getElementById('lightbox-overlay').classList.remove('active');
-        }
-
-        function getGuestName() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const guestName = urlParams.get('to');
-            const penampungNama = guestName ? decodeURIComponent(guestName) : "Tamu Undangan";
-
-            document.getElementById('nama-tamu').innerText = penampungNama;
-            document.getElementById('form-nama-tamu').value = penampungNama;
-        }
-
-        // FUNGSI UTAMA OTOMATIS: Berputar tepat saat ketukan "Buka Undangan" masuk
-                function bukaUndangan() {
-            // 1. Langsung singkirkan cover undangan
-            document.getElementById('cover').classList.add('opened');
-            
-            // 2. Perintah putar murni tanpa syarat (Langsung ditembak saat jari mengetuk)
-            var laguPernikahan = document.getElementById('bg-music');
-            if (laguPernikahan) {
-                laguPernikahan.muted = false; // Buka kunci suara
-                
-                // Perintah putar langsung tanpa fungsi penengah (Anti-Blokir Browser)
-                laguPernikahan.play();
-                
-                // Hidupkan animasi tombol lingkaran berputar di pojok bawah
-                var tombolMusik = document.getElementById('music-control');
-                if (tombolMusik) {
-                    tombolMusik.style.animationPlayState = 'running';
-                    tombolMusik.innerText = "🎵";
-                }
-            }
-        }
-
-        function toggleMusik() {
-            if (music.paused) {
-                music.muted = false;
-                music.play();
-                musicBtn.style.animationPlayState = 'running';
-                musicBtn.innerText = "🎵";
-            } else {
-                music.pause();
-                musicBtn.style.animationPlayState = 'paused';
-                musicBtn.innerText = "🔇";
-            }
-        }
-
-        // Logic Submit Form -> Google Sheets via Web3Forms
-        const form = document.getElementById('rsvp-form');
-        const statusDiv = document.getElementById('form-status');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            statusDiv.textContent = "Sedang mengirim konfirmasi...";
-            statusDiv.style.color = "#333";
-
-            const formData = new FormData(form);
-            const object = Object.fromEntries(formData);
-            const json = JSON.stringify(object);
-
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: json
-            })
-            .then(async (response) => {
-                if (response.status == 200) {
-                    statusDiv.textContent = "Konfirmasi berhasil masuk ke Spreadsheet! Terima kasih.";
-                    statusDiv.style.color = "green";
-                    form.reset();
-                    getGuestName();
-                } else {
-                    statusDiv.textContent = "Terjadi gangguan transmisi data, coba lagi.";
-                    statusDiv.style.color = "red";
-                }
-            })
-            .catch(error => {
-                statusDiv.textContent = "Koneksi lambat.";
-                statusDiv.style.color = "red";
-            });
-        });
-
-        // Countdown Timer
-        const tanggalAcara = new Date("Dec 31, 2026 09:00:00").getTime();
-        const hitungMundur = setInterval(function() {
-            const sekarang = new Date().getTime();
-            const selisih = tanggalAcara - sekarang;
-            const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
-            const jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
-            const detik = Math.floor((selisih % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = hari < 10 ? "0" + hari : hari;
-            document.getElementById("hours").innerText = jam < 10 ? "0" + jam : jam;
-            document.getElementById("minutes").innerText = menit < 10 ? "0" + menit : menit;
-            document.getElementById("seconds").innerText = detik < 10 ? "0" + detik : detik;
-
-            if (selisih < 0) { clearInterval(hitungMundur); document.querySelector(".timer-container").innerHTML = "<h3>Acara Berlangsung!</h3>"; }
-        }, 1000);
-
-        window.onload = getGuestName;
-    </script>
-</body>
-</html>
+            <form id="rsvp-form" action="
