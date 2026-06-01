@@ -111,4 +111,44 @@
 
         <section class="section-rsvp">
             <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-align: center; color: #aa8c2c; margin-bottom: 5px;">Konfirmasi Kehadiran</h3>
-            <form id="rsvp-form" action="
+            <form id="rsvp-form" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="MASUKKAN_ACCESS_KEY_ANDA_DISINI">
+                <div class="form-group">
+                    <label>Nama Tamu</label>
+                    <input type="text" name="Nama Tamu" id="form-nama-tamu" class="form-control" required readonly>
+                </div>
+                <div class="form-group">
+                    <label>Konfirmasi Kehadiran</label>
+                    <select name="Konfirmasi Kehadiran" class="form-control" required>
+                        <option value="Hadir">Hadir</option>
+                        <option value="Tidak Hadir">Tidak Hadir</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit">Kirim Konfirmasi</button>
+                <div id="form-status"></div>
+            </form>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="https://docs.google.com/spreadsheets/d/1GQnNhjb2Bb7oZDsktD9_Y7aeBjHUpCjlJqQwMSYegCM/edit?usp=sharing" target="_blank" style="text-decoration: none; background-color: #25d366; color: white; padding: 12px 25px; border-radius: 25px; font-weight: bold;">Lihat Daftar Tamu</a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function bukaUndangan() {
+            document.getElementById('cover').classList.add('opened');
+            document.getElementById('bg-music').play();
+            document.getElementById('music-control').style.animationPlayState = 'running';
+        }
+        function getGuestName() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const guestName = urlParams.get('to');
+            const name = guestName ? decodeURIComponent(guestName) : "Tamu Undangan";
+            document.getElementById('nama-tamu').innerText = name;
+            document.getElementById('form-nama-tamu').value = name;
+        }
+        window.onload = getGuestName;
+        // (Fungsi lainnya tetap sama)
+    </script>
+</body>
+</html>
