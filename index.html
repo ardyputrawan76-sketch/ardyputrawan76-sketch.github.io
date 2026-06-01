@@ -235,49 +235,63 @@
 
         <!-- FORM RSVP SPREADSHEET GOOGLE -->
         <section class="section-rsvp">
-            <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-align: center; color: #aa8c2c; margin-bottom: 5px;">Konfirmasi Kehadiran</h3>
-            <p style="font-size: 0.8rem; text-align: center; color: #777; margin-bottom: 25px;">Mohon konfirmasikan kehadiran Anda melalui form di bawah ini:</p>
+    <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-align: center; color: #aa8c2c; margin-bottom: 5px;">Konfirmasi Kehadiran</h3>
     <form id="rsvp-form">
-    <input type="text" name="Nama Tamu" placeholder="Nama Anda" required>
+        <input type="text" name="Nama Tamu" placeholder="Nama Anda" required>
+        <select name="Status Kehadiran" required>
+            <option value="">-- Pilih Kehadiran --</option>
+            <option value="Hadir">Hadir</option>
+            <option value="Tidak Hadir">Tidak Hadir</option>
+        </select>
+        <textarea name="Ucapan" placeholder="Tulis ucapan/doa di sini..."></textarea>
+        <button type="submit" class="btn-submit">Kirim Konfirmasi</button>
+    </form>   
+    <div id="form-status" style="margin-top:15px; text-align:center;"></div>
     
-    <select name="Status Kehadiran" required>
-        <option value="">-- Pilih Kehadiran --</option>
-        <option value="Hadir">Hadir</option>
-        <option value="Tidak Hadir">Tidak Hadir</option>
-    </select>
-    
-    <textarea name="Ucapan" placeholder="Tulis ucapan/doa di sini..."></textarea>
-    
-    <button type="submit">Kirim Konfirmasi</button>
-</form>   
-    <div id="wadahKomentar" style="margin-top: 20px; padding: 10px; border-top: 2px solid #aa8c2c; color: black !important;">
-    <h4 style="text-align: center; color: black !important;">Riwayat Ucapan Tamu</h4>
-</div>
+    <div id="wadahKomentar" style="margin-top: 30px; padding: 20px; border-top: 2px solid #aa8c2c;">
+        <h4 style="text-align: center; color: #333;">Riwayat Ucapan Tamu</h4>
+    </div>
+</section>
 
-    <script>
+<script>
     const form = document.getElementById('rsvp-form');
-    // GANTI TULISAN DI BAWAH DENGAN URL WEB APP BAPAK
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyo0Jv7gNqmCAjrVTcNnWyaAU50AuTuDPTrxJG6pqQaU05LPFzvaUTuy7IG1QQCimqyCA/exec'; 
+    const statusDiv = document.getElementById('form-status');
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyo0Jv7gNqmCAjrVTcNnWyaAU50AuTuDPTrxJG6pqQaU05LPFzvaUTuy7IG1QQCimqyCA/exec';
+
+    // 1. Fungsi Kirim Data
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        // Mengubah data form menjadi format yang bisa dibaca Google Sheets
+        statusDiv.textContent = "Mengirim...";
         const data = new FormData(form);
         
-        fetch(SCRIPT_URL, {
-            method: 'POST',
-            body: data
-        })
+        fetch(SCRIPT_URL, { method: 'POST', body: data })
         .then(res => res.json())
         .then(data => {
-            alert("Terima kasih, konfirmasi Anda sudah tersimpan!");
-            form.reset(); // Mengosongkan form setelah berhasil
+            alert("Terima kasih, ucapan Anda sudah tersimpan!");
+            form.reset();
+            muatKomentar(); // Refresh daftar komentar
         })
-        .catch(err => {
-            alert("Oops, ada masalah. Coba lagi ya.");
-            console.error(err);
-        });
+        .catch(err => { alert("Gagal kirim."); console.error(err); });
     });
+
+    // 2. Fungsi Ambil Data (Tampil Komentar)
+    async function muatKomentar() {
+        const wadah = document.getElementById('wadahKomentar');
+        const res = await fetch(SCRIPT_URL);
+        const data = await res.json();
+        
+        // Hapus isi lama, sisakan judul
+        wadah.innerHTML = '<h4 style="text-align:center;">Riwayat Ucapan Tamu</h4>';
+        
+        // Tampilkan 5 komentar terakhir
+        for (let i = data.length - 1; i > 0 && i > data.length - 6; i--) {
+            wadah.innerHTML += "<div style='margin:10px 0; padding:10px; background:#f9f9f9; border-radius:5px;'>"+
+                               "<strong>"+data[i][1]+"</strong><br>"+data[i][3]+"</div>";
+        }
+    }
+    
+    // Panggil saat web dibuka
+    muatKomentar();
 </script>
     <script>
         const music = document.getElementById('bg-music');
