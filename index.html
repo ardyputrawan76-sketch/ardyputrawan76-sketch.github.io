@@ -111,7 +111,7 @@
         .btn-maps:hover { background-color: #1ebd58; transform: scale(1.03); }
 
         /* ========================================================== */
-        /* UPDATE: STYLE GALERI SLIDER HORIZONTAL (CAROUSEL MODERN) */
+        /* STYLE GALERI CAROUSEL (DENGAN ANIMASI AUTOPLAY SLIDE)      */
         /* ========================================================== */
         .section-galeri { background-color: #fff; padding: 35px 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); position: relative; }
         
@@ -128,36 +128,47 @@
             overflow-x: auto; 
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
-            padding-bottom: 10px;
+            padding: 5px 5px 15px 5px;
             -webkit-overflow-scrolling: touch;
         }
-        /* Menyembunyikan scrollbar bawaan browser biar rapi */
         .galeri-slider::-webkit-scrollbar { display: none; }
 
         .galeri-item { 
-            flex: 0 0 80%; /* Di HP, satu foto memakan 80% lebar layar */
+            flex: 0 0 85%; 
             scroll-snap-align: center;
-            height: 240px; 
+            height: 250px; 
             overflow: hidden; 
             border-radius: 12px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+            border: 2px solid #eadecc;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.06); 
             cursor: pointer; 
         }
-        .galeri-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+        .galeri-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
         .galeri-item img:hover { transform: scale(1.05); }
 
-        /* Tombol Navigasi Panah Slider */
+        /* Tombol Navigasi Panah */
         .slide-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(212, 175, 55, 0.85); color: white;
-            border: none; width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(212, 175, 55, 0.9); color: white;
+            border: none; width: 38px; height: 38px; border-radius: 50%;
             font-size: 1rem; cursor: pointer; z-index: 10;
             display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2); transition: 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15); transition: 0.3s;
         }
         .slide-btn:hover { background: #aa8c2c; }
-        .btn-left { left: -10px; }
-        .btn-right { right: -10px; }
+        .btn-left { left: -12px; }
+        .btn-right { right: -12px; }
+
+        /* Indikator Titik (Dots) */
+        .slider-dots {
+            display: flex; justify-content: center; gap: 8px; margin-top: 5px;
+        }
+        .dot {
+            width: 8px; height: 8px; background-color: #eadecc; border-radius: 50%; transition: 0.3s; cursor: pointer;
+        }
+        .dot.active {
+            background-color: #d4af37; width: 20px; border-radius: 4px;
+        }
         /* ========================================================== */
 
         /* Lightbox Overlay */
@@ -201,7 +212,8 @@
             .section-mempelai { flex-direction: row; justify-content: space-around; gap: 10px; }
             .timer-box { width: 80px; }
             .timer-box span { font-size: 1.6rem; }
-            .galeri-item { flex: 0 0 45%; height: 300px; } /* Di laptop muat 2 foto bersandingan */
+            .galeri-item { flex: 0 0 48%; height: 320px; } 
+            .slide-btn { display: none; }
         }
     </style>
 </head>
@@ -283,12 +295,12 @@
         <section class="section-galeri">
             <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin: 0 0 5px 0;">Galeri Kebersamaan</h3>
             <p style="font-size: 0.8rem; color: #777; margin: 0 0 5px 0;">Kisah cinta dalam bingkai potret kebahagiaan kami</p>
-            <p style="font-size: 0.7rem; color: #bfa36b; font-style: italic; margin: 0;">(Geser ke samping atau ketuk untuk memperbesar)</p>
+            <p style="font-size: 0.7rem; color: #bfa36b; font-style: italic; margin: 0;">(Bergeser otomatis atau ketuk untuk memperbesar)</p>
 
             <div class="galeri-wrapper">
                 <button class="slide-btn btn-left" onclick="geserGaleri(-1)">❮</button>
                 
-                <div class="galeri-slider" id="sliderGaleri">
+                <div class="galeri-slider" id="sliderGaleri" onscroll="perbaruiTitikIndikator()">
                     <div class="galeri-item" onclick="perbesarFoto('galeri1.jpg')"><img src="galeri1.jpg" alt="Foto Wedding 1"></div>
                     <div class="galeri-item" onclick="perbesarFoto('galeri2.jpg')"><img src="galeri2.jpg" alt="Foto Wedding 2"></div>
                     <div class="galeri-item" onclick="perbesarFoto('galeri3.jpg')"><img src="galeri3.jpg" alt="Foto Wedding 3"></div>
@@ -296,6 +308,13 @@
                 </div>
 
                 <button class="slide-btn btn-right" onclick="geserGaleri(1)">❯</button>
+            </div>
+
+            <div class="slider-dots" id="wadahDots">
+                <span class="dot active" onclick="lompatKeFoto(0)"></span>
+                <span class="dot" onclick="lompatKeFoto(1)"></span>
+                <span class="dot" onclick="lompatKeFoto(2)"></span>
+                <span class="dot" onclick="lompatKeFoto(3)"></span>
             </div>
         </section>
 
@@ -377,6 +396,9 @@
         music.play().catch(error => console.log("Autoplay dicegah browser"));
         musicBtn.style.animationPlayState = 'running';
         musicBtn.innerText = "🎵";
+
+        // Jalankan autoplay slider setelah undangan dibuka
+        mulaiAutoplayGaleri();
     }
 
     // 3. Kontrol Musik Melayang (Play/Pause)
@@ -414,13 +436,61 @@
     }
 
     // ==========================================================
-    // UPDATE: FUNGSI JAVASCRIPT UNTUK NAVIGASI TOMBOL SLIDER
+    // LOGIKA UTAMA SLIDER AUTOPLAY (BERGESER SENDIRI)
     // ==========================================================
+    let intervalGaleri;
+
     function geserGaleri(arah) {
         const slider = document.getElementById('sliderGaleri');
-        // Mendapatkan lebar item pertama termasuk jarak (gap)
         const lebarItem = slider.querySelector('.galeri-item').clientWidth + 15;
-        slider.scrollLeft += (lebarItem * arah);
+        const totalFoto = slider.querySelectorAll('.galeri-item').length;
+        
+        // Cek posisi index saat ini
+        let indexAktif = Math.round(slider.scrollLeft / lebarItem);
+        let indexBaru = indexAktif + arah;
+
+        // Reset kembali ke foto pertama jika sudah mentok di ujung kanan saat autoplay berjalan
+        if (indexBaru >= totalFoto) {
+            indexBaru = 0;
+        } else if (indexBaru < 0) {
+            indexBaru = totalFoto - 1;
+        }
+
+        slider.scrollLeft = lebarItem * indexBaru;
+        
+        // Reset waktu interval biar jalannya tidak tabrakan pas diklik manual
+        clearInterval(intervalGaleri);
+        mulaiAutoplayGaleri();
+    }
+
+    function mulaiAutoplayGaleri() {
+        intervalGaleri = setInterval(() => {
+            geserGaleri(1); // Geser maju 1 foto secara otomatis
+        }, 3000); // 3000 milidetik = 3 Detik sekali geser
+    }
+
+    function perbaruiTitikIndikator() {
+        const slider = document.getElementById('sliderGaleri');
+        const dots = document.getElementById('wadahDots').getElementsByClassName('dot');
+        const lebarItem = slider.querySelector('.galeri-item').clientWidth + 15;
+        
+        const indexAktif = Math.round(slider.scrollLeft / lebarItem);
+        
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].classList.remove('active');
+        }
+        if (dots[indexAktif]) {
+            dots[indexAktif].classList.add('active');
+        }
+    }
+
+    function lompatKeFoto(index) {
+        const slider = document.getElementById('sliderGaleri');
+        const lebarItem = slider.querySelector('.galeri-item').clientWidth + 15;
+        slider.scrollLeft = lebarItem * index;
+        
+        clearInterval(intervalGaleri);
+        mulaiAutoplayGaleri();
     }
     // ==========================================================
 
