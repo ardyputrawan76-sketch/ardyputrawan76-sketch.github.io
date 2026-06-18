@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undangan Pernikahan Ardy & Ana</title>
+    
+    <!-- Meta Tags untuk Link Preview WhatsApp (GitHub Pages) -->
+    <meta property="og:title" content="Undangan Pernikahan Ardy & Ana" />
+    <meta property="og:description" content="Kamis, 31 Desember 2026 - Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri hari bahagia kami." />
+    <meta property="og:image" content="https://ardyputrawan76-sketch.github.io/bg-cover.jpg" />
+    <meta property="og:image:secure_url" content="https://ardyputrawan76-sketch.github.io/bg-cover.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
+    <meta property="og:type" content="website" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
@@ -110,9 +121,7 @@
         .btn-maps { display: inline-block; background-color: #25d366; color: #fff; text-decoration: none; padding: 12px 25px; border-radius: 25px; font-size: 0.9rem; margin-top: 15px; transition: 0.3s; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
         .btn-maps:hover { background-color: #1ebd58; transform: scale(1.03); }
 
-        /* ========================================================== */
-        /* STYLE GALERI CAROUSEL (DENGAN ANIMASI AUTOPLAY SLIDE)      */
-        /* ========================================================== */
+        /* Style Galeri Carousel */
         .section-galeri { background-color: #fff; padding: 35px 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); position: relative; }
         
         .galeri-wrapper { 
@@ -169,7 +178,6 @@
         .dot.active {
             background-color: #d4af37; width: 20px; border-radius: 4px;
         }
-        /* ========================================================== */
 
         /* Lightbox Overlay */
         #lightbox-overlay {
@@ -338,7 +346,7 @@
                 <div style="margin-top: 5px; background-color: #fff; padding: 10px; border-radius: 6px; text-align: left; font-size: 0.75rem; color: #666; line-height: 1.4; border: 1px solid #eadecc;">
                     <strong>💡 Cara Transfer Gratis via HP:</strong><br>
                     1. Klik tombol <strong>"Simpan QRIS ke Galeri HP"</strong> di atas.<br>
-                    2. Buka M-Banking Anda (BPD Bali, BCA, Mandiri, dll) atau e-wallet lainnya.<br>
+                    2. Buka M-Banking Anda (BPD Bali, BCA, Mandiri, dll) or e-wallet lainnya.<br>
                     3. Pilih menu <strong>Scan / QRIS</strong>.<br>
                     4. Ketuk ikon <strong>Galeri/Foto</strong> di pojok menu scan, lalu pilih foto QRIS yang baru di-download tadi.<br>
                     5. Masukkan nominal transfer (Bebas biaya admin).
@@ -397,7 +405,6 @@
         musicBtn.style.animationPlayState = 'running';
         musicBtn.innerText = "🎵";
 
-        // Jalankan autoplay slider setelah undangan dibuka
         mulaiAutoplayGaleri();
     }
 
@@ -435,9 +442,7 @@
         }, 1000);
     }
 
-    // ==========================================================
-    // LOGIKA UTAMA SLIDER AUTOPLAY (BERGESER SENDIRI)
-    // ==========================================================
+    // LOGIKA UTAMA SLIDER AUTOPLAY
     let intervalGaleri;
 
     function geserGaleri(arah) {
@@ -445,11 +450,9 @@
         const lebarItem = slider.querySelector('.galeri-item').clientWidth + 15;
         const totalFoto = slider.querySelectorAll('.galeri-item').length;
         
-        // Cek posisi index saat ini
         let indexAktif = Math.round(slider.scrollLeft / lebarItem);
         let indexBaru = indexAktif + arah;
 
-        // Reset kembali ke foto pertama jika sudah mentok di ujung kanan saat autoplay berjalan
         if (indexBaru >= totalFoto) {
             indexBaru = 0;
         } else if (indexBaru < 0) {
@@ -458,15 +461,14 @@
 
         slider.scrollLeft = lebarItem * indexBaru;
         
-        // Reset waktu interval biar jalannya tidak tabrakan pas diklik manual
         clearInterval(intervalGaleri);
         mulaiAutoplayGaleri();
     }
 
     function mulaiAutoplayGaleri() {
         intervalGaleri = setInterval(() => {
-            geserGaleri(1); // Geser maju 1 foto secara otomatis
-        }, 3000); // 3000 milidetik = 3 Detik sekali geser
+            geserGaleri(1);
+        }, 3000);
     }
 
     function perbaruiTitikIndikator() {
@@ -492,7 +494,6 @@
         clearInterval(intervalGaleri);
         mulaiAutoplayGaleri();
     }
-    // ==========================================================
 
     // 5. Submit RSVP ke Google Sheets
     form.addEventListener('submit', function(e) {
@@ -515,7 +516,7 @@
         });
     });
 
-    // 6. Muat Ucapan secara Real-time dari Spreadsheet
+    // 6. Muat Ucapan secara Real-time
     async function muatKomentar() {
         const wadah = document.getElementById('wadahKomentar');
         try {
