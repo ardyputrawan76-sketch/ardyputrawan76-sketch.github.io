@@ -108,19 +108,28 @@
             margin: 40px 0; 
         }
 
-        /* FOTO UTAMA ATAS RESPONSIF SEMUA GAWAI */
+        /* FIX: FOTO UTAMA ATAS - Dibuat penuhi layar penuh di awal agar pas dengan cover */
         .hero-foto {
             width: 100%;
-            height: 50vh; /* Menggunakan setengah tinggi layar di perangkat apa pun */
-            max-height: 450px; /* Batas maksimal biar tidak terlalu besar di laptop */
+            height: 100vh;
             overflow: hidden;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
             box-shadow: 0 8px 25px rgba(92, 64, 51, 0.15);
             margin-bottom: 30px;
             cursor: pointer;
             position: relative;
+            transition: height 0.8s cubic-bezier(0.77, 0, 0.175, 1), border-radius 0.8s ease;
         }
+        
+        /* Ketika user mulai scroll, foto mengecil secara halus */
+        .hero-foto.scrolled {
+            height: 50vh;
+            max-height: 450px;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
         .hero-foto img {
             width: 100%;
             height: 100%;
@@ -132,21 +141,32 @@
             transform: scale(1.15);
         }
 
+        /* Pengaturan Khusus Aksara Bali agar Rapi di Semua Layar */
+        .aksara-bali {
+            font-size: clamp(2rem, 6vw, 2.8rem);
+            color: #5c4033;
+            margin: 0;
+            line-height: 1.2;
+            letter-spacing: 2px;
+        }
+
         .salam-arab { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #5c4033; margin-bottom: 10px; }
         .salam-teks { font-size: 0.9rem; color: #4a3525; line-height: 1.6; }
         
         .section-mempelai { display: flex; flex-direction: column; align-items: center; gap: 25px; margin-top: 30px; }
         
+        /* Default HP: Dibatasi 280px agar rapi */
         .mempelai-card { 
             width: 100%; max-width: 280px; background: #fffdfa; padding: 20px; 
             border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); 
             border: 1px solid #eaddca; box-sizing: border-box;
+            transition: max-width 0.3s ease;
         }
         
-        /* FIX: Ukuran bingkai foto adaptif menggunakan fungsi clamp() */
+        /* Ukuran Foto Fleksibel Mengikuti Lebar Konten Kartunya */
         .avatar-frame { 
-            width: clamp(140px, 18vw, 180px); 
-            height: clamp(140px, 18vw, 180px); 
+            width: clamp(140px, 45vw, 200px); 
+            height: clamp(140px, 45vw, 200px); 
             margin: 0 auto 15px; 
             border-radius: 50%; 
             overflow: hidden; 
@@ -156,7 +176,7 @@
         }
         .avatar-frame img { width: 100%; height: 100%; object-fit: cover; }
         
-        .nama-lengkap { font-size: clamp(0.95rem, 4vw, 1.15rem); font-weight: 600; color: #2c1e15; margin: 10px 0 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .nama-lengkap { font-size: clamp(0.95rem, 4vw, 1.2rem); font-weight: 600; color: #2c1e15; margin: 10px 0 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .info-ortu { font-size: 0.8rem; color: #5c4033; line-height: 1.4; }
         .dan-simbol { font-family: 'Great Vibes', cursive; font-size: 2rem; color: #8b5a2b; }
 
@@ -177,9 +197,9 @@
         .galeri-slider::-webkit-scrollbar { display: none; }
         
         .galeri-item { 
-            flex: 0 0 85%; /* Di HP memenuhi 85% area layar */
+            flex: 0 0 85%; 
             scroll-snap-align: center; 
-            height: 40vh; /* Mengikuti rasio tinggi layar */
+            height: 40vh; 
             max-height: 350px; 
             overflow: hidden; 
             border-radius: 12px; 
@@ -230,23 +250,27 @@
         .scroll-animasi { opacity: 0; transform: scale(0.4) translateY(50px); transition: opacity 1s ease, transform 1s cubic-bezier(0.34, 1.6, 0.64, 1); }
         .scroll-animasi.muncul { opacity: 1; transform: scale(1) translateY(0); }
 
-        /* RESPONSIVENESS MEDIA QUERY: UNTUK IPAD, TABLET & LAPTOP */
+        /* FIX: Khusus Tablet / iPad Mini (Potret) agar Foto Mempelai Lebih Besar & Tidak Kekecilan */
+        @media (min-width: 600px) {
+            .mempelai-card {
+                max-width: 340px;
+                padding: 25px;
+            }
+        }
+
+        /* Khusus iPad Besar, Tablet Landscape, & Laptop */
         @media (min-width: 768px) {
             .section-mempelai { flex-direction: row; justify-content: space-around; gap: 15px; align-items: center; }
-            
-            /* FIX: Memperbesar batas kartu di layar desktop agar pas foto mendapat ruang seimbang */
             .mempelai-card {
                 max-width: 320px;
                 padding: 25px 20px;
             }
-
-            /* Di Layar Lebar (iPad/Laptop), Galeri membelah rapi jadi 2 kolom penuh */
             .galeri-item { 
                 flex: 0 0 48%; 
                 height: 350px; 
             } 
-            .slide-btn { display: flex; } /* Menampilkan tombol panah di iPad/Laptop */
-            .hero-foto { height: 450px; }
+            .slide-btn { display: flex; } 
+            .hero-foto.scrolled { height: 450px; }
             .lightbox-prev { left: -50px; }
             .lightbox-next { right: -50px; }
         }
@@ -283,8 +307,10 @@
         </div>
 
         <div class="content-padding">
+            <!-- FIX: Salam Menggunakan Aksara Bali Unicode Asli -->
             <section class="section-salam scroll-animasi">
-                <p class="salam-arab">Om Swastyastu</p>
+                <p class="aksara-bali">&#x1B05;&#x1B44;&#x1B0F;&#x1B35;&#x1B1F;&#x1B3F;&#x1B44;&#x1B13;&#x1B44;&#x1B1A;&#x1B35;</p>
+                <p class="salam-arab" style="margin-top: 5px; font-size: 2rem;">Om Swastyastu</p>
                 <p class="salam-teks">Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri Acara Pernikahan kami:</p>
             </section>
 
@@ -465,7 +491,13 @@
     }
     setInterval(hitungMundur, 1000);
 
+    // FIX: Deteksi scroll untuk transisi mengecilkan foto utama secara anggun
     function cekScroll() {
+        const fotoPembuka = document.getElementById('foto-pembuka');
+        if (window.scrollY > 50) {
+            fotoPembuka.classList.add('scrolled');
+        }
+
         const targetAnimasi = document.querySelectorAll('.scroll-animasi');
         targetAnimasi.forEach(elemen => {
             const batasAtas = elemen.getBoundingClientRect().top;
