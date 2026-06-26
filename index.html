@@ -105,12 +105,11 @@
         .avatar-frame { width: 150px; height: 150px; margin: 0 auto 15px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 6px 15px rgba(0,0,0,0.1); cursor: pointer; }
         .avatar-frame img { width: 100%; height: 100%; object-fit: cover; }
         .nama-lengkap {font-size: 1.1rem; /* Sedikit dikecilkan dari 1.2rem agar pas di layar HP */ font-weight: 600; color: #333; margin: 10px 0 5px; white-spanowrap; /* Mencegah nama terbungkus/turun ke bawah */}/* Countdown Timer */
-        .section-countdown { background-color: #fff; padding: 30px 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-        .timer-container { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
+        .nama-lengkap {font-size: clamp(0.95rem, 4vw, 1.15rem); /* Ukuran huruf otomatis mengecil di HP kecil */font-weight: 600;color: #333;margin: 10px 0 5px;white-space: nowrap; /* Memperbaiki typo 'white-spanowrap' */overflow: hidden; /* Mengantisipasi jika teks tetap terlalu panjang */text-overflow: ellipsis; /* Memberikan efek titik tiga (...) jika terpaksa mentok */}        .timer-container { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
         .timer-box { background: #f7f5f0; width: 65px; padding: 10px 5px; border-radius: 8px; border: 1px solid #eadecc; }
         .timer-box span { font-size: 1.3rem; font-weight: 600; color: #aa8c2c; display: block; }
         .timer-box p { font-size: 0.7rem; color: #777; margin: 2px 0 0; }
-
+        
         /* Detail Acara Style */
         .section-acara { background-color: #fff; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
         .acara-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin-bottom: 15px; }
