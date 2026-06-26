@@ -104,8 +104,20 @@
         .mempelai-card { width: 100%; max-width: 280px; background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
         .avatar-frame { width: 150px; height: 150px; margin: 0 auto 15px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 6px 15px rgba(0,0,0,0.1); cursor: pointer; }
         .avatar-frame img { width: 100%; height: 100%; object-fit: cover; }
-        .nama-lengkap {font-size: 1.1rem; /* Sedikit dikecilkan dari 1.2rem agar pas di layar HP */ font-weight: 600; color: #333; margin: 10px 0 5px; white-spanowrap; /* Mencegah nama terbungkus/turun ke bawah */}/* Countdown Timer */
-        .nama-lengkap {font-size: clamp(0.95rem, 4vw, 1.15rem); /* Ukuran huruf otomatis mengecil di HP kecil */font-weight: 600;color: #333;margin: 10px 0 5px;white-space: nowrap; /* Memperbaiki typo 'white-spanowrap' */overflow: hidden; /* Mengantisipasi jika teks tetap terlalu panjang */text-overflow: ellipsis; /* Memberikan efek titik tiga (...) jika terpaksa mentok */}        .timer-container { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
+        
+        /* Nama Lengkap Presisi & Anti-Patah */
+        .nama-lengkap {
+            font-size: clamp(0.95rem, 4vw, 1.15rem); 
+            font-weight: 600;
+            color: #333;
+            margin: 10px 0 5px;
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis;
+        }
+
+        /* Countdown Timer */
+        .timer-container { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
         .timer-box { background: #f7f5f0; width: 65px; padding: 10px 5px; border-radius: 8px; border: 1px solid #eadecc; }
         .timer-box span { font-size: 1.3rem; font-weight: 600; color: #aa8c2c; display: block; }
         .timer-box p { font-size: 0.7rem; color: #777; margin: 2px 0 0; }
@@ -210,6 +222,17 @@
         }
         @keyframes putarMusik { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
+        /* --- SITEM DESAIN GELEMBUNG POP-UP (Scroll Animation) --- */
+        .scroll-animasi {
+            opacity: 0;
+            transform: scale(0.4) translateY(50px);
+            transition: opacity 1s ease, transform 1s cubic-bezier(0.34, 1.6, 0.64, 1);
+        }
+        .scroll-animasi.muncul {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
         /* Pengaturan khusus Layar Besar (Desktop) */
         @media (min-width: 768px) {
             .section-mempelai { flex-direction: row; justify-content: space-around; gap: 10px; }
@@ -242,13 +265,13 @@
     </div>
 
     <div id="main-content">
-        <section class="section-salam">
+        <section class="section-salam scroll-animasi">
             <p class="salam-arab">Om Swastyastu</p>
             <p class="salam-teks">Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri Acara Pernikahan kami:</p>
         </section>
 
         <section class="section-mempelai">
-            <div class="mempelai-card">
+            <div class="mempelai-card scroll-animasi">
                 <div class="avatar-frame" onclick="perbesarFoto('ardy.png')">
                     <img src="ardy.png" alt="Foto Ardy">
                 </div>
@@ -256,7 +279,7 @@
                 <p class="info-ortu">Putra dari Pasangan:<br>Bapak Ketut Sariana (Alm.)<br>& Ibu Ketut Arsih</p>
             </div>
             <div class="dan-simbol">&</div>
-            <div class="mempelai-card">
+            <div class="mempelai-card scroll-animasi">
                 <div class="avatar-frame" onclick="perbesarFoto('ana.png')">
                     <img src="ana.png" alt="Foto Ana">
                 </div>
@@ -267,7 +290,7 @@
 
         <hr class="pembatas">
 
-        <section class="section-countdown">
+        <section class="section-countdown scroll-animasi">
             <h4 style="font-size: 0.85rem; letter-spacing: 2px; margin: 0 0 15px 0; color: #aa8c2c; font-weight:600;">MENUJU HARI BAHAGIA</h4>
             <div class="timer-container">
                 <div class="timer-box"><span id="days">00</span><p>Hari</p></div>
@@ -279,7 +302,7 @@
 
         <hr class="pembatas">
 
-        <section class="section-acara">
+        <section class="section-acara scroll-animasi">
             <h2 class="acara-title">Pawiwahan / Acara</h2>
             <p style="font-weight: 600; margin: 0 0 5px 0;">Hari, Tanggal</p>
             <p style="color: #666; font-size: 0.9rem; margin: 0 0 20px 0;">Kamis, 31 Desember 2026</p>
@@ -295,7 +318,7 @@
 
         <hr class="pembatas">
 
-        <section class="section-galeri">
+        <section class="section-galeri scroll-animasi">
             <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin: 0 0 5px 0;">Galeri Kebersamaan</h3>
             <p style="font-size: 0.8rem; color: #777; margin: 0 0 5px 0;">Kisah cinta dalam bingkai potret kebahagiaan kami</p>
             <p style="font-size: 0.7rem; color: #bfa36b; font-style: italic; margin: 0;">(Bergeser otomatis atau ketuk untuk memperbesar)</p>
@@ -323,7 +346,7 @@
 
         <hr class="pembatas">
 
-        <section class="section-kado">
+        <section class="section-kado scroll-animasi">
             <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin: 0;">Kado Digital</h3>
             <p style="font-size: 0.85rem; color: #777; line-height: 1.5; margin-top: 10px;">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika ingin memberikan tanda kasih, anda dapat menstransfer ke QRIS DANA di bawah ini:</p>
 
@@ -351,7 +374,7 @@
 
         <hr class="pembatas">
 
-        <section class="section-rsvp">
+        <section class="section-rsvp scroll-animasi">
             <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-align: center; color: #aa8c2c; margin: 0 0 5px 0;">Konfirmasi Kehadiran</h3>
             <form id="rsvp-form">
                 <div class="rsvp-inputs">
@@ -548,6 +571,21 @@
         getGuestName();
         hitungMundur();
         muatKomentar();
+
+        // --- SISTEM DETEKSI GELEMBUNG SCROLL ---
+        const elemenAnimasi = document.querySelectorAll('.scroll-animasi');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('muncul');
+                }
+            });
+        }, {
+            threshold: 0.1, 
+            rootMargin: "0px 0px -40px 0px" 
+        });
+
+        elemenAnimasi.forEach(elemen => observer.observe(elemen));
     };
 </script>
 </body>
