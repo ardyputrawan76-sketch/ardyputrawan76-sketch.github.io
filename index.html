@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undangan Pernikahan Ardy & Ana</title>
     
+    <!-- 1. FAVICON LOGO CINCIN PERNIKAHAN (MEMBACA FILE favicon.png DI FOLDER ANDA) -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    
     <!-- Meta Tags untuk Link Preview WhatsApp (GitHub Pages) -->
     <meta property="og:title" content="Undangan Pernikahan Ardy & Ana" />
     <meta property="og:description" content="Kamis, 31 Desember 2026 - Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri hari bahagia kami." />
@@ -20,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* 1. Pengaturan Dasar */
+        /* Pengaturan Dasar */
         html { scroll-behavior: smooth; }
         body { 
             margin: 0; padding: 0; background-color: #f7f5f0; 
@@ -28,7 +31,7 @@
             overflow-y: hidden; /* Dikunci sebelum tombol buka diklik */
         }
 
-        /* 2. Cover Tetap (Desktop & Mobile) */
+        /* Cover Tetap (Desktop & Mobile) */
         #cover {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('bg-cover.jpg') no-repeat center center/cover;
@@ -86,20 +89,17 @@
             transform: scale(1.05);
         }
 
-        /* 3. KONTEN UTAMA (Responsive) */
+        /* KONTEN UTAMA */
         #main-content { 
             padding: 0 0 40px 0; text-align: center; max-width: 600px; margin: 0 auto; 
             opacity: 0; transition: opacity 0.8s ease; 
         }
 
-        .content-padding {
-            padding: 20px;
-        }
-
+        .content-padding { padding: 20px; }
         img { max-width: 100%; height: auto; }
         .pembatas { border: 0; height: 1px; background: linear-gradient(to right, transparent, #d4af37, transparent); margin: 40px 0; }
 
-        /* Style Foto Berdua di Awal dengan Efek Slow Zoom */
+        /* FOTO BERDUA DI AWAL (SLOW ZOOM) */
         .hero-foto {
             width: 100%;
             height: 350px;
@@ -116,33 +116,21 @@
             height: 100%;
             object-fit: cover;
             transform: scale(1);
-            transition: transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Efek zoom halus */
+            transition: transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        /* Trigger zoom saat kelas ini ditambahkan via JS */
+        /* Memicu zoom perlahan */
         .hero-foto.zoom-aktif img {
             transform: scale(1.15);
         }
 
-        /* Salam Style */
+        /* Salam & Mempelai */
         .salam-arab { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin-bottom: 10px; }
         .salam-teks { font-size: 0.9rem; color: #555; line-height: 1.6; }
-
-        /* Section Mempelai */
         .section-mempelai { display: flex; flex-direction: column; align-items: center; gap: 25px; margin-top: 30px; }
         .mempelai-card { width: 100%; max-width: 280px; background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
         .avatar-frame { width: 150px; height: 150px; margin: 0 auto 15px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 6px 15px rgba(0,0,0,0.1); cursor: pointer; }
         .avatar-frame img { width: 100%; height: 100%; object-fit: cover; }
-        
-        /* Nama Lengkap Presisi & Anti-Patah */
-        .nama-lengkap {
-            font-size: clamp(0.95rem, 4vw, 1.15rem); 
-            font-weight: 600;
-            color: #333;
-            margin: 10px 0 5px;
-            white-space: nowrap; 
-            overflow: hidden; 
-            text-overflow: ellipsis;
-        }
+        .nama-lengkap { font-size: clamp(0.95rem, 4vw, 1.15rem); font-weight: 600; color: #333; margin: 10px 0 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
         /* Countdown Timer */
         .timer-container { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
@@ -150,71 +138,29 @@
         .timer-box span { font-size: 1.3rem; font-weight: 600; color: #aa8c2c; display: block; }
         .timer-box p { font-size: 0.7rem; color: #777; margin: 2px 0 0; }
         
-        /* Detail Acara Style */
+        /* Detail Acara */
         .section-acara { background-color: #fff; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
         .acara-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin-bottom: 15px; }
         .btn-maps { display: inline-block; background-color: #25d366; color: #fff; text-decoration: none; padding: 12px 25px; border-radius: 25px; font-size: 0.9rem; margin-top: 15px; transition: 0.3s; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
         .btn-maps:hover { background-color: #1ebd58; transform: scale(1.03); }
 
-        /* Style Galeri Carousel */
+        /* Galeri Slider Halaman Rumah */
         .section-galeri { background-color: #fff; padding: 35px 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); position: relative; }
-        
-        .galeri-wrapper { 
-            position: relative; 
-            margin-top: 20px; 
-            display: flex; 
-            align-items: center; 
-        }
-
-        .galeri-slider { 
-            display: flex; 
-            gap: 15px; 
-            overflow-x: auto; 
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            padding: 5px 5px 15px 5px;
-            -webkit-overflow-scrolling: touch;
-        }
+        .galeri-wrapper { position: relative; margin-top: 20px; display: flex; align-items: center; }
+        .galeri-slider { display: flex; gap: 15px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 5px 5px 15px 5px; -webkit-overflow-scrolling: touch; }
         .galeri-slider::-webkit-scrollbar { display: none; }
-
-        .galeri-item { 
-            flex: 0 0 85%; 
-            scroll-snap-align: center;
-            height: 250px; 
-            overflow: hidden; 
-            border-radius: 12px; 
-            border: 2px solid #eadecc;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.06); 
-            cursor: pointer; 
-        }
+        .galeri-item { flex: 0 0 85%; scroll-snap-align: center; height: 250px; overflow: hidden; border-radius: 12px; border: 2px solid #eadecc; box-shadow: 0 6px 15px rgba(0,0,0,0.06); cursor: pointer; }
         .galeri-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-        .galeri-item img:hover { transform: scale(1.05); }
 
-        /* Tombol Navigasi Panah Slider */
-        .slide-btn {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(212, 175, 55, 0.9); color: white;
-            border: none; width: 38px; height: 38px; border-radius: 50%;
-            font-size: 1rem; cursor: pointer; z-index: 10;
-            display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.15); transition: 0.3s;
-        }
-        .slide-btn:hover { background: #aa8c2c; }
+        /* Tombol Panah Slider */
+        .slide-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(212, 175, 55, 0.9); color: white; border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1rem; cursor: pointer; z-index: 10; display: flex; justify-content: center; align-items: center; box-shadow: 0 3px 10px rgba(0,0,0,0.15); }
         .btn-left { left: -12px; }
         .btn-right { right: -12px; }
+        .slider-dots { display: flex; justify-content: center; gap: 8px; margin-top: 5px; }
+        .dot { width: 8px; height: 8px; background-color: #eadecc; border-radius: 50%; transition: 0.3s; cursor: pointer; }
+        .dot.active { background-color: #d4af37; width: 20px; border-radius: 4px; }
 
-        /* Indikator Titik (Dots) */
-        .slider-dots {
-            display: flex; justify-content: center; gap: 8px; margin-top: 5px;
-        }
-        .dot {
-            width: 8px; height: 8px; background-color: #eadecc; border-radius: 50%; transition: 0.3s; cursor: pointer;
-        }
-        .dot.active {
-            background-color: #d4af37; width: 20px; border-radius: 4px;
-        }
-
-        /* --- LIGHTBOX MODAL BARU (BISA DI-SLIDE DAN DI-KLIK KELUAR) --- */
+        /* LIGHTBOX INTERAKTIF (GESER & KLIK LUAR UNTUK TUTUP) */
         #lightbox-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.95); z-index: 10000;
@@ -222,76 +168,35 @@
             opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
         }
         #lightbox-overlay.active { opacity: 1; pointer-events: auto; }
-        
-        .lightbox-container {
-            position: relative; width: 90%; max-width: 500px; display: flex; flex-direction: column; align-items: center;
-        }
-        #lightbox-img { 
-            max-width: 100%; max-height: 75vh; border-radius: 8px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5); transform: scale(0.9); 
-            transition: transform 0.4s ease, opacity 0.3s ease; 
-        }
+        .lightbox-container { position: relative; width: 90%; max-width: 500px; display: flex; flex-direction: column; align-items: center; }
+        #lightbox-img { max-width: 100%; max-height: 75vh; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transform: scale(0.9); transition: transform 0.4s ease, opacity 0.3s ease; }
         #lightbox-overlay.active #lightbox-img { transform: scale(1); }
         
-        /* Tombol Navigasi di Dalam Lightbox */
-        .lightbox-arrow {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.2); color: white; border: none;
-            width: 45px; height: 45px; border-radius: 50%; font-size: 1.5rem;
-            cursor: pointer; display: flex; justify-content: center; align-items: center;
-            transition: 0.3s; z-index: 10002;
-        }
+        .lightbox-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.2); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.3s; z-index: 10002; }
         .lightbox-arrow:hover { background: rgba(212, 175, 55, 0.9); }
         .lightbox-prev { left: -20px; }
         .lightbox-next { right: -20px; }
-        
-        /* Tombol Close Silang Atas */
-        .lightbox-close {
-            position: absolute; top: -45px; right: 0; color: white;
-            font-size: 2rem; background: none; border: none; cursor: pointer;
-        }
+        .lightbox-close { position: absolute; top: -45px; right: 0; color: white; font-size: 2rem; background: none; border: none; cursor: pointer; }
         .lightbox-hint { color: #aaa; font-size: 0.8rem; letter-spacing: 1px; margin-top: 15px; text-align: center; }
 
-        /* Kado Digital Style */
+        /* Kado Digital & RSVP */
         .section-kado { background-color: #fff; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
         .card-rekening { background-color: #f7f5f0; border: 1px dashed #d4af37; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center; }
-
-        /* Form RSVP Style */
         .section-rsvp { background-color: #fff; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); text-align: left; }
         .rsvp-inputs { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        .rsvp-inputs input, .rsvp-inputs select, .rsvp-inputs textarea {
-            width: 100%; padding: 12px; border: 1px solid #eadecc; border-radius: 8px; font-family: inherit; font-size: 0.9rem; background-color: #fbfbfa; box-sizing: border-box;
-        }
-        .rsvp-inputs input:focus, .rsvp-inputs select:focus, .rsvp-inputs textarea:focus { outline: none; border-color: #d4af37; }
+        .rsvp-inputs input, .rsvp-inputs select, .rsvp-inputs textarea { width: 100%; padding: 12px; border: 1px solid #eadecc; border-radius: 8px; font-family: inherit; font-size: 0.9rem; background-color: #fbfbfa; box-sizing: border-box; }
         .btn-submit { background-color: #d4af37; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .btn-submit:hover { background-color: #aa8c2c; }
 
-        /* Tombol Musik Melayang Kontrol */
-        #music-control {
-            position: fixed; bottom: 25px; right: 25px; width: 50px; height: 50px;
-            background-color: rgba(212, 175, 55, 0.9); color: white; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; z-index: 999;
-            cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 1.2rem;
-            animation: putarMusik 4s linear infinite; animation-play-state: paused;
-        }
+        /* Musik Melayang */
+        #music-control { position: fixed; bottom: 25px; right: 25px; width: 50px; height: 50px; background-color: rgba(212, 175, 55, 0.9); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 999; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 1.2rem; animation: putarMusik 4s linear infinite; animation-play-state: paused; }
         @keyframes putarMusik { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* --- SISTEM DESAIN GELEMBUNG POP-UP (Scroll Animation) --- */
-        .scroll-animasi {
-            opacity: 0;
-            transform: scale(0.4) translateY(50px);
-            transition: opacity 1s ease, transform 1s cubic-bezier(0.34, 1.6, 0.64, 1);
-        }
-        .scroll-animasi.muncul {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
+        /* Efek Scroll Animasi Gelembung */
+        .scroll-animasi { opacity: 0; transform: scale(0.4) translateY(50px); transition: opacity 1s ease, transform 1s cubic-bezier(0.34, 1.6, 0.64, 1); }
+        .scroll-animasi.muncul { opacity: 1; transform: scale(1) translateY(0); }
 
-        /* Pengaturan khusus Layar Besar (Desktop) */
         @media (min-width: 768px) {
             .section-mempelai { flex-direction: row; justify-content: space-around; gap: 10px; }
-            .timer-box { width: 80px; }
-            .timer-box span { font-size: 1.6rem; }
             .galeri-item { flex: 0 0 48%; height: 320px; } 
             .slide-btn { display: none; }
             .hero-foto { height: 450px; }
@@ -303,10 +208,9 @@
 <body>
 
     <audio id="bg-music" src="musik-pernikahan.mp3" loop></audio>
-
     <div id="music-control" onclick="toggleMusik()">🎵</div>
 
-    <!-- STRUKTUR LIGHTBOX UPGRADE (BISA DI-SLIDE DAN DI-KLIK BERSIH) -->
+    <!-- STRUKTUR LAYAR PERBESARAN FOTO (LIGHTBOX) -->
     <div id="lightbox-overlay" onclick="tutupFotoLuar(event)">
         <div class="lightbox-container">
             <button class="lightbox-close" onclick="tutupFoto()">&times;</button>
@@ -317,6 +221,7 @@
         </div>
     </div>
 
+    <!-- Halaman Cover Awal -->
     <div id="cover">
         <p style="letter-spacing: 3px; font-size: 0.8rem; font-weight:600;">THE WEDDING OF</p>
         <h1 class="wedding-title">Ardy & Ana</h1>
@@ -327,8 +232,9 @@
         <button class="btn-open" onclick="bukaUndangan()">Buka Undangan</button>
     </div>
 
+    <!-- Isi Utama Undangan -->
     <div id="main-content">
-        <!-- FOTO BERDUA DI AWAL BUKA -->
+        <!-- Foto Berdua Atas dengan Efek Slow Zoom otomatis -->
         <div id="foto-pembuka" class="hero-foto" onclick="bukaSingleLightbox('bg-cover.jpg')">
             <img src="bg-cover.jpg" alt="Foto Berdua Ardy & Ana">
         </div>
@@ -375,18 +281,16 @@
                 <h2 class="acara-title">Pawiwahan / Acara</h2>
                 <p style="font-weight: 600; margin: 0 0 5px 0;">Hari, Tanggal</p>
                 <p style="color: #666; font-size: 0.9rem; margin: 0 0 20px 0;">Kamis, 31 Desember 2026</p>
-
                 <p style="font-weight: 600; margin: 0 0 5px 0;">Waktu</p>
                 <p style="color: #666; font-size: 0.9rem; margin: 0 0 20px 0;">09.00 WITA - Selesai</p>
-
                 <p style="font-weight: 600; margin: 0 0 5px 0;">Tempat / Lokasi</p>
                 <p style="color: #666; font-size: 0.9rem; padding: 0 20px; margin: 0 0 15px 0;">Kediaman Mempelai Pria, Tabanan, Bali</p>
-
                 <a href="https://goo.gl/maps/bz8HRTQSsVTxnEum9" target="_blank" class="btn-maps">📍 Buka Google Maps Lokasi Acara</a>
             </section>
 
             <hr class="pembatas">
 
+            <!-- BAGIAN GALERI DENGAN LIGHTBOX MULTI-SLIDE -->
             <section class="section-galeri scroll-animasi">
                 <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin: 0 0 5px 0;">Galeri Kebersamaan</h3>
                 <p style="font-size: 0.8rem; color: #777; margin: 0 0 5px 0;">Kisah cinta dalam bingkai potret kebahagiaan kami</p>
@@ -394,14 +298,12 @@
 
                 <div class="galeri-wrapper">
                     <button class="slide-btn btn-left" onclick="geserGaleri(-1)">❮</button>
-                    
                     <div class="galeri-slider" id="sliderGaleri" onscroll="perbaruiTitikIndikator()">
                         <div class="galeri-item" onclick="bukaGaleriLightbox(0)"><img src="galeri1.jpg" alt="Foto Wedding 1"></div>
                         <div class="galeri-item" onclick="bukaGaleriLightbox(1)"><img src="galeri2.jpg" alt="Foto Wedding 2"></div>
                         <div class="galeri-item" onclick="bukaGaleriLightbox(2)"><img src="galeri3.jpg" alt="Foto Wedding 3"></div>
                         <div class="galeri-item" onclick="bukaGaleriLightbox(3)"><img src="galeri4.jpg" alt="Foto Wedding 4"></div>
                     </div>
-
                     <button class="slide-btn btn-right" onclick="geserGaleri(1)">❯</button>
                 </div>
 
@@ -421,23 +323,9 @@
 
                 <div class="card-rekening" style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
                     <p style="font-weight: 600; color: #0086b3; letter-spacing: 1px; margin: 0;">QRIS DANA (ALL BANK & E-WALLET)</p>
-
                     <img src="qris-dana.png" alt="QRIS Kado Digital" style="width: 200px; height: 200px; object-fit: contain; border: 4px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 8px;">
-
                     <p style="font-size: 0.85rem; color: #555; font-weight: 600; margin: 0;">a.n Gede Ardy Putrawan</p>
-
-                    <a href="qris-dana.png" download="qris-dana.png" style="display: inline-block; background-color: #0086b3; color: white; text-decoration: none; padding: 10px 20px; font-size: 0.8rem; font-weight: 600; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin: 5px 0; transition: 0.3s;">
-                        📸 Simpan QRIS ke Galeri HP
-                    </a>
-
-                    <div style="margin-top: 5px; background-color: #fff; padding: 10px; border-radius: 6px; text-align: left; font-size: 0.75rem; color: #666; line-height: 1.4; border: 1px solid #eadecc;">
-                        <strong>💡 Cara Transfer Gratis via HP:</strong><br>
-                        1. Klik tombol <strong>"Simpan QRIS ke Galeri HP"</strong> di atas.<br>
-                        2. Buka M-Banking Anda (BPD Bali, BCA, Mandiri, dll) or e-wallet lainnya.<br>
-                        3. Pilih menu <strong>Scan / QRIS</strong>.<br>
-                        4. Ketuk ikon <strong>Galeri/Foto</strong> di pojok menu scan, lalu pilih foto QRIS yang baru di-download tadi.<br>
-                        5. Masukkan nominal transfer (Bebas biaya admin).
-                    </div>
+                    <a href="qris-dana.png" download="qris-dana.png" style="display: inline-block; background-color: #0086b3; color: white; text-decoration: none; padding: 10px 20px; font-size: 0.8rem; font-weight: 600; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin: 5px 0; transition: 0.3s;">📸 Simpan QRIS ke Galeri HP</a>
                 </div>
             </section>
 
@@ -458,7 +346,6 @@
                     </div>
                 </form>   
                 <div id="form-status" style="margin-top:15px; text-align:center; font-weight:600; font-size:0.9rem;"></div>
-                
                 <div id="wadahKomentar" style="margin-top: 30px; padding: 20px; border-top: 2px solid #aa8c2c;">
                     <h4 style="text-align: center; color: #333; margin: 0 0 15px 0;">Riwayat Ucapan Tamu</h4>
                 </div>
@@ -470,12 +357,11 @@
     const music = document.getElementById('bg-music');
     const musicBtn = document.getElementById('music-control');
     
-    // Daftar gambar galeri untuk sistem slide lightbox
+    // List array foto galeri untuk navigasi slide lightbox
     const daftarGaleri = ['galeri1.jpg', 'galeri2.jpg', 'galeri3.jpg', 'galeri4.jpg'];
     let indeksLightboxAktif = 0;
-    let modeGaleriSaja = false; // Membedakan foto lepas (mempelai) vs galeri geser
+    let modeGaleriSaja = false; 
 
-    // 1. Fungsi Mengambil Nama Tamu dari URL (?to=Nama)
     function getGuestName() {
         const urlParams = new URLSearchParams(window.location.search);
         const guestName = urlParams.get('to');
@@ -484,26 +370,24 @@
         }
     }
 
-    // 2. Fungsi Tombol Buka Undangan
     function bukaUndangan() {
         document.getElementById('cover').classList.add('opened');
         document.body.style.overflowY = 'auto'; 
         document.getElementById('main-content').style.opacity = '1';
         
-        // Memicu animasi slow zoom pada foto berdua paling atas
+        // Pemicu zoom lambat pada foto berdua paling atas
         setTimeout(() => {
             document.getElementById('foto-pembuka').classList.add('zoom-aktif');
         }, 100);
 
         music.muted = false;
-        music.play().catch(error => console.log("Autoplay dicegah browser"));
+        music.play().catch(error => console.log("Autoplay dicegah"));
         musicBtn.style.animationPlayState = 'running';
         musicBtn.innerText = "🎵";
 
         mulaiAutoplayGaleri();
     }
 
-    // 3. Kontrol Musik Melayang (Play/Pause)
     function toggleMusik() {
         if (music.paused) { 
             music.play(); 
@@ -516,7 +400,6 @@
         }
     }
 
-    // 4. Hitung Mundur (Countdown) - Menuju 31 Des 2026
     function hitungMundur() {
         const targetDate = new Date('December 31, 2026 09:00:00 WITA').getTime();
         const now = new Date().getTime();
@@ -542,7 +425,6 @@
     }
     setInterval(hitungMundur, 1000);
 
-    // 5. Animasi Muncul Efek Pop-up / Gelembung saat Scroll
     function cekScroll() {
         const targetAnimasi = document.querySelectorAll('.scroll-animasi');
         targetAnimasi.forEach(elemen => {
@@ -556,7 +438,6 @@
     window.addEventListener('scroll', cekScroll);
     window.addEventListener('load', () => { getGuestName(); cekScroll(); });
 
-    // 6. Fungsi Galeri Slider Utama di Halaman Rumah
     const slider = document.getElementById('sliderGaleri');
     let intervalAutoplay;
 
@@ -574,13 +455,9 @@
         const dots = document.querySelectorAll('.dot');
         const itemWidth = slider.querySelector('.galeri-item').clientWidth + 15;
         const indeksAktif = Math.round(slider.scrollLeft / itemWidth);
-        
         dots.forEach((dot, idx) => {
-            if (idx === indeksAktif) {
-                dot.classList.add('active');
-            } else {
-                dot.classList.remove('active');
-            }
+            if (idx === indeksAktif) dot.classList.add('active');
+            else dot.classList.remove('active');
         });
     }
 
@@ -599,64 +476,53 @@
     }
     slider.addEventListener('touchstart', () => clearInterval(intervalAutoplay));
 
-
-    // 7. --- SISTEM LIGHTBOX INTERAKTIF BARU ---
-    
-    // Buka foto biasa tunggal (Foto pembuka / avatar mempelai, tidak bisa geser)
+    // JAVASCRIPT SYSTEM UNTUK MODE LIGHTBOX BESAR
     function bukaSingleLightbox(src) {
         modeGaleriSaja = false;
         document.querySelectorAll('.lightbox-arrow').forEach(p => p.style.display = 'none');
-        
         const overlay = document.getElementById('lightbox-overlay');
         const img = document.getElementById('lightbox-img');
         img.src = src;
         overlay.classList.add('active');
     }
 
-    // Buka foto galeri (Bisa digeser ke kanan dan kiri)
     function bukaGaleriLightbox(indeks) {
         modeGaleriSaja = true;
         indeksLightboxAktif = indeks;
         document.querySelectorAll('.lightbox-arrow').forEach(p => p.style.display = 'flex');
-        
         tampilkanFotoLightbox();
         document.getElementById('lightbox-overlay').classList.add('active');
     }
 
     function tampilkanFotoLightbox() {
         const img = document.getElementById('lightbox-img');
-        img.style.opacity = '0'; // Efek kedip halus saat ganti foto
+        img.style.opacity = '0';
         setTimeout(() => {
             img.src = daftarGaleri[indeksLightboxAktif];
             img.style.opacity = '1';
         }, 150);
     }
 
-    // Navigasi panah di dalam mode besar layar penuh
     function navigasiLightbox(arah, event) {
-        event.stopPropagation(); // Mencegah lightbox tertutup tiba-tiba saat klik panah
+        event.stopPropagation(); 
         if (!modeGaleriSaja) return;
-        
         indeksLightboxAktif += arah;
         if (indeksLightboxAktif >= daftarGaleri.length) indeksLightboxAktif = 0;
         if (indeksLightboxAktif < 0) indeksLightboxAktif = daftarGaleri.length - 1;
-        
         tampilkanFotoLightbox();
     }
 
-    // Fungsi klik tombol silang keluar
     function tutupFoto() {
         document.getElementById('lightbox-overlay').classList.remove('active');
     }
 
-    // Fungsi klik di mana saja (area hitam) untuk menutup bersih
     function tutupFotoLuar(event) {
         if (event.target.id === 'lightbox-overlay' || event.target.className === 'lightbox-container') {
             tutupFoto();
         }
     }
 
-    // Dukungan geser layar hp (Swipe) di dalam lightbox
+    // Pendeteksi usapan layar (Swipe) di HP saat foto diperbesar
     let sentuhanAwalX = 0;
     document.getElementById('lightbox-overlay').addEventListener('touchstart', e => {
         sentuhanAwalX = e.changedTouches[0].screenX;
@@ -664,8 +530,8 @@
     document.getElementById('lightbox-overlay').addEventListener('touchend', e => {
         if (!modeGaleriSaja) return;
         let sentuhanAkhirX = e.changedTouches[0].screenX;
-        if (sentuhanAwalX - sentuhanAkhirX > 50) navigasiLightbox(1, e);  // Swipe Kiri -> Foto Berikutnya
-        if (sentuhanAkhirX - sentuhanAwalX > 50) navigasiLightbox(-1, e); // Swipe Kanan -> Foto Sebelumnya
+        if (sentuhanAwalX - sentuhanAkhirX > 50) navigasiLightbox(1, e);  
+        if (sentuhanAkhirX - sentuhanAwalX > 50) navigasiLightbox(-1, e); 
     });
 </script>
 </body>
