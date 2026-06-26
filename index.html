@@ -141,13 +141,16 @@
             transform: scale(1.15);
         }
 
-        /* Pengaturan Khusus Aksara Bali agar Rapi di Semua Layar */
+        /* PERBAIKAN: Jarak dan Kerapian Aksara Bali */
         .aksara-bali {
-            font-size: clamp(2rem, 6vw, 2.8rem);
+            font-size: clamp(1.8rem, 5.5vw, 2.5rem);
             color: #5c4033;
-            margin: 0;
-            line-height: 1.2;
-            letter-spacing: 2px;
+            margin: 0 auto;
+            padding: 10px 0;
+            line-height: 1.8;       /* Ruang vertikal agar gantungan tidak tabrakan */
+            letter-spacing: 6px;    /* Jarak antar karakter agar tidak menumpuk */
+            display: block;
+            word-spacing: 12px;     /* Jarak spasi antara kata 'Om' dan 'Swastyastu' */
         }
 
         .salam-arab { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #5c4033; margin-bottom: 10px; }
@@ -307,10 +310,10 @@
         </div>
 
         <div class="content-padding">
-            <!-- FIX: Salam Menggunakan Aksara Bali Unicode Asli -->
+            <!-- FIX: Rangkaian Susunan Unicode Aksara Bali yang Akurat -->
             <section class="section-salam scroll-animasi">
-                <p class="aksara-bali">&#x1B05;&#x1B44;&#x1B0F;&#x1B35;&#x1B1F;&#x1B3F;&#x1B44;&#x1B13;&#x1B44;&#x1B1A;&#x1B35;</p>
-                <p class="salam-arab" style="margin-top: 5px; font-size: 2rem;">Om Swastyastu</p>
+                <p class="aksara-bali">&#x1B06;&#x1B44;&nbsp;&#x1B32;&#x1B3F;&#x1B32;&#x1B43;&#x1B1A;&#x1B3F;&#x1B13;&#x1B35;</p>
+                <p class="salam-arab" style="margin-top: 15px; font-size: 2rem;">Om Swastyastu</p>
                 <p class="salam-teks">Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri Acara Pernikahan kami:</p>
             </section>
 
@@ -491,7 +494,6 @@
     }
     setInterval(hitungMundur, 1000);
 
-    // FIX: Deteksi scroll untuk transisi mengecilkan foto utama secara anggun
     function cekScroll() {
         const fotoPembuka = document.getElementById('foto-pembuka');
         if (window.scrollY > 50) {
