@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undangan Pernikahan Ardy & Ana</title>
     
-    <!-- 1. FAVICON LOGO CINCIN PERNIKAHAN (MEMBACA FILE favicon.png DI FOLDER ANDA) -->
+    <!-- FAVICON LOGO CINCIN PERNIKAHAN -->
     <link rel="icon" type="image/png" href="favicon.png">
     
-    <!-- Meta Tags untuk Link Preview WhatsApp (GitHub Pages) -->
+    <!-- Meta Tags untuk Link Preview WhatsApp -->
     <meta property="og:title" content="Undangan Pernikahan Ardy & Ana" />
     <meta property="og:description" content="Kamis, 31 Desember 2026 - Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri hari bahagia kami." />
     <meta property="og:image" content="https://ardyputrawan76-sketch.github.io/bg-cover.jpg" />
@@ -23,10 +23,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* Pengaturan Dasar */
+        /* Pengaturan Dasar & Desain Background Motif Coklat Kayu Estetik */
         html { scroll-behavior: smooth; }
         body { 
-            margin: 0; padding: 0; background-color: #f7f5f0; 
+            margin: 0; padding: 0; 
+            /* Latar Belakang Gradasi Warna Kayu dengan Pola Garis Serat Halus */
+            background-color: #ebdccb;
+            background-image: linear-gradient(90deg, rgba(218,196,171,0.4) 1px, transparent 1px),
+                              linear-gradient(rgba(218,196,171,0.4) 1px, transparent 1px);
+            background-size: 20px 20px;
             overflow-x: hidden; font-family: 'Montserrat', sans-serif; 
             overflow-y: hidden; /* Dikunci sebelum tombol buka diklik */
         }
@@ -34,14 +39,13 @@
         /* Cover Tetap (Desktop & Mobile) */
         #cover {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('bg-cover.jpg') no-repeat center center/cover;
+            background: linear-gradient(rgba(44, 30, 21, 0.6), rgba(44, 30, 21, 0.6)), url('bg-cover.jpg') no-repeat center center/cover;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             color: #fff; text-align: center; z-index: 9999; padding: 20px;
             box-sizing: border-box;
             transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
         }
 
-        /* Efek Transisi saat Cover Dibuka */
         #cover.opened {
             transform: translateY(-100vh);
             opacity: 0;
@@ -51,17 +55,17 @@
         .wedding-title {
             font-family: 'Great Vibes', cursive;
             font-size: 3.5rem;
-            color: #d4af37;
+            color: #dfcbaf; /* Coklat kayu muda cerah */
             margin: 15px 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
         }
 
         .guest-box {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(92, 64, 51, 0.4); /* Nuansa kayu gelap transparan */
             backdrop-filter: blur(5px);
             padding: 15px 25px;
             border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(223, 203, 175, 0.3);
             margin: 20px 0;
         }
 
@@ -73,7 +77,7 @@
         }
 
         .btn-open {
-            background-color: #d4af37;
+            background-color: #8b5a2b; /* Coklat kayu hangat */
             color: white;
             border: none;
             padding: 12px 30px;
@@ -81,11 +85,11 @@
             font-weight: 600;
             border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             transition: 0.3s;
         }
         .btn-open:hover {
-            background-color: #aa8c2c;
+            background-color: #5c4033; /* Coklat tua kayu */
             transform: scale(1.05);
         }
 
@@ -97,7 +101,13 @@
 
         .content-padding { padding: 20px; }
         img { max-width: 100%; height: auto; }
-        .pembatas { border: 0; height: 1px; background: linear-gradient(to right, transparent, #d4af37, transparent); margin: 40px 0; }
+        
+        /* Pembatas Estetik Kayu */
+        .pembatas { 
+            border: 0; height: 1px; 
+            background: linear-gradient(to right, transparent, #8b5a2b, transparent); 
+            margin: 40px 0; 
+        }
 
         /* FOTO BERDUA DI AWAL (SLOW ZOOM) */
         .hero-foto {
@@ -106,7 +116,7 @@
             overflow: hidden;
             border-bottom-left-radius: 30px;
             border-bottom-right-radius: 30px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(92, 64, 51, 0.15);
             margin-bottom: 30px;
             cursor: pointer;
             position: relative;
@@ -118,52 +128,61 @@
             transform: scale(1);
             transition: transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        /* Memicu zoom perlahan */
         .hero-foto.zoom-aktif img {
             transform: scale(1.15);
         }
 
-        /* Salam & Mempelai */
-        .salam-arab { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin-bottom: 10px; }
-        .salam-teks { font-size: 0.9rem; color: #555; line-height: 1.6; }
+        /* Salam & Mempelai dengan Warna Kayu Estetik */
+        .salam-arab { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #5c4033; margin-bottom: 10px; }
+        .salam-teks { font-size: 0.9rem; color: #4a3525; line-height: 1.6; }
+        
         .section-mempelai { display: flex; flex-direction: column; align-items: center; gap: 25px; margin-top: 30px; }
-        .mempelai-card { width: 100%; max-width: 280px; background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
-        .avatar-frame { width: 150px; height: 150px; margin: 0 auto 15px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 6px 15px rgba(0,0,0,0.1); cursor: pointer; }
+        
+        /* Kartu Konten Putih Tulang (Ivory) agar Kontras Cantik dengan BG Kayu */
+        .mempelai-card { 
+            width: 100%; max-width: 280px; background: #fffdfa; padding: 20px; 
+            border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); 
+            border: 1px solid #eaddca;
+        }
+        .avatar-frame { width: 150px; height: 150px; margin: 0 auto 15px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 6px 15px rgba(92, 64, 51, 0.15); cursor: pointer; }
         .avatar-frame img { width: 100%; height: 100%; object-fit: cover; }
-        .nama-lengkap { font-size: clamp(0.95rem, 4vw, 1.15rem); font-weight: 600; color: #333; margin: 10px 0 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        .nama-lengkap { font-size: clamp(0.95rem, 4vw, 1.15rem); font-weight: 600; color: #2c1e15; margin: 10px 0 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .info-ortu { font-size: 0.8rem; color: #5c4033; line-height: 1.4; }
+        .dan-simbol { font-family: 'Great Vibes', cursive; font-size: 2rem; color: #8b5a2b; }
 
-        /* Countdown Timer */
+        /* Countdown Timer Kotak Serat */
         .timer-container { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
-        .timer-box { background: #f7f5f0; width: 65px; padding: 10px 5px; border-radius: 8px; border: 1px solid #eadecc; }
-        .timer-box span { font-size: 1.3rem; font-weight: 600; color: #aa8c2c; display: block; }
-        .timer-box p { font-size: 0.7rem; color: #777; margin: 2px 0 0; }
+        .timer-box { background: #fffdfa; width: 65px; padding: 10px 5px; border-radius: 8px; border: 1px solid #d2b48c; box-shadow: 0 2px 8px rgba(92,64,51,0.04); }
+        .timer-box span { font-size: 1.3rem; font-weight: 600; color: #8b5a2b; display: block; }
+        .timer-box p { font-size: 0.7rem; color: #5c4033; margin: 2px 0 0; }
         
         /* Detail Acara */
-        .section-acara { background-color: #fff; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-        .acara-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin-bottom: 15px; }
+        .section-acara { background-color: #fffdfa; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); border: 1px solid #eaddca; }
+        .acara-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #5c4033; margin-bottom: 15px; }
         .btn-maps { display: inline-block; background-color: #25d366; color: #fff; text-decoration: none; padding: 12px 25px; border-radius: 25px; font-size: 0.9rem; margin-top: 15px; transition: 0.3s; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
         .btn-maps:hover { background-color: #1ebd58; transform: scale(1.03); }
 
-        /* Galeri Slider Halaman Rumah */
-        .section-galeri { background-color: #fff; padding: 35px 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); position: relative; }
+        /* Galeri Slider */
+        .section-galeri { background-color: #fffdfa; padding: 35px 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); position: relative; border: 1px solid #eaddca; }
         .galeri-wrapper { position: relative; margin-top: 20px; display: flex; align-items: center; }
         .galeri-slider { display: flex; gap: 15px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 5px 5px 15px 5px; -webkit-overflow-scrolling: touch; }
         .galeri-slider::-webkit-scrollbar { display: none; }
-        .galeri-item { flex: 0 0 85%; scroll-snap-align: center; height: 250px; overflow: hidden; border-radius: 12px; border: 2px solid #eadecc; box-shadow: 0 6px 15px rgba(0,0,0,0.06); cursor: pointer; }
+        .galeri-item { flex: 0 0 85%; scroll-snap-align: center; height: 250px; overflow: hidden; border-radius: 12px; border: 2px solid #eaddca; box-shadow: 0 6px 15px rgba(92,64,51,0.06); cursor: pointer; }
         .galeri-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
 
-        /* Tombol Panah Slider */
-        .slide-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(212, 175, 55, 0.9); color: white; border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1rem; cursor: pointer; z-index: 10; display: flex; justify-content: center; align-items: center; box-shadow: 0 3px 10px rgba(0,0,0,0.15); }
+        /* Tombol Panah Slider Tema Coklat */
+        .slide-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(139, 90, 43, 0.9); color: white; border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1rem; cursor: pointer; z-index: 10; display: flex; justify-content: center; align-items: center; box-shadow: 0 3px 10px rgba(0,0,0,0.15); }
         .btn-left { left: -12px; }
         .btn-right { right: -12px; }
         .slider-dots { display: flex; justify-content: center; gap: 8px; margin-top: 5px; }
-        .dot { width: 8px; height: 8px; background-color: #eadecc; border-radius: 50%; transition: 0.3s; cursor: pointer; }
-        .dot.active { background-color: #d4af37; width: 20px; border-radius: 4px; }
+        .dot { width: 8px; height: 8px; background-color: #eaddca; border-radius: 50%; transition: 0.3s; cursor: pointer; }
+        .dot.active { background-color: #8b5a2b; width: 20px; border-radius: 4px; }
 
         /* LIGHTBOX INTERAKTIF (GESER & KLIK LUAR UNTUK TUTUP) */
         #lightbox-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.95); z-index: 10000;
+            background-color: rgba(20, 14, 10, 0.96); z-index: 10000;
             display: flex; justify-content: center; align-items: center;
             opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
         }
@@ -173,22 +192,24 @@
         #lightbox-overlay.active #lightbox-img { transform: scale(1); }
         
         .lightbox-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.2); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.3s; z-index: 10002; }
-        .lightbox-arrow:hover { background: rgba(212, 175, 55, 0.9); }
+        .lightbox-arrow:hover { background: #8b5a2b; }
         .lightbox-prev { left: -20px; }
         .lightbox-next { right: -20px; }
         .lightbox-close { position: absolute; top: -45px; right: 0; color: white; font-size: 2rem; background: none; border: none; cursor: pointer; }
-        .lightbox-hint { color: #aaa; font-size: 0.8rem; letter-spacing: 1px; margin-top: 15px; text-align: center; }
+        .lightbox-hint { color: #caa; font-size: 0.8rem; letter-spacing: 1px; margin-top: 15px; text-align: center; }
 
         /* Kado Digital & RSVP */
-        .section-kado { background-color: #fff; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-        .card-rekening { background-color: #f7f5f0; border: 1px dashed #d4af37; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center; }
-        .section-rsvp { background-color: #fff; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); text-align: left; }
+        .section-kado { background-color: #fffdfa; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); border: 1px solid #eaddca; }
+        .card-rekening { background-color: #f7f5f0; border: 1px dashed #8b5a2b; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center; }
+        
+        .section-rsvp { background-color: #fffdfa; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); border: 1px solid #eaddca; text-align: left; }
         .rsvp-inputs { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        .rsvp-inputs input, .rsvp-inputs select, .rsvp-inputs textarea { width: 100%; padding: 12px; border: 1px solid #eadecc; border-radius: 8px; font-family: inherit; font-size: 0.9rem; background-color: #fbfbfa; box-sizing: border-box; }
-        .btn-submit { background-color: #d4af37; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .rsvp-inputs input, .rsvp-inputs select, .rsvp-inputs textarea { width: 100%; padding: 12px; border: 1px solid #eaddca; border-radius: 8px; font-family: inherit; font-size: 0.9rem; background-color: #fbfbfa; box-sizing: border-box; color: #2c1e15; }
+        .btn-submit { background-color: #8b5a2b; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn-submit:hover { background-color: #5c4033; }
 
         /* Musik Melayang */
-        #music-control { position: fixed; bottom: 25px; right: 25px; width: 50px; height: 50px; background-color: rgba(212, 175, 55, 0.9); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 999; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 1.2rem; animation: putarMusik 4s linear infinite; animation-play-state: paused; }
+        #music-control { position: fixed; bottom: 25px; right: 25px; width: 50px; height: 50px; background-color: rgba(139, 90, 43, 0.9); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 999; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 1.2rem; animation: putarMusik 4s linear infinite; animation-play-state: paused; }
         @keyframes putarMusik { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
         /* Efek Scroll Animasi Gelembung */
@@ -217,13 +238,13 @@
             <button class="lightbox-arrow lightbox-prev" onclick="navigasiLightbox(-1, event)">❮</button>
             <img id="lightbox-img" src="" alt="Foto Diperbesar">
             <button class="lightbox-arrow lightbox-next" onclick="navigasiLightbox(1, event)">❯</button>
-            <p class="lightbox-hint">Ketuk area hitam atau tombol silang untuk keluar</p>
+            <p class="lightbox-hint">Ketuk area gelap atau tombol silang untuk keluar</p>
         </div>
     </div>
 
     <!-- Halaman Cover Awal -->
     <div id="cover">
-        <p style="letter-spacing: 3px; font-size: 0.8rem; font-weight:600;">THE WEDDING OF</p>
+        <p style="letter-spacing: 3px; font-size: 0.8rem; font-weight:600; color:#dfcbaf;">THE WEDDING OF</p>
         <h1 class="wedding-title">Ardy & Ana</h1>
         <div class="guest-box">
             <p style="font-size: 0.85rem; font-style: italic; margin:0; color:#eee;">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
@@ -266,7 +287,7 @@
             <hr class="pembatas">
 
             <section class="section-countdown scroll-animasi">
-                <h4 style="font-size: 0.85rem; letter-spacing: 2px; margin: 0 0 15px 0; color: #aa8c2c; font-weight:600;">MENUJU HARI BAHAGIA</h4>
+                <h4 style="font-size: 0.85rem; letter-spacing: 2px; margin: 0 0 15px 0; color: #5c4033; font-weight:600;">MENUJU HARI BAHAGIA</h4>
                 <div class="timer-container">
                     <div class="timer-box"><span id="days">00</span><p>Hari</p></div>
                     <div class="timer-box"><span id="hours">00</span><p>Jam</p></div>
@@ -279,12 +300,12 @@
 
             <section class="section-acara scroll-animasi">
                 <h2 class="acara-title">Pawiwahan / Acara</h2>
-                <p style="font-weight: 600; margin: 0 0 5px 0;">Hari, Tanggal</p>
-                <p style="color: #666; font-size: 0.9rem; margin: 0 0 20px 0;">Kamis, 31 Desember 2026</p>
-                <p style="font-weight: 600; margin: 0 0 5px 0;">Waktu</p>
-                <p style="color: #666; font-size: 0.9rem; margin: 0 0 20px 0;">09.00 WITA - Selesai</p>
-                <p style="font-weight: 600; margin: 0 0 5px 0;">Tempat / Lokasi</p>
-                <p style="color: #666; font-size: 0.9rem; padding: 0 20px; margin: 0 0 15px 0;">Kediaman Mempelai Pria, Tabanan, Bali</p>
+                <p style="font-weight: 600; margin: 0 0 5px 0; color: #2c1e15;">Hari, Tanggal</p>
+                <p style="color: #5c4033; font-size: 0.9rem; margin: 0 0 20px 0;">Kamis, 31 Desember 2026</p>
+                <p style="font-weight: 600; margin: 0 0 5px 0; color: #2c1e15;">Waktu</p>
+                <p style="color: #5c4033; font-size: 0.9rem; margin: 0 0 20px 0;">09.00 WITA - Selesai</p>
+                <p style="font-weight: 600; margin: 0 0 5px 0; color: #2c1e15;">Tempat / Lokasi</p>
+                <p style="color: #5c4033; font-size: 0.9rem; padding: 0 20px; margin: 0 0 15px 0;">Kediaman Mempelai Pria, Tabanan, Bali</p>
                 <a href="https://goo.gl/maps/bz8HRTQSsVTxnEum9" target="_blank" class="btn-maps">📍 Buka Google Maps Lokasi Acara</a>
             </section>
 
@@ -292,9 +313,9 @@
 
             <!-- BAGIAN GALERI DENGAN LIGHTBOX MULTI-SLIDE -->
             <section class="section-galeri scroll-animasi">
-                <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin: 0 0 5px 0;">Galeri Kebersamaan</h3>
-                <p style="font-size: 0.8rem; color: #777; margin: 0 0 5px 0;">Kisah cinta dalam bingkai potret kebahagiaan kami</p>
-                <p style="font-size: 0.7rem; color: #bfa36b; font-style: italic; margin: 0;">(Bergeser otomatis atau ketuk untuk memperbesar & slide)</p>
+                <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #5c4033; margin: 0 0 5px 0;">Galeri Kebersamaan</h3>
+                <p style="font-size: 0.8rem; color: #5c4033; margin: 0 0 5px 0;">Kisah cinta dalam bingkai potret kebahagiaan kami</p>
+                <p style="font-size: 0.7rem; color: #8b5a2b; font-style: italic; margin: 0;">(Bergeser otomatis atau ketuk untuk memperbesar & slide)</p>
 
                 <div class="galeri-wrapper">
                     <button class="slide-btn btn-left" onclick="geserGaleri(-1)">❮</button>
@@ -318,21 +339,21 @@
             <hr class="pembatas">
 
             <section class="section-kado scroll-animasi">
-                <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin: 0;">Kado Digital</h3>
-                <p style="font-size: 0.85rem; color: #777; line-height: 1.5; margin-top: 10px;">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika ingin memberikan tanda kasih, anda dapat menstransfer ke QRIS DANA di bawah ini:</p>
+                <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #5c4033; margin: 0;">Kado Digital</h3>
+                <p style="font-size: 0.85rem; color: #5c4033; line-height: 1.5; margin-top: 10px;">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika ingin memberikan tanda kasih, anda dapat menstransfer ke QRIS DANA di bawah ini:</p>
 
                 <div class="card-rekening" style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
-                    <p style="font-weight: 600; color: #0086b3; letter-spacing: 1px; margin: 0;">QRIS DANA (ALL BANK & E-WALLET)</p>
-                    <img src="qris-dana.png" alt="QRIS Kado Digital" style="width: 200px; height: 200px; object-fit: contain; border: 4px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 8px;">
-                    <p style="font-size: 0.85rem; color: #555; font-weight: 600; margin: 0;">a.n Gede Ardy Putrawan</p>
-                    <a href="qris-dana.png" download="qris-dana.png" style="display: inline-block; background-color: #0086b3; color: white; text-decoration: none; padding: 10px 20px; font-size: 0.8rem; font-weight: 600; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin: 5px 0; transition: 0.3s;">📸 Simpan QRIS ke Galeri HP</a>
+                    <p style="font-weight: 600; color: #8b5a2b; letter-spacing: 1px; margin: 0;">QRIS DANA (ALL BANK & E-WALLET)</p>
+                    <img src="qris-dana.png" alt="QRIS Kado Digital" style="width: 200px; height: 200px; object-fit: contain; border: 4px solid #fff; box-shadow: 0 4px 10px rgba(92,64,51,0.1); border-radius: 8px;">
+                    <p style="font-size: 0.85rem; color: #5c4033; font-weight: 600; margin: 0;">a.n Gede Ardy Putrawan</p>
+                    <a href="qris-dana.png" download="qris-dana.png" style="display: inline-block; background-color: #8b5a2b; color: white; text-decoration: none; padding: 10px 20px; font-size: 0.8rem; font-weight: 600; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin: 5px 0; transition: 0.3s;">📸 Simpan QRIS ke Galeri HP</a>
                 </div>
             </section>
 
             <hr class="pembatas">
 
             <section class="section-rsvp scroll-animasi">
-                <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-align: center; color: #aa8c2c; margin: 0 0 5px 0;">Konfirmasi Kehadiran</h3>
+                <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-align: center; color: #5c4033; margin: 0 0 5px 0;">Konfirmasi Kehadiran</h3>
                 <form id="rsvp-form">
                     <div class="rsvp-inputs">
                         <input type="text" name="Nama Tamu" placeholder="Nama Anda" required>
@@ -346,7 +367,7 @@
                     </div>
                 </form>   
                 <div id="form-status" style="margin-top:15px; text-align:center; font-weight:600; font-size:0.9rem;"></div>
-                <div id="wadahKomentar" style="margin-top: 30px; padding: 20px; border-top: 2px solid #aa8c2c;">
+                <div id="wadahKomentar" style="margin-top: 30px; padding: 20px; border-top: 2px solid #8b5a2b;">
                     <h4 style="text-align: center; color: #333; margin: 0 0 15px 0;">Riwayat Ucapan Tamu</h4>
                 </div>
             </section>
@@ -357,7 +378,6 @@
     const music = document.getElementById('bg-music');
     const musicBtn = document.getElementById('music-control');
     
-    // List array foto galeri untuk navigasi slide lightbox
     const daftarGaleri = ['galeri1.jpg', 'galeri2.jpg', 'galeri3.jpg', 'galeri4.jpg'];
     let indeksLightboxAktif = 0;
     let modeGaleriSaja = false; 
@@ -375,7 +395,6 @@
         document.body.style.overflowY = 'auto'; 
         document.getElementById('main-content').style.opacity = '1';
         
-        // Pemicu zoom lambat pada foto berdua paling atas
         setTimeout(() => {
             document.getElementById('foto-pembuka').classList.add('zoom-aktif');
         }, 100);
@@ -476,7 +495,6 @@
     }
     slider.addEventListener('touchstart', () => clearInterval(intervalAutoplay));
 
-    // JAVASCRIPT SYSTEM UNTUK MODE LIGHTBOX BESAR
     function bukaSingleLightbox(src) {
         modeGaleriSaja = false;
         document.querySelectorAll('.lightbox-arrow').forEach(p => p.style.display = 'none');
@@ -522,7 +540,6 @@
         }
     }
 
-    // Pendeteksi usapan layar (Swipe) di HP saat foto diperbesar
     let sentuhanAwalX = 0;
     document.getElementById('lightbox-overlay').addEventListener('touchstart', e => {
         sentuhanAwalX = e.changedTouches[0].screenX;
