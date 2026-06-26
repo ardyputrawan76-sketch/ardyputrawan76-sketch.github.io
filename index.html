@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undangan Pernikahan Ardy & Ana</title>
     
-    <!-- FAVICON LOGO CINCIN PERNIKAHAN -->
-    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- FAVICON LOGO CINCIN PERNIKAHAN (Ditambahkan anti-cache Apple) -->
+    <link rel="icon" type="image/png" href="favicon.png?v=2">
+    <link rel="apple-touch-icon" href="favicon.png?v=2">
     
     <!-- Meta Tags untuk Link Preview WhatsApp -->
     <meta property="og:title" content="Undangan Pernikahan Ardy & Ana" />
@@ -27,13 +28,12 @@
         html { scroll-behavior: smooth; }
         body { 
             margin: 0; padding: 0; 
-            /* Latar Belakang Gradasi Warna Kayu dengan Pola Garis Serat Halus */
             background-color: #ebdccb;
             background-image: linear-gradient(90deg, rgba(218,196,171,0.4) 1px, transparent 1px),
                               linear-gradient(rgba(218,196,171,0.4) 1px, transparent 1px);
             background-size: 20px 20px;
             overflow-x: hidden; font-family: 'Montserrat', sans-serif; 
-            overflow-y: hidden; /* Dikunci sebelum tombol buka diklik */
+            overflow-y: hidden;
         }
 
         /* Cover Tetap (Desktop & Mobile) */
@@ -55,13 +55,13 @@
         .wedding-title {
             font-family: 'Great Vibes', cursive;
             font-size: 3.5rem;
-            color: #dfcbaf; /* Coklat kayu muda cerah */
+            color: #dfcbaf;
             margin: 15px 0;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
         }
 
         .guest-box {
-            background: rgba(92, 64, 51, 0.4); /* Nuansa kayu gelap transparan */
+            background: rgba(92, 64, 51, 0.4);
             backdrop-filter: blur(5px);
             padding: 15px 25px;
             border-radius: 10px;
@@ -77,7 +77,7 @@
         }
 
         .btn-open {
-            background-color: #8b5a2b; /* Coklat kayu hangat */
+            background-color: #8b5a2b;
             color: white;
             border: none;
             padding: 12px 30px;
@@ -89,7 +89,7 @@
             transition: 0.3s;
         }
         .btn-open:hover {
-            background-color: #5c4033; /* Coklat tua kayu */
+            background-color: #5c4033;
             transform: scale(1.05);
         }
 
@@ -102,17 +102,17 @@
         .content-padding { padding: 20px; }
         img { max-width: 100%; height: auto; }
         
-        /* Pembatas Estetik Kayu */
         .pembatas { 
             border: 0; height: 1px; 
             background: linear-gradient(to right, transparent, #8b5a2b, transparent); 
             margin: 40px 0; 
         }
 
-        /* FOTO BERDUA DI AWAL (SLOW ZOOM) */
+        /* FOTO UTAMA ATAS RESPONSIF SEMUA GAWAI */
         .hero-foto {
             width: 100%;
-            height: 350px;
+            height: 50vh; /* Menggunakan setengah tinggi layar di perangkat apa pun */
+            max-height: 450px; /* Batas maksimal biar tidak terlalu besar di laptop */
             overflow: hidden;
             border-bottom-left-radius: 30px;
             border-bottom-right-radius: 30px;
@@ -132,17 +132,15 @@
             transform: scale(1.15);
         }
 
-        /* Salam & Mempelai dengan Warna Kayu Estetik */
         .salam-arab { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #5c4033; margin-bottom: 10px; }
         .salam-teks { font-size: 0.9rem; color: #4a3525; line-height: 1.6; }
         
         .section-mempelai { display: flex; flex-direction: column; align-items: center; gap: 25px; margin-top: 30px; }
         
-        /* Kartu Konten Putih Tulang (Ivory) agar Kontras Cantik dengan BG Kayu */
         .mempelai-card { 
             width: 100%; max-width: 280px; background: #fffdfa; padding: 20px; 
             border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); 
-            border: 1px solid #eaddca;
+            border: 1px solid #eaddca; box-sizing: border-box;
         }
         .avatar-frame { width: 150px; height: 150px; margin: 0 auto 15px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 6px 15px rgba(92, 64, 51, 0.15); cursor: pointer; }
         .avatar-frame img { width: 100%; height: 100%; object-fit: cover; }
@@ -151,27 +149,35 @@
         .info-ortu { font-size: 0.8rem; color: #5c4033; line-height: 1.4; }
         .dan-simbol { font-family: 'Great Vibes', cursive; font-size: 2rem; color: #8b5a2b; }
 
-        /* Countdown Timer Kotak Serat */
         .timer-container { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
         .timer-box { background: #fffdfa; width: 65px; padding: 10px 5px; border-radius: 8px; border: 1px solid #d2b48c; box-shadow: 0 2px 8px rgba(92,64,51,0.04); }
         .timer-box span { font-size: 1.3rem; font-weight: 600; color: #8b5a2b; display: block; }
         .timer-box p { font-size: 0.7rem; color: #5c4033; margin: 2px 0 0; }
         
-        /* Detail Acara */
         .section-acara { background-color: #fffdfa; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); border: 1px solid #eaddca; }
         .acara-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #5c4033; margin-bottom: 15px; }
         .btn-maps { display: inline-block; background-color: #25d366; color: #fff; text-decoration: none; padding: 12px 25px; border-radius: 25px; font-size: 0.9rem; margin-top: 15px; transition: 0.3s; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
         .btn-maps:hover { background-color: #1ebd58; transform: scale(1.03); }
 
-        /* Galeri Slider */
+        /* GALERI SLIDER RESPONSIF */
         .section-galeri { background-color: #fffdfa; padding: 35px 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); position: relative; border: 1px solid #eaddca; }
         .galeri-wrapper { position: relative; margin-top: 20px; display: flex; align-items: center; }
         .galeri-slider { display: flex; gap: 15px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 5px 5px 15px 5px; -webkit-overflow-scrolling: touch; }
         .galeri-slider::-webkit-scrollbar { display: none; }
-        .galeri-item { flex: 0 0 85%; scroll-snap-align: center; height: 250px; overflow: hidden; border-radius: 12px; border: 2px solid #eaddca; box-shadow: 0 6px 15px rgba(92,64,51,0.06); cursor: pointer; }
+        
+        .galeri-item { 
+            flex: 0 0 85%; /* Di HP memenuhi 85% area layar */
+            scroll-snap-align: center; 
+            height: 40vh; /* Mengikuti rasio tinggi layar */
+            max-height: 350px; 
+            overflow: hidden; 
+            border-radius: 12px; 
+            border: 2px solid #eaddca; 
+            box-shadow: 0 6px 15px rgba(92,64,51,0.06); 
+            cursor: pointer; 
+        }
         .galeri-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
 
-        /* Tombol Panah Slider Tema Coklat */
         .slide-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(139, 90, 43, 0.9); color: white; border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1rem; cursor: pointer; z-index: 10; display: flex; justify-content: center; align-items: center; box-shadow: 0 3px 10px rgba(0,0,0,0.15); }
         .btn-left { left: -12px; }
         .btn-right { right: -12px; }
@@ -179,7 +185,7 @@
         .dot { width: 8px; height: 8px; background-color: #eaddca; border-radius: 50%; transition: 0.3s; cursor: pointer; }
         .dot.active { background-color: #8b5a2b; width: 20px; border-radius: 4px; }
 
-        /* LIGHTBOX INTERAKTIF (GESER & KLIK LUAR UNTUK TUTUP) */
+        /* LIGHTBOX OVERLAY */
         #lightbox-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(20, 14, 10, 0.96); z-index: 10000;
@@ -198,7 +204,6 @@
         .lightbox-close { position: absolute; top: -45px; right: 0; color: white; font-size: 2rem; background: none; border: none; cursor: pointer; }
         .lightbox-hint { color: #caa; font-size: 0.8rem; letter-spacing: 1px; margin-top: 15px; text-align: center; }
 
-        /* Kado Digital & RSVP */
         .section-kado { background-color: #fffdfa; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); border: 1px solid #eaddca; }
         .card-rekening { background-color: #f7f5f0; border: 1px dashed #8b5a2b; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center; }
         
@@ -208,18 +213,22 @@
         .btn-submit { background-color: #8b5a2b; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; }
         .btn-submit:hover { background-color: #5c4033; }
 
-        /* Musik Melayang */
         #music-control { position: fixed; bottom: 25px; right: 25px; width: 50px; height: 50px; background-color: rgba(139, 90, 43, 0.9); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 999; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 1.2rem; animation: putarMusik 4s linear infinite; animation-play-state: paused; }
         @keyframes putarMusik { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* Efek Scroll Animasi Gelembung */
         .scroll-animasi { opacity: 0; transform: scale(0.4) translateY(50px); transition: opacity 1s ease, transform 1s cubic-bezier(0.34, 1.6, 0.64, 1); }
         .scroll-animasi.muncul { opacity: 1; transform: scale(1) translateY(0); }
 
+        /* RESPONSIVENESS MEDIA QUERY: UNTUK IPAD, TABLET & LAPTOP */
         @media (min-width: 768px) {
-            .section-mempelai { flex-direction: row; justify-content: space-around; gap: 10px; }
-            .galeri-item { flex: 0 0 48%; height: 320px; } 
-            .slide-btn { display: none; }
+            .section-mempelai { flex-direction: row; justify-content: space-around; gap: 15px; }
+            
+            /* Di Layar Lebar (iPad/Laptop), Galeri membelah rapi jadi 2 kolom penuh */
+            .galeri-item { 
+                flex: 0 0 48%; 
+                height: 350px; 
+            } 
+            .slide-btn { display: flex; } /* Menampilkan tombol panah di iPad/Laptop */
             .hero-foto { height: 450px; }
             .lightbox-prev { left: -50px; }
             .lightbox-next { right: -50px; }
@@ -231,7 +240,6 @@
     <audio id="bg-music" src="musik-pernikahan.mp3" loop></audio>
     <div id="music-control" onclick="toggleMusik()">🎵</div>
 
-    <!-- STRUKTUR LAYAR PERBESARAN FOTO (LIGHTBOX) -->
     <div id="lightbox-overlay" onclick="tutupFotoLuar(event)">
         <div class="lightbox-container">
             <button class="lightbox-close" onclick="tutupFoto()">&times;</button>
@@ -242,7 +250,6 @@
         </div>
     </div>
 
-    <!-- Halaman Cover Awal -->
     <div id="cover">
         <p style="letter-spacing: 3px; font-size: 0.8rem; font-weight:600; color:#dfcbaf;">THE WEDDING OF</p>
         <h1 class="wedding-title">Ardy & Ana</h1>
@@ -253,9 +260,7 @@
         <button class="btn-open" onclick="bukaUndangan()">Buka Undangan</button>
     </div>
 
-    <!-- Isi Utama Undangan -->
     <div id="main-content">
-        <!-- Foto Berdua Atas dengan Efek Slow Zoom otomatis -->
         <div id="foto-pembuka" class="hero-foto" onclick="bukaSingleLightbox('bg-cover.jpg')">
             <img src="bg-cover.jpg" alt="Foto Berdua Ardy & Ana">
         </div>
@@ -311,7 +316,6 @@
 
             <hr class="pembatas">
 
-            <!-- BAGIAN GALERI DENGAN LIGHTBOX MULTI-SLIDE -->
             <section class="section-galeri scroll-animasi">
                 <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #5c4033; margin: 0 0 5px 0;">Galeri Kebersamaan</h3>
                 <p style="font-size: 0.8rem; color: #5c4033; margin: 0 0 5px 0;">Kisah cinta dalam bingkai potret kebahagiaan kami</p>
