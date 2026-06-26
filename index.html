@@ -142,7 +142,18 @@
             border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); 
             border: 1px solid #eaddca; box-sizing: border-box;
         }
-        .avatar-frame { width: 150px; height: 150px; margin: 0 auto 15px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 6px 15px rgba(92, 64, 51, 0.15); cursor: pointer; }
+        
+        /* FIX: Ukuran bingkai foto adaptif menggunakan fungsi clamp() */
+        .avatar-frame { 
+            width: clamp(140px, 18vw, 180px); 
+            height: clamp(140px, 18vw, 180px); 
+            margin: 0 auto 15px; 
+            border-radius: 50%; 
+            overflow: hidden; 
+            border: 4px solid #fff; 
+            box-shadow: 0 6px 15px rgba(92, 64, 51, 0.15); 
+            cursor: pointer; 
+        }
         .avatar-frame img { width: 100%; height: 100%; object-fit: cover; }
         
         .nama-lengkap { font-size: clamp(0.95rem, 4vw, 1.15rem); font-weight: 600; color: #2c1e15; margin: 10px 0 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -221,8 +232,14 @@
 
         /* RESPONSIVENESS MEDIA QUERY: UNTUK IPAD, TABLET & LAPTOP */
         @media (min-width: 768px) {
-            .section-mempelai { flex-direction: row; justify-content: space-around; gap: 15px; }
+            .section-mempelai { flex-direction: row; justify-content: space-around; gap: 15px; align-items: center; }
             
+            /* FIX: Memperbesar batas kartu di layar desktop agar pas foto mendapat ruang seimbang */
+            .mempelai-card {
+                max-width: 320px;
+                padding: 25px 20px;
+            }
+
             /* Di Layar Lebar (iPad/Laptop), Galeri membelah rapi jadi 2 kolom penuh */
             .galeri-item { 
                 flex: 0 0 48%; 
