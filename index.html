@@ -99,7 +99,7 @@
         img { max-width: 100%; height: auto; }
         .pembatas { border: 0; height: 1px; background: linear-gradient(to right, transparent, #d4af37, transparent); margin: 40px 0; }
 
-        /* Style Foto Berdua di Awal */
+        /* Style Foto Berdua di Awal dengan Efek Slow Zoom */
         .hero-foto {
             width: 100%;
             height: 350px;
@@ -109,11 +109,18 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             margin-bottom: 30px;
             cursor: pointer;
+            position: relative;
         }
         .hero-foto img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transform: scale(1);
+            transition: transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Efek zoom halus */
+        }
+        /* Trigger zoom saat kelas ini ditambahkan via JS */
+        .hero-foto.zoom-aktif img {
+            transform: scale(1.15);
         }
 
         /* Salam Style */
@@ -183,7 +190,7 @@
         .galeri-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
         .galeri-item img:hover { transform: scale(1.05); }
 
-        /* Tombol Navigasi Panah */
+        /* Tombol Navigasi Panah Slider */
         .slide-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
             background: rgba(212, 175, 55, 0.9); color: white;
@@ -207,17 +214,43 @@
             background-color: #d4af37; width: 20px; border-radius: 4px;
         }
 
-        /* Lightbox Overlay */
+        /* --- LIGHTBOX MODAL BARU (BISA DI-SLIDE DAN DI-KLIK KELUAR) --- */
         #lightbox-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.9); z-index: 10000;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background-color: rgba(0, 0, 0, 0.95); z-index: 10000;
+            display: flex; justify-content: center; align-items: center;
             opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
         }
         #lightbox-overlay.active { opacity: 1; pointer-events: auto; }
-        #lightbox-img { max-width: 90%; max-height: 80vh; border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transform: scale(0.9); transition: transform 0.4s ease; }
+        
+        .lightbox-container {
+            position: relative; width: 90%; max-width: 500px; display: flex; flex-direction: column; align-items: center;
+        }
+        #lightbox-img { 
+            max-width: 100%; max-height: 75vh; border-radius: 8px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5); transform: scale(0.9); 
+            transition: transform 0.4s ease, opacity 0.3s ease; 
+        }
         #lightbox-overlay.active #lightbox-img { transform: scale(1); }
-        .lightbox-hint { color: #ccc; font-size: 0.8rem; letter-spacing: 1px; margin-top: 15px; }
+        
+        /* Tombol Navigasi di Dalam Lightbox */
+        .lightbox-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2); color: white; border: none;
+            width: 45px; height: 45px; border-radius: 50%; font-size: 1.5rem;
+            cursor: pointer; display: flex; justify-content: center; align-items: center;
+            transition: 0.3s; z-index: 10002;
+        }
+        .lightbox-arrow:hover { background: rgba(212, 175, 55, 0.9); }
+        .lightbox-prev { left: -20px; }
+        .lightbox-next { right: -20px; }
+        
+        /* Tombol Close Silang Atas */
+        .lightbox-close {
+            position: absolute; top: -45px; right: 0; color: white;
+            font-size: 2rem; background: none; border: none; cursor: pointer;
+        }
+        .lightbox-hint { color: #aaa; font-size: 0.8rem; letter-spacing: 1px; margin-top: 15px; text-align: center; }
 
         /* Kado Digital Style */
         .section-kado { background-color: #fff; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
@@ -262,6 +295,8 @@
             .galeri-item { flex: 0 0 48%; height: 320px; } 
             .slide-btn { display: none; }
             .hero-foto { height: 450px; }
+            .lightbox-prev { left: -50px; }
+            .lightbox-next { right: -50px; }
         }
     </style>
 </head>
@@ -271,9 +306,15 @@
 
     <div id="music-control" onclick="toggleMusik()">🎵</div>
 
-    <div id="lightbox-overlay" onclick="tutupFoto()">
-        <img id="lightbox-img" src="" alt="Foto Diperbesar">
-        <p class="lightbox-hint">Ketuk di mana saja untuk menutup</p>
+    <!-- STRUKTUR LIGHTBOX UPGRADE (BISA DI-SLIDE DAN DI-KLIK BERSIH) -->
+    <div id="lightbox-overlay" onclick="tutupFotoLuar(event)">
+        <div class="lightbox-container">
+            <button class="lightbox-close" onclick="tutupFoto()">&times;</button>
+            <button class="lightbox-arrow lightbox-prev" onclick="navigasiLightbox(-1, event)">❮</button>
+            <img id="lightbox-img" src="" alt="Foto Diperbesar">
+            <button class="lightbox-arrow lightbox-next" onclick="navigasiLightbox(1, event)">❯</button>
+            <p class="lightbox-hint">Ketuk area hitam atau tombol silang untuk keluar</p>
+        </div>
     </div>
 
     <div id="cover">
@@ -288,7 +329,7 @@
 
     <div id="main-content">
         <!-- FOTO BERDUA DI AWAL BUKA -->
-        <div class="hero-foto" onclick="perbesarFoto('bg-cover.jpg')">
+        <div id="foto-pembuka" class="hero-foto" onclick="bukaSingleLightbox('bg-cover.jpg')">
             <img src="bg-cover.jpg" alt="Foto Berdua Ardy & Ana">
         </div>
 
@@ -300,7 +341,7 @@
 
             <section class="section-mempelai">
                 <div class="mempelai-card scroll-animasi">
-                    <div class="avatar-frame" onclick="perbesarFoto('ardy.png')">
+                    <div class="avatar-frame" onclick="bukaSingleLightbox('ardy.png')">
                         <img src="ardy.png" alt="Foto Ardy">
                     </div>
                     <h3 class="nama-lengkap">Gede Ardy Putrawan</h3>
@@ -308,7 +349,7 @@
                 </div>
                 <div class="dan-simbol">&</div>
                 <div class="mempelai-card scroll-animasi">
-                    <div class="avatar-frame" onclick="perbesarFoto('ana.png')">
+                    <div class="avatar-frame" onclick="bukaSingleLightbox('ana.png')">
                         <img src="ana.png" alt="Foto Ana">
                     </div>
                     <h3 class="nama-lengkap">Ni Komang Ana Oktaviani</h3>
@@ -349,16 +390,16 @@
             <section class="section-galeri scroll-animasi">
                 <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin: 0 0 5px 0;">Galeri Kebersamaan</h3>
                 <p style="font-size: 0.8rem; color: #777; margin: 0 0 5px 0;">Kisah cinta dalam bingkai potret kebahagiaan kami</p>
-                <p style="font-size: 0.7rem; color: #bfa36b; font-style: italic; margin: 0;">(Bergeser otomatis atau ketuk untuk memperbesar)</p>
+                <p style="font-size: 0.7rem; color: #bfa36b; font-style: italic; margin: 0;">(Bergeser otomatis atau ketuk untuk memperbesar & slide)</p>
 
                 <div class="galeri-wrapper">
                     <button class="slide-btn btn-left" onclick="geserGaleri(-1)">❮</button>
                     
                     <div class="galeri-slider" id="sliderGaleri" onscroll="perbaruiTitikIndikator()">
-                        <div class="galeri-item" onclick="perbesarFoto('galeri1.jpg')"><img src="galeri1.jpg" alt="Foto Wedding 1"></div>
-                        <div class="galeri-item" onclick="perbesarFoto('galeri2.jpg')"><img src="galeri2.jpg" alt="Foto Wedding 2"></div>
-                        <div class="galeri-item" onclick="perbesarFoto('galeri3.jpg')"><img src="galeri3.jpg" alt="Foto Wedding 3"></div>
-                        <div class="galeri-item" onclick="perbesarFoto('galeri4.jpg')"><img src="galeri4.jpg" alt="Foto Wedding 4"></div>
+                        <div class="galeri-item" onclick="bukaGaleriLightbox(0)"><img src="galeri1.jpg" alt="Foto Wedding 1"></div>
+                        <div class="galeri-item" onclick="bukaGaleriLightbox(1)"><img src="galeri2.jpg" alt="Foto Wedding 2"></div>
+                        <div class="galeri-item" onclick="bukaGaleriLightbox(2)"><img src="galeri3.jpg" alt="Foto Wedding 3"></div>
+                        <div class="galeri-item" onclick="bukaGaleriLightbox(3)"><img src="galeri4.jpg" alt="Foto Wedding 4"></div>
                     </div>
 
                     <button class="slide-btn btn-right" onclick="geserGaleri(1)">❯</button>
@@ -428,9 +469,11 @@
 <script>
     const music = document.getElementById('bg-music');
     const musicBtn = document.getElementById('music-control');
-    const form = document.getElementById('rsvp-form');
-    const statusDiv = document.getElementById('form-status');
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXrTVtcTbtvKaX0oXEUg-8-yUaSBUQ-XGonT91lbD-jq00YUaphpF5n9Ey-qGQ3kK0kg/exec';
+    
+    // Daftar gambar galeri untuk sistem slide lightbox
+    const daftarGaleri = ['galeri1.jpg', 'galeri2.jpg', 'galeri3.jpg', 'galeri4.jpg'];
+    let indeksLightboxAktif = 0;
+    let modeGaleriSaja = false; // Membedakan foto lepas (mempelai) vs galeri geser
 
     // 1. Fungsi Mengambil Nama Tamu dari URL (?to=Nama)
     function getGuestName() {
@@ -447,6 +490,11 @@
         document.body.style.overflowY = 'auto'; 
         document.getElementById('main-content').style.opacity = '1';
         
+        // Memicu animasi slow zoom pada foto berdua paling atas
+        setTimeout(() => {
+            document.getElementById('foto-pembuka').classList.add('zoom-aktif');
+        }, 100);
+
         music.muted = false;
         music.play().catch(error => console.log("Autoplay dicegah browser"));
         musicBtn.style.animationPlayState = 'running';
@@ -508,7 +556,7 @@
     window.addEventListener('scroll', cekScroll);
     window.addEventListener('load', () => { getGuestName(); cekScroll(); });
 
-    // 6. Fungsi Galeri Slider Manual & Otomatis (Autoplay)
+    // 6. Fungsi Galeri Slider Utama di Halaman Rumah
     const slider = document.getElementById('sliderGaleri');
     let intervalAutoplay;
 
@@ -549,20 +597,76 @@
             }
         }, 4000);
     }
-
     slider.addEventListener('touchstart', () => clearInterval(intervalAutoplay));
 
-    // 7. Lightbox Preview (Perbesar Foto)
-    function perbesarFoto(src) {
+
+    // 7. --- SISTEM LIGHTBOX INTERAKTIF BARU ---
+    
+    // Buka foto biasa tunggal (Foto pembuka / avatar mempelai, tidak bisa geser)
+    function bukaSingleLightbox(src) {
+        modeGaleriSaja = false;
+        document.querySelectorAll('.lightbox-arrow').forEach(p => p.style.display = 'none');
+        
         const overlay = document.getElementById('lightbox-overlay');
         const img = document.getElementById('lightbox-img');
         img.src = src;
         overlay.classList.add('active');
     }
 
+    // Buka foto galeri (Bisa digeser ke kanan dan kiri)
+    function bukaGaleriLightbox(indeks) {
+        modeGaleriSaja = true;
+        indeksLightboxAktif = indeks;
+        document.querySelectorAll('.lightbox-arrow').forEach(p => p.style.display = 'flex');
+        
+        tampilkanFotoLightbox();
+        document.getElementById('lightbox-overlay').classList.add('active');
+    }
+
+    function tampilkanFotoLightbox() {
+        const img = document.getElementById('lightbox-img');
+        img.style.opacity = '0'; // Efek kedip halus saat ganti foto
+        setTimeout(() => {
+            img.src = daftarGaleri[indeksLightboxAktif];
+            img.style.opacity = '1';
+        }, 150);
+    }
+
+    // Navigasi panah di dalam mode besar layar penuh
+    function navigasiLightbox(arah, event) {
+        event.stopPropagation(); // Mencegah lightbox tertutup tiba-tiba saat klik panah
+        if (!modeGaleriSaja) return;
+        
+        indeksLightboxAktif += arah;
+        if (indeksLightboxAktif >= daftarGaleri.length) indeksLightboxAktif = 0;
+        if (indeksLightboxAktif < 0) indeksLightboxAktif = daftarGaleri.length - 1;
+        
+        tampilkanFotoLightbox();
+    }
+
+    // Fungsi klik tombol silang keluar
     function tutupFoto() {
         document.getElementById('lightbox-overlay').classList.remove('active');
     }
+
+    // Fungsi klik di mana saja (area hitam) untuk menutup bersih
+    function tutupFotoLuar(event) {
+        if (event.target.id === 'lightbox-overlay' || event.target.className === 'lightbox-container') {
+            tutupFoto();
+        }
+    }
+
+    // Dukungan geser layar hp (Swipe) di dalam lightbox
+    let sentuhanAwalX = 0;
+    document.getElementById('lightbox-overlay').addEventListener('touchstart', e => {
+        sentuhanAwalX = e.changedTouches[0].screenX;
+    });
+    document.getElementById('lightbox-overlay').addEventListener('touchend', e => {
+        if (!modeGaleriSaja) return;
+        let sentuhanAkhirX = e.changedTouches[0].screenX;
+        if (sentuhanAwalX - sentuhanAkhirX > 50) navigasiLightbox(1, e);  // Swipe Kiri -> Foto Berikutnya
+        if (sentuhanAkhirX - sentuhanAwalX > 50) navigasiLightbox(-1, e); // Swipe Kanan -> Foto Sebelumnya
+    });
 </script>
 </body>
 </html>
