@@ -88,12 +88,33 @@
 
         /* 3. KONTEN UTAMA (Responsive) */
         #main-content { 
-            padding: 40px 20px; text-align: center; max-width: 600px; margin: 0 auto; 
+            padding: 0 0 40px 0; text-align: center; max-width: 600px; margin: 0 auto; 
             opacity: 0; transition: opacity 0.8s ease; 
+        }
+
+        .content-padding {
+            padding: 20px;
         }
 
         img { max-width: 100%; height: auto; }
         .pembatas { border: 0; height: 1px; background: linear-gradient(to right, transparent, #d4af37, transparent); margin: 40px 0; }
+
+        /* Style Foto Berdua di Awal */
+        .hero-foto {
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+        .hero-foto img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         /* Salam Style */
         .salam-arab { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin-bottom: 10px; }
@@ -222,7 +243,7 @@
         }
         @keyframes putarMusik { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* --- SITEM DESAIN GELEMBUNG POP-UP (Scroll Animation) --- */
+        /* --- SISTEM DESAIN GELEMBUNG POP-UP (Scroll Animation) --- */
         .scroll-animasi {
             opacity: 0;
             transform: scale(0.4) translateY(50px);
@@ -240,6 +261,7 @@
             .timer-box span { font-size: 1.6rem; }
             .galeri-item { flex: 0 0 48%; height: 320px; } 
             .slide-btn { display: none; }
+            .hero-foto { height: 450px; }
         }
     </style>
 </head>
@@ -265,135 +287,142 @@
     </div>
 
     <div id="main-content">
-        <section class="section-salam scroll-animasi">
-            <p class="salam-arab">Om Swastyastu</p>
-            <p class="salam-teks">Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri Acara Pernikahan kami:</p>
-        </section>
+        <!-- FOTO BERDUA DI AWAL BUKA -->
+        <div class="hero-foto" onclick="perbesarFoto('bg-cover.jpg')">
+            <img src="bg-cover.jpg" alt="Foto Berdua Ardy & Ana">
+        </div>
 
-        <section class="section-mempelai">
-            <div class="mempelai-card scroll-animasi">
-                <div class="avatar-frame" onclick="perbesarFoto('ardy.png')">
-                    <img src="ardy.png" alt="Foto Ardy">
+        <div class="content-padding">
+            <section class="section-salam scroll-animasi">
+                <p class="salam-arab">Om Swastyastu</p>
+                <p class="salam-teks">Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri Acara Pernikahan kami:</p>
+            </section>
+
+            <section class="section-mempelai">
+                <div class="mempelai-card scroll-animasi">
+                    <div class="avatar-frame" onclick="perbesarFoto('ardy.png')">
+                        <img src="ardy.png" alt="Foto Ardy">
+                    </div>
+                    <h3 class="nama-lengkap">Gede Ardy Putrawan</h3>
+                    <p class="info-ortu">Putra dari Pasangan:<br>Bapak Ketut Sariana (Alm.)<br>& Ibu Ketut Arsih</p>
                 </div>
-                <h3 class="nama-lengkap">Gede Ardy Putrawan</h3>
-                <p class="info-ortu">Putra dari Pasangan:<br>Bapak Ketut Sariana (Alm.)<br>& Ibu Ketut Arsih</p>
-            </div>
-            <div class="dan-simbol">&</div>
-            <div class="mempelai-card scroll-animasi">
-                <div class="avatar-frame" onclick="perbesarFoto('ana.png')">
-                    <img src="ana.png" alt="Foto Ana">
+                <div class="dan-simbol">&</div>
+                <div class="mempelai-card scroll-animasi">
+                    <div class="avatar-frame" onclick="perbesarFoto('ana.png')">
+                        <img src="ana.png" alt="Foto Ana">
+                    </div>
+                    <h3 class="nama-lengkap">Ni Komang Ana Oktaviani</h3>
+                    <p class="info-ortu">Putri dari Pasangan:<br>Bapak I Wayan Sugiantara<br>& Ibu Ni Ketut Wartini</p>
                 </div>
-                <h3 class="nama-lengkap">Ni Komang Ana Oktaviani</h3>
-                <p class="info-ortu">Putri dari Pasangan:<br>Bapak I Wayan Sugiantara<br>& Ibu Ni Ketut Wartini</p>
-            </div>
-        </section>
+            </section>
 
-        <hr class="pembatas">
+            <hr class="pembatas">
 
-        <section class="section-countdown scroll-animasi">
-            <h4 style="font-size: 0.85rem; letter-spacing: 2px; margin: 0 0 15px 0; color: #aa8c2c; font-weight:600;">MENUJU HARI BAHAGIA</h4>
-            <div class="timer-container">
-                <div class="timer-box"><span id="days">00</span><p>Hari</p></div>
-                <div class="timer-box"><span id="hours">00</span><p>Jam</p></div>
-                <div class="timer-box"><span id="minutes">00</span><p>Menit</p></div>
-                <div class="timer-box"><span id="seconds">00</span><p>Detik</p></div>
-            </div>
-        </section>
+            <section class="section-countdown scroll-animasi">
+                <h4 style="font-size: 0.85rem; letter-spacing: 2px; margin: 0 0 15px 0; color: #aa8c2c; font-weight:600;">MENUJU HARI BAHAGIA</h4>
+                <div class="timer-container">
+                    <div class="timer-box"><span id="days">00</span><p>Hari</p></div>
+                    <div class="timer-box"><span id="hours">00</span><p>Jam</p></div>
+                    <div class="timer-box"><span id="minutes">00</span><p>Menit</p></div>
+                    <div class="timer-box"><span id="seconds">00</span><p>Detik</p></div>
+                </div>
+            </section>
 
-        <hr class="pembatas">
+            <hr class="pembatas">
 
-        <section class="section-acara scroll-animasi">
-            <h2 class="acara-title">Pawiwahan / Acara</h2>
-            <p style="font-weight: 600; margin: 0 0 5px 0;">Hari, Tanggal</p>
-            <p style="color: #666; font-size: 0.9rem; margin: 0 0 20px 0;">Kamis, 31 Desember 2026</p>
+            <section class="section-acara scroll-animasi">
+                <h2 class="acara-title">Pawiwahan / Acara</h2>
+                <p style="font-weight: 600; margin: 0 0 5px 0;">Hari, Tanggal</p>
+                <p style="color: #666; font-size: 0.9rem; margin: 0 0 20px 0;">Kamis, 31 Desember 2026</p>
 
-            <p style="font-weight: 600; margin: 0 0 5px 0;">Waktu</p>
-            <p style="color: #666; font-size: 0.9rem; margin: 0 0 20px 0;">09.00 WITA - Selesai</p>
+                <p style="font-weight: 600; margin: 0 0 5px 0;">Waktu</p>
+                <p style="color: #666; font-size: 0.9rem; margin: 0 0 20px 0;">09.00 WITA - Selesai</p>
 
-            <p style="font-weight: 600; margin: 0 0 5px 0;">Tempat / Lokasi</p>
-            <p style="color: #666; font-size: 0.9rem; padding: 0 20px; margin: 0 0 15px 0;">Kediaman Mempelai Pria, Tabanan, Bali</p>
+                <p style="font-weight: 600; margin: 0 0 5px 0;">Tempat / Lokasi</p>
+                <p style="color: #666; font-size: 0.9rem; padding: 0 20px; margin: 0 0 15px 0;">Kediaman Mempelai Pria, Tabanan, Bali</p>
 
-            <a href="https://goo.gl/maps/bz8HRTQSsVTxnEum9" target="_blank" class="btn-maps">📍 Buka Google Maps Lokasi Acara</a>
-        </section>
+                <a href="https://goo.gl/maps/bz8HRTQSsVTxnEum9" target="_blank" class="btn-maps">📍 Buka Google Maps Lokasi Acara</a>
+            </section>
 
-        <hr class="pembatas">
+            <hr class="pembatas">
 
-        <section class="section-galeri scroll-animasi">
-            <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin: 0 0 5px 0;">Galeri Kebersamaan</h3>
-            <p style="font-size: 0.8rem; color: #777; margin: 0 0 5px 0;">Kisah cinta dalam bingkai potret kebahagiaan kami</p>
-            <p style="font-size: 0.7rem; color: #bfa36b; font-style: italic; margin: 0;">(Bergeser otomatis atau ketuk untuk memperbesar)</p>
+            <section class="section-galeri scroll-animasi">
+                <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin: 0 0 5px 0;">Galeri Kebersamaan</h3>
+                <p style="font-size: 0.8rem; color: #777; margin: 0 0 5px 0;">Kisah cinta dalam bingkai potret kebahagiaan kami</p>
+                <p style="font-size: 0.7rem; color: #bfa36b; font-style: italic; margin: 0;">(Bergeser otomatis atau ketuk untuk memperbesar)</p>
 
-            <div class="galeri-wrapper">
-                <button class="slide-btn btn-left" onclick="geserGaleri(-1)">❮</button>
+                <div class="galeri-wrapper">
+                    <button class="slide-btn btn-left" onclick="geserGaleri(-1)">❮</button>
+                    
+                    <div class="galeri-slider" id="sliderGaleri" onscroll="perbaruiTitikIndikator()">
+                        <div class="galeri-item" onclick="perbesarFoto('galeri1.jpg')"><img src="galeri1.jpg" alt="Foto Wedding 1"></div>
+                        <div class="galeri-item" onclick="perbesarFoto('galeri2.jpg')"><img src="galeri2.jpg" alt="Foto Wedding 2"></div>
+                        <div class="galeri-item" onclick="perbesarFoto('galeri3.jpg')"><img src="galeri3.jpg" alt="Foto Wedding 3"></div>
+                        <div class="galeri-item" onclick="perbesarFoto('galeri4.jpg')"><img src="galeri4.jpg" alt="Foto Wedding 4"></div>
+                    </div>
+
+                    <button class="slide-btn btn-right" onclick="geserGaleri(1)">❯</button>
+                </div>
+
+                <div class="slider-dots" id="wadahDots">
+                    <span class="dot active" onclick="lompatKeFoto(0)"></span>
+                    <span class="dot" onclick="lompatKeFoto(1)"></span>
+                    <span class="dot" onclick="lompatKeFoto(2)"></span>
+                    <span class="dot" onclick="lompatKeFoto(3)"></span>
+                </div>
+            </section>
+
+            <hr class="pembatas">
+
+            <section class="section-kado scroll-animasi">
+                <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin: 0;">Kado Digital</h3>
+                <p style="font-size: 0.85rem; color: #777; line-height: 1.5; margin-top: 10px;">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika ingin memberikan tanda kasih, anda dapat menstransfer ke QRIS DANA di bawah ini:</p>
+
+                <div class="card-rekening" style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                    <p style="font-weight: 600; color: #0086b3; letter-spacing: 1px; margin: 0;">QRIS DANA (ALL BANK & E-WALLET)</p>
+
+                    <img src="qris-dana.png" alt="QRIS Kado Digital" style="width: 200px; height: 200px; object-fit: contain; border: 4px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 8px;">
+
+                    <p style="font-size: 0.85rem; color: #555; font-weight: 600; margin: 0;">a.n Gede Ardy Putrawan</p>
+
+                    <a href="qris-dana.png" download="qris-dana.png" style="display: inline-block; background-color: #0086b3; color: white; text-decoration: none; padding: 10px 20px; font-size: 0.8rem; font-weight: 600; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin: 5px 0; transition: 0.3s;">
+                        📸 Simpan QRIS ke Galeri HP
+                    </a>
+
+                    <div style="margin-top: 5px; background-color: #fff; padding: 10px; border-radius: 6px; text-align: left; font-size: 0.75rem; color: #666; line-height: 1.4; border: 1px solid #eadecc;">
+                        <strong>💡 Cara Transfer Gratis via HP:</strong><br>
+                        1. Klik tombol <strong>"Simpan QRIS ke Galeri HP"</strong> di atas.<br>
+                        2. Buka M-Banking Anda (BPD Bali, BCA, Mandiri, dll) or e-wallet lainnya.<br>
+                        3. Pilih menu <strong>Scan / QRIS</strong>.<br>
+                        4. Ketuk ikon <strong>Galeri/Foto</strong> di pojok menu scan, lalu pilih foto QRIS yang baru di-download tadi.<br>
+                        5. Masukkan nominal transfer (Bebas biaya admin).
+                    </div>
+                </div>
+            </section>
+
+            <hr class="pembatas">
+
+            <section class="section-rsvp scroll-animasi">
+                <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-align: center; color: #aa8c2c; margin: 0 0 5px 0;">Konfirmasi Kehadiran</h3>
+                <form id="rsvp-form">
+                    <div class="rsvp-inputs">
+                        <input type="text" name="Nama Tamu" placeholder="Nama Anda" required>
+                        <select name="Status Kehadiran" required>
+                            <option value="">-- Pilih Kehadiran --</option>
+                            <option value="Hadir">Hadir</option>
+                            <option value="Tidak Hadir">Tidak Hadir</option>
+                        </select>
+                        <textarea name="Ucapan" placeholder="Tulis ucapan/doa di sini..." rows="3"></textarea>
+                        <button type="submit" class="btn-submit">Kirim Konfirmasi</button>
+                    </div>
+                </form>   
+                <div id="form-status" style="margin-top:15px; text-align:center; font-weight:600; font-size:0.9rem;"></div>
                 
-                <div class="galeri-slider" id="sliderGaleri" onscroll="perbaruiTitikIndikator()">
-                    <div class="galeri-item" onclick="perbesarFoto('galeri1.jpg')"><img src="galeri1.jpg" alt="Foto Wedding 1"></div>
-                    <div class="galeri-item" onclick="perbesarFoto('galeri2.jpg')"><img src="galeri2.jpg" alt="Foto Wedding 2"></div>
-                    <div class="galeri-item" onclick="perbesarFoto('galeri3.jpg')"><img src="galeri3.jpg" alt="Foto Wedding 3"></div>
-                    <div class="galeri-item" onclick="perbesarFoto('galeri4.jpg')"><img src="galeri4.jpg" alt="Foto Wedding 4"></div>
+                <div id="wadahKomentar" style="margin-top: 30px; padding: 20px; border-top: 2px solid #aa8c2c;">
+                    <h4 style="text-align: center; color: #333; margin: 0 0 15px 0;">Riwayat Ucapan Tamu</h4>
                 </div>
-
-                <button class="slide-btn btn-right" onclick="geserGaleri(1)">❯</button>
-            </div>
-
-            <div class="slider-dots" id="wadahDots">
-                <span class="dot active" onclick="lompatKeFoto(0)"></span>
-                <span class="dot" onclick="lompatKeFoto(1)"></span>
-                <span class="dot" onclick="lompatKeFoto(2)"></span>
-                <span class="dot" onclick="lompatKeFoto(3)"></span>
-            </div>
-        </section>
-
-        <hr class="pembatas">
-
-        <section class="section-kado scroll-animasi">
-            <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #aa8c2c; margin: 0;">Kado Digital</h3>
-            <p style="font-size: 0.85rem; color: #777; line-height: 1.5; margin-top: 10px;">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika ingin memberikan tanda kasih, anda dapat menstransfer ke QRIS DANA di bawah ini:</p>
-
-            <div class="card-rekening" style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
-                <p style="font-weight: 600; color: #0086b3; letter-spacing: 1px; margin: 0;">QRIS DANA (ALL BANK & E-WALLET)</p>
-
-                <img src="qris-dana.png" alt="QRIS Kado Digital" style="width: 200px; height: 200px; object-fit: contain; border: 4px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 8px;">
-
-                <p style="font-size: 0.85rem; color: #555; font-weight: 600; margin: 0;">a.n Gede Ardy Putrawan</p>
-
-                <a href="qris-dana.png" download="qris-dana.png" style="display: inline-block; background-color: #0086b3; color: white; text-decoration: none; padding: 10px 20px; font-size: 0.8rem; font-weight: 600; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin: 5px 0; transition: 0.3s;">
-                    📸 Simpan QRIS ke Galeri HP
-                </a>
-
-                <div style="margin-top: 5px; background-color: #fff; padding: 10px; border-radius: 6px; text-align: left; font-size: 0.75rem; color: #666; line-height: 1.4; border: 1px solid #eadecc;">
-                    <strong>💡 Cara Transfer Gratis via HP:</strong><br>
-                    1. Klik tombol <strong>"Simpan QRIS ke Galeri HP"</strong> di atas.<br>
-                    2. Buka M-Banking Anda (BPD Bali, BCA, Mandiri, dll) or e-wallet lainnya.<br>
-                    3. Pilih menu <strong>Scan / QRIS</strong>.<br>
-                    4. Ketuk ikon <strong>Galeri/Foto</strong> di pojok menu scan, lalu pilih foto QRIS yang baru di-download tadi.<br>
-                    5. Masukkan nominal transfer (Bebas biaya admin).
-                </div>
-            </div>
-        </section>
-
-        <hr class="pembatas">
-
-        <section class="section-rsvp scroll-animasi">
-            <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-align: center; color: #aa8c2c; margin: 0 0 5px 0;">Konfirmasi Kehadiran</h3>
-            <form id="rsvp-form">
-                <div class="rsvp-inputs">
-                    <input type="text" name="Nama Tamu" placeholder="Nama Anda" required>
-                    <select name="Status Kehadiran" required>
-                        <option value="">-- Pilih Kehadiran --</option>
-                        <option value="Hadir">Hadir</option>
-                        <option value="Tidak Hadir">Tidak Hadir</option>
-                    </select>
-                    <textarea name="Ucapan" placeholder="Tulis ucapan/doa di sini..." rows="3"></textarea>
-                    <button type="submit" class="btn-submit">Kirim Konfirmasi</button>
-                </div>
-            </form>   
-            <div id="form-status" style="margin-top:15px; text-align:center; font-weight:600; font-size:0.9rem;"></div>
-            
-            <div id="wadahKomentar" style="margin-top: 30px; padding: 20px; border-top: 2px solid #aa8c2c;">
-                <h4 style="text-align: center; color: #333; margin: 0 0 15px 0;">Riwayat Ucapan Tamu</h4>
-            </div>
-        </section>
+            </section>
+        </div>
     </div>
 
 <script>
@@ -441,152 +470,98 @@
 
     // 4. Hitung Mundur (Countdown) - Menuju 31 Des 2026
     function hitungMundur() {
-        const targetDate = new Date("December 31, 2026 09:00:00").getTime();
-        setInterval(function() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
+        const targetDate = new Date('December 31, 2026 09:00:00 WITA').getTime();
+        const now = new Date().getTime();
+        const selisih = targetDate - now;
 
-            if (distance < 0) return;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
-        }, 1000);
-    }
-
-    // LOGIKA UTAMA SLIDER AUTOPLAY
-    let intervalGaleri;
-
-    function geserGaleri(arah) {
-        const slider = document.getElementById('sliderGaleri');
-        const lebarItem = slider.querySelector('.galeri-item').clientWidth + 15;
-        const totalFoto = slider.querySelectorAll('.galeri-item').length;
-        
-        let indexAktif = Math.round(slider.scrollLeft / lebarItem);
-        let indexBaru = indexAktif + arah;
-
-        if (indexBaru >= totalFoto) {
-            indexBaru = 0;
-        } else if (indexBaru < 0) {
-            indexBaru = totalFoto - 1;
+        if (selisih <= 0) {
+            document.getElementById('days').innerText = '00';
+            document.getElementById('hours').innerText = '00';
+            document.getElementById('minutes').innerText = '00';
+            document.getElementById('seconds').innerText = '00';
+            return;
         }
 
-        slider.scrollLeft = lebarItem * indexBaru;
-        
-        clearInterval(intervalGaleri);
-        mulaiAutoplayGaleri();
+        const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
+        const jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
+        const detik = Math.floor((selisih % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = hari < 10 ? '0' + hari : hari;
+        document.getElementById('hours').innerText = jam < 10 ? '0' + jam : jam;
+        document.getElementById('minutes').innerText = menit < 10 ? '0' + menit : menit;
+        document.getElementById('seconds').innerText = detik < 10 ? '0' + detik : detik;
+    }
+    setInterval(hitungMundur, 1000);
+
+    // 5. Animasi Muncul Efek Pop-up / Gelembung saat Scroll
+    function cekScroll() {
+        const targetAnimasi = document.querySelectorAll('.scroll-animasi');
+        targetAnimasi.forEach(elemen => {
+            const batasAtas = elemen.getBoundingClientRect().top;
+            const tinggiLayar = window.innerHeight * 0.85;
+            if (batasAtas < tinggiLayar) {
+                elemen.classList.add('muncul');
+            }
+        });
+    }
+    window.addEventListener('scroll', cekScroll);
+    window.addEventListener('load', () => { getGuestName(); cekScroll(); ambilUlasan(); });
+
+    // 6. Fungsi Galeri Slider Manual & Otomatis (Autoplay)
+    const slider = document.getElementById('sliderGaleri');
+    let intervalAutoplay;
+
+    function geserGaleri(arah) {
+        const itemWidth = slider.querySelector('.galeri-item').clientWidth + 15;
+        slider.scrollBy({ left: arah * itemWidth, behavior: 'smooth' });
     }
 
-    function mulaiAutoplayGaleri() {
-        intervalGaleri = setInterval(() => {
-            geserGaleri(1);
-        }, 3000);
+    function lompatKeFoto(indeks) {
+        const itemWidth = slider.querySelector('.galeri-item').clientWidth + 15;
+        slider.scrollTo({ left: indeks * itemWidth, behavior: 'smooth' });
     }
 
     function perbaruiTitikIndikator() {
-        const slider = document.getElementById('sliderGaleri');
-        const dots = document.getElementById('wadahDots').getElementsByClassName('dot');
-        const lebarItem = slider.querySelector('.galeri-item').clientWidth + 15;
+        const dots = document.querySelectorAll('.dot');
+        const itemWidth = slider.querySelector('.galeri-item').clientWidth + 15;
+        const indeksAktif = Math.round(slider.scrollLeft / itemWidth);
         
-        const indexAktif = Math.round(slider.scrollLeft / lebarItem);
-        
-        for (let i = 0; i < dots.length; i++) {
-            dots[i].classList.remove('active');
-        }
-        if (dots[indexAktif]) {
-            dots[indexAktif].classList.add('active');
-        }
-    }
-
-    function lompatKeFoto(index) {
-        const slider = document.getElementById('sliderGaleri');
-        const lebarItem = slider.querySelector('.galeri-item').clientWidth + 15;
-        slider.scrollLeft = lebarItem * index;
-        
-        clearInterval(intervalGaleri);
-        mulaiAutoplayGaleri();
-    }
-
-    // 5. Submit RSVP ke Google Sheets
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        statusDiv.textContent = "Sedang mengirim konfirmasi...";
-        statusDiv.style.color = "#aa8c2c";
-
-        const data = new FormData(form);
-        
-        fetch(SCRIPT_URL, { method: 'POST', body: data })
-        .then(res => {
-            statusDiv.textContent = "Konfirmasi berhasil dikirim! Terima kasih.";
-            statusDiv.style.color = "green";
-            form.reset();
-            muatKomentar();
-        })
-        .catch(err => { 
-            statusDiv.textContent = "Terjadi gangguan, silakan coba lagi.";
-            statusDiv.style.color = "red";
-        });
-    });
-
-    // 6. Muat Ucapan secara Real-time
-    async function muatKomentar() {
-        const wadah = document.getElementById('wadahKomentar');
-        try {
-            const res = await fetch(SCRIPT_URL);
-            const data = await res.json();
-            wadah.innerHTML = '<h4 style="text-align:center; color:#333; margin-bottom:15px;">Riwayat Ucapan Tamu</h4>';
-            
-            let limit = 0;
-            for (let i = data.length - 1; i > 0; i--) {
-                if(limit >= 5) break;
-                if(data[i][1] && data[i][3]) { 
-                    wadah.innerHTML += `<div style='margin-bottom:12px; padding:12px; background:#fdfcf9; border: 1px solid #eadecc; border-radius:8px; text-align:left;'>
-                        <strong style='color:#aa8c2c; font-size:0.9rem;'>${data[i][1]}</strong> <span style='font-size:0.75rem; color:green;'>(${data[i][2]})</span><br>
-                        <p style='margin:5px 0 0 0; font-size:0.85rem; color:#555;'>${data[i][3]}</p>
-                    </div>`;
-                    limit++;
-                }
+        dots.forEach((dot, idx) => {
+            if (idx === indeksAktif) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
             }
-        } catch(err) { 
-            wadah.innerHTML = '<p style="font-size:0.8rem; color:#999; text-align:center;">Belum ada ucapan atau gagal memuat.</p>'; 
-        }
-    }
-
-    // 7. Fungsi Lightbox (Perbesar Foto)
-    function perbesarFoto(src) { 
-        document.getElementById('lightbox-img').src = src; 
-        document.getElementById('lightbox-overlay').classList.add('active'); 
-    }
-    function tutupFoto() { 
-        document.getElementById('lightbox-overlay').classList.remove('active'); 
-    }
-
-    window.onload = function() {
-        getGuestName();
-        hitungMundur();
-        muatKomentar();
-
-        // --- SISTEM DETEKSI GELEMBUNG SCROLL ---
-        const elemenAnimasi = document.querySelectorAll('.scroll-animasi');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('muncul');
-                }
-            });
-        }, {
-            threshold: 0.1, 
-            rootMargin: "0px 0px -40px 0px" 
         });
+    }
 
-        elemenAnimasi.forEach(elemen => observer.observe(elemen));
-    };
-</script>
+    function mulaiAutoplayGaleri() {
+        intervalAutoplay = setInterval(() => {
+            const itemWidth = slider.querySelector('.galeri-item').clientWidth + 15;
+            const totalFoto = slider.querySelectorAll('.galeri-item').length;
+            const indeksAktif = Math.round(slider.scrollLeft / itemWidth);
+
+            if (indeksAktif >= totalFoto - 1) {
+                slider.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                slider.scrollBy({ left: itemWidth, behavior: 'smooth' });
+            }
+        }, 4000);
+    }
+
+    slider.addEventListener('touchstart', () => clearInterval(intervalAutoplay));
+
+    // 7. Lightbox Preview (Perbesar Foto)
+    function perbesarFoto(src) {
+        const overlay = document.getElementById('lightbox-overlay');
+        const img = document.getElementById('lightbox-img');
+        img.src = src;
+        overlay.classList.add('active');
+    }
+
+    function tutupFoto() {
+        document.getElementById('lightbox-overlay').classList.remove('active');
+    </script>
 </body>
 </html>
