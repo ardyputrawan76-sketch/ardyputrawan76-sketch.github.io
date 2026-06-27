@@ -114,7 +114,7 @@
             margin: 40px 0; 
         }
 
-        /* FIX SMOOTH: FOTO UTAMA ATAS (Ukurannya konsisten sehingga scroll sangat mulus) */
+        /* FIX SMOOTH: FOTO UTAMA ATAS */
         .hero-foto {
             width: 100%;
             height: 45vh;
@@ -224,7 +224,6 @@
         .lightbox-hint { color: #caa; font-size: 0.8rem; letter-spacing: 1px; margin-top: 15px; text-align: center; }
 
         .section-kado { background-color: #fffdfa; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); border: 1px solid #eaddca; }
-        .card-rekening { background-color: #f7f5f0; border: 1px dashed #8b5a2b; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center; }
         
         .section-rsvp { background-color: #fffdfa; padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); border: 1px solid #eaddca; text-align: left; }
         .rsvp-inputs { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
@@ -360,15 +359,58 @@
 
             <hr class="pembatas">
 
+            <!-- BAGIAN KADO DIGITAL DENGAN KARTU ATM BPD BALI -->
             <section class="section-kado scroll-animasi">
                 <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #5c4033; margin: 0;">Kado Digital</h3>
-                <p style="font-size: 0.85rem; color: #5c4033; line-height: 1.5; margin-top: 10px;">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika ingin memberikan tanda kasih, anda dapat menstransfer ke QRIS DANA di bawah ini:</p>
+                <p style="font-size: 0.85rem; color: #5c4033; line-height: 1.5; margin-top: 10px;">
+                    Doa restu Anda merupakan karunia terindah bagi kami. Namun jika ingin memberikan tanda kasih, Anda dapat mentransfer melalui rekening di bawah ini:
+                </p>
 
-                <div class="card-rekening" style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
-                    <p style="font-weight: 600; color: #8b5a2b; letter-spacing: 1px; margin: 0;">QRIS DANA (ALL BANK & E-WALLET)</p>
-                    <img src="qris-dana.png" alt="QRIS Kado Digital" style="width: 200px; height: 200px; object-fit: contain; border: 4px solid #fff; box-shadow: 0 4px 10px rgba(92,64,51,0.1); border-radius: 8px;">
-                    <p style="font-size: 0.85rem; color: #5c4033; font-weight: 600; margin: 0;">a.n Gede Ardy Putrawan</p>
-                    <a href="qris-dana.png" download="qris-dana.png" style="display: inline-block; background-color: #8b5a2b; color: white; text-decoration: none; padding: 10px 20px; font-size: 0.8rem; font-weight: 600; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin: 5px 0; transition: 0.3s;">📸 Simpan QRIS ke Galeri HP</a>
+                <div class="atm-card" style="
+                    background: linear-gradient(135deg, #0f4c81 0%, #1d70b8 100%);
+                    color: white;
+                    padding: 25px;
+                    border-radius: 15px;
+                    max-width: 350px;
+                    margin: 20px auto;
+                    text-align: left;
+                    box-shadow: 0 8px 20px rgba(15, 76, 129, 0.3);
+                    position: relative;
+                    overflow: hidden;
+                    font-family: 'Montserrat', sans-serif;
+                ">
+                    <!-- Efek Kilau Aksen Kartu -->
+                    <div style="position: absolute; top: -50%; right: -20%; width: 200px; height: 200px; background: rgba(255,255,255,0.08); border-radius: 50%;"></div>
+                    
+                    <!-- Header Kartu -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                        <span style="font-weight: bold; font-size: 1.1rem; letter-spacing: 1px;">BPD BALI</span>
+                        <!-- Chip ATM -->
+                        <div style="width: 40px; height: 30px; background: linear-gradient(135deg, #fcd34d 0%, #b45309 100%); border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Nomor Rekening -->
+                    <p style="margin: 0; font-size: 0.8rem; color: #cbd5e1; letter-spacing: 1px;">NOMOR REKENING</p>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin: 5px 0 20px 0;">
+                        <span style="font-size: 1.3rem; font-weight: bold; letter-spacing: 2px;">057 0205 00004 1</span>
+                        <button onclick="copyNoRek()" style="
+                            background: rgba(255, 255, 255, 0.2);
+                            border: none;
+                            color: white;
+                            padding: 5px 12px;
+                            font-size: 0.75rem;
+                            border-radius: 12px;
+                            cursor: pointer;
+                            backdrop-filter: blur(5px);
+                            transition: 0.3s;
+                        " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+                            📋 <span id="btn-text">Salin</span>
+                        </button>
+                    </div>
+
+                    <!-- Nama Pemilik -->
+                    <p style="margin: 0; font-size: 0.8rem; color: #cbd5e1; letter-spacing: 1px;">CARD HOLDER</p>
+                    <p style="margin: 5px 0 0 0; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Gede Ardy Putrawan</p>
                 </div>
             </section>
 
@@ -416,7 +458,6 @@
         document.getElementById('cover').classList.add('opened');
         document.body.style.overflowY = 'auto'; 
         
-        // Pemicu transisi konten utama naik dengan smooth
         const mainContent = document.getElementById('main-content');
         mainContent.classList.add('muncul-konten');
 
@@ -571,6 +612,20 @@
         if (sentuhanAwalX - sentuhanAkhirX > 50) navigasiLightbox(1, e);  
         if (sentuhanAkhirX - sentuhanAwalX > 50) navigasiLightbox(-1, e); 
     });
+
+    // FUNGSI COPY SALIN REKENING
+    function copyNoRek() {
+        const noRekAsli = "0570205000041"; 
+        navigator.clipboard.writeText(noRekAsli).then(() => {
+            const btnText = document.getElementById('btn-text');
+            btnText.innerText = "Tersalin!";
+            setTimeout(() => {
+                btnText.innerText = "Salin";
+            }, 2000);
+        }).catch(err => {
+            console.error('Gagal menyalin: ', err);
+        });
+    }
 </script>
 </body>
 </html>
