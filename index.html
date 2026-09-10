@@ -35,7 +35,7 @@
             position: relative;
         }
 
-        /* --- BACKGROUND UKIRAN BALINIS MOVING PARALLAX --- */
+        /* --- BACKGROUND UKIRAN BUNGA BALI ELEGAN (PARALLAX) --- */
         .ukiran-container {
             position: fixed;
             top: 0; left: 0;
@@ -45,21 +45,20 @@
             overflow: hidden;
         }
 
-        .ukiran-balis {
+        .ukiran-bunga-bali {
             position: absolute;
-            width: clamp(160px, 35vw, 280px);
-            fill: #6d421d; /* Warna ukiran kayu klasik */
-            opacity: 0.5;
-            filter: drop-shadow(2px 3px 5px rgba(60, 35, 15, 0.3));
+            width: clamp(180px, 38vw, 320px);
+            opacity: 0.65;
+            filter: drop-shadow(2px 4px 8px rgba(70, 38, 15, 0.3));
             will-change: transform;
             transition: transform 0.08s cubic-bezier(0.1, 1, 0.1, 1);
         }
 
-        /* Posisi Ukiran Khas Sudut & Samping Bali */
-        .ub-top-left { top: -20px; left: -20px; }
-        .ub-top-right { top: 10vh; right: -20px; transform: scaleX(-1); }
-        .ub-mid-left { top: 45vh; left: -25px; }
-        .ub-bot-right { top: 70vh; right: -25px; transform: scaleX(-1); }
+        /* Posisi Sudut dan Samping dengan Ornamen Bunga Megah */
+        .ub-top-left { top: -25px; left: -25px; }
+        .ub-top-right { top: 5vh; right: -25px; transform: scaleX(-1); }
+        .ub-mid-left { top: 40vh; left: -30px; }
+        .ub-bot-right { top: 68vh; right: -30px; transform: scaleX(-1); }
 
         /* Cover Layar Penuh */
         #cover {
@@ -296,34 +295,46 @@
 </head>
 <body>
 
-    <!-- LAYER ORNAMEN UKIRAN KLASIK BALI (PATRA PUNGGEL / PEPATRAN) DENGAN EFEK PARALLAX -->
+    <!-- LAYER ORNAMEN UKIRAN BUNGA BALI MEWAH & DETAIL (PARALLAX EFFECT) -->
     <div class="ukiran-container">
-        <!-- Ukiran Bali Sudut Kiri Atas -->
-        <svg class="ukiran-balis ub-top-left" data-speed="0.3" viewBox="0 0 200 200">
-            <path d="M10,10 C40,10 80,30 90,70 C100,110 60,130 30,120 C15,115 10,100 25,95 C40,90 70,100 60,70 C50,40 20,30 10,10 Z"></path>
-            <path d="M10,10 C20,50 50,90 90,90 C110,90 120,70 110,60 C100,50 90,70 80,70 C60,70 40,40 20,20 Z" fill="#d4af37" opacity="0.7"></path>
-            <circle cx="100" cy="40" r="8" fill="#d4af37"/>
-            <circle cx="40" cy="100" r="6" fill="#d4af37"/>
+        <!-- Ukiran Bunga Bali Sudut Kiri Atas -->
+        <svg class="ukiran-bunga-bali ub-top-left" data-speed="0.3" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 10 C60 10 120 40 140 90 C160 140 120 180 70 190 C30 195 10 170 25 145 C40 120 80 130 75 100 C70 70 30 50 10 10 Z" fill="#6d421d"/>
+            <!-- Mahkota Bunga Mekar Khas Bali -->
+            <path d="M10 10 Q50 60 90 40 Q130 20 150 70 Q170 120 120 130 Q70 140 40 100 Z" fill="#d4af37" opacity="0.8"/>
+            <circle cx="75" cy="75" r="14" fill="#523013"/>
+            <circle cx="75" cy="75" r="8" fill="#f3e5ab"/>
+            <!-- Kelopak Daun Melengkung -->
+            <path d="M75 90 C100 130 140 150 180 130 C150 170 90 160 75 90 Z" fill="#824c1f" opacity="0.9"/>
+            <path d="M90 75 C130 100 160 70 190 100 C160 130 120 110 90 75 Z" fill="#824c1f" opacity="0.7"/>
         </svg>
 
-        <!-- Ukiran Bali Sudut Kanan Atas -->
-        <svg class="ukiran-balis ub-top-right" data-speed="-0.25" viewBox="0 0 200 200">
-            <path d="M10,10 C40,10 80,30 90,70 C100,110 60,130 30,120 C15,115 10,100 25,95 C40,90 70,100 60,70 C50,40 20,30 10,10 Z"></path>
-            <path d="M10,10 C20,50 50,90 90,90 C110,90 120,70 110,60 C100,50 90,70 80,70 C60,70 40,40 20,20 Z" fill="#d4af37" opacity="0.7"></path>
-            <circle cx="100" cy="40" r="8" fill="#d4af37"/>
-            <circle cx="40" cy="100" r="6" fill="#d4af37"/>
+        <!-- Ukiran Bunga Bali Sudut Kanan Atas -->
+        <svg class="ukiran-bunga-bali ub-top-right" data-speed="-0.25" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 10 C60 10 120 40 140 90 C160 140 120 180 70 190 C30 195 10 170 25 145 C40 120 80 130 75 100 C70 70 30 50 10 10 Z" fill="#6d421d"/>
+            <path d="M10 10 Q50 60 90 40 Q130 20 150 70 Q170 120 120 130 Q70 140 40 100 Z" fill="#d4af37" opacity="0.8"/>
+            <circle cx="75" cy="75" r="14" fill="#523013"/>
+            <circle cx="75" cy="75" r="8" fill="#f3e5ab"/>
+            <path d="M75 90 C100 130 140 150 180 130 C150 170 90 160 75 90 Z" fill="#824c1f" opacity="0.9"/>
+            <path d="M90 75 C130 100 160 70 190 100 C160 130 120 110 90 75 Z" fill="#824c1f" opacity="0.7"/>
         </svg>
 
-        <!-- Ukiran Bali Samping Tengah Kiri -->
-        <svg class="ukiran-balis ub-mid-left" data-speed="0.2" viewBox="0 0 200 200">
-            <path d="M10,10 C40,10 80,30 90,70 C100,110 60,130 30,120 C15,115 10,100 25,95 C40,90 70,100 60,70 C50,40 20,30 10,10 Z"></path>
-            <circle cx="100" cy="40" r="8" fill="#d4af37"/>
+        <!-- Ukiran Bunga Bali Samping Tengah Kiri -->
+        <svg class="ukiran-bunga-bali ub-mid-left" data-speed="0.2" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 10 C60 10 120 40 140 90 C160 140 120 180 70 190 C30 195 10 170 25 145 C40 120 80 130 75 100 C70 70 30 50 10 10 Z" fill="#6d421d"/>
+            <path d="M10 10 Q50 60 90 40 Q130 20 150 70 Q170 120 120 130 Q70 140 40 100 Z" fill="#d4af37" opacity="0.8"/>
+            <circle cx="75" cy="75" r="14" fill="#523013"/>
+            <circle cx="75" cy="75" r="8" fill="#f3e5ab"/>
+            <path d="M75 90 C100 130 140 150 180 130 C150 170 90 160 75 90 Z" fill="#824c1f" opacity="0.9"/>
         </svg>
 
-        <!-- Ukiran Bali Samping Bawah Kanan -->
-        <svg class="ukiran-balis ub-bot-right" data-speed="-0.35" viewBox="0 0 200 200">
-            <path d="M10,10 C40,10 80,30 90,70 C100,110 60,130 30,120 C15,115 10,100 25,95 C40,90 70,100 60,70 C50,40 20,30 10,10 Z"></path>
-            <circle cx="100" cy="40" r="8" fill="#d4af37"/>
+        <!-- Ukiran Bunga Bali Samping Bawah Kanan -->
+        <svg class="ukiran-bunga-bali ub-bot-right" data-speed="-0.35" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 10 C60 10 120 40 140 90 C160 140 120 180 70 190 C30 195 10 170 25 145 C40 120 80 130 75 100 C70 70 30 50 10 10 Z" fill="#6d421d"/>
+            <path d="M10 10 Q50 60 90 40 Q130 20 150 70 Q170 120 120 130 Q70 140 40 100 Z" fill="#d4af37" opacity="0.8"/>
+            <circle cx="75" cy="75" r="14" fill="#523013"/>
+            <circle cx="75" cy="75" r="8" fill="#f3e5ab"/>
+            <path d="M75 90 C100 130 140 150 180 130 C150 170 90 160 75 90 Z" fill="#824c1f" opacity="0.9"/>
         </svg>
     </div>
 
@@ -583,7 +594,7 @@
     }
     setInterval(hitungMundur, 1000);
 
-    /* PROSES ANIMASI GERAK PARALLAX UKIRAN BALI SAAT SCROLL */
+    /* PROSES ANIMASI GERAK PARALLAX UKIRAN BUNGA BALI SAAT SCROLL */
     function prosesParallax() {
         const posScroll = window.scrollY || window.pageYOffset;
 
@@ -596,11 +607,11 @@
             }
         });
 
-        const itemUkiran = document.querySelectorAll('.ukiran-balis');
+        const itemUkiran = document.querySelectorAll('.ukiran-bunga-bali');
         itemUkiran.forEach(ukiran => {
             const kelajuan = parseFloat(ukiran.getAttribute('data-speed'));
             const offset = posScroll * kelajuan;
-            const putaran = (posScroll * 0.03 * kelajuan);
+            const putaran = (posScroll * 0.02 * kelajuan);
             
             const balikKanan = ukiran.classList.contains('ub-top-right') || ukiran.classList.contains('ub-bot-right');
             const cermin = balikKanan ? 'scaleX(-1) ' : '';
