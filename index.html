@@ -34,70 +34,31 @@
             position: relative;
         }
 
-        /* --- BG UKIRAN MOVING EFFECT (DIBIKIN LEBIH JELAS & KONTRAS) --- */
-        .bg-ukiran-fixed {
+        /* --- BACKGROUND PARALLAX UKIRAN ELEGAN --- */
+        .parallax-bg-wrapper {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
             pointer-events: none;
-            z-index: 10; /* Berada di atas bg tapi di bawah konten utama */
+            z-index: 5;
             overflow: hidden;
         }
 
-        .ukiran-item {
+        /* Ukiran Samping Kiri & Kanan Layar */
+        .ukiran-parallax {
             position: absolute;
-            width: clamp(140px, 35vw, 220px);
-            opacity: 0.55; /* Lebih tebal supaya jelas kelihatan */
-            filter: drop-shadow(2px 4px 6px rgba(92, 64, 51, 0.3));
+            width: clamp(160px, 32vw, 280px);
+            opacity: 0.45;
+            fill: #724720;
+            filter: drop-shadow(2px 4px 8px rgba(74, 48, 22, 0.25));
+            will-change: transform;
+            transition: transform 0.1s ease-out; /* Menjaga animasi scroll terasa halus */
         }
 
-        .ukiran-1 {
-            top: -10px; left: -10px;
-            animation: gerakPutar1 8s ease-in-out infinite alternate;
-        }
-
-        .ukiran-2 {
-            top: -10px; right: -10px;
-            animation: gerakPutar2 10s ease-in-out infinite alternate;
-        }
-
-        .ukiran-3 {
-            bottom: -10px; left: -10px;
-            animation: gerakPutar2 9s ease-in-out infinite alternate;
-        }
-
-        .ukiran-4 {
-            bottom: -10px; right: -10px;
-            animation: gerakPutar1 11s ease-in-out infinite alternate;
-        }
-
-        /* Keyframes Gerak Melayang & Berputar Halus */
-        @keyframes gerakPutar1 {
-            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-            50% { transform: translate(20px, 25px) rotate(8deg) scale(1.08); }
-            100% { transform: translate(-15px, 15px) rotate(-5deg) scale(0.95); }
-        }
-
-        @keyframes gerakPutar2 {
-            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-            50% { transform: translate(-20px, 20px) rotate(-8deg) scale(1.05); }
-            100% { transform: translate(15px, -15px) rotate(6deg) scale(0.98); }
-        }
-
-        /* Particle Bunga / Emas Melayang Naik */
-        .partikel-emas {
-            position: absolute;
-            background: #d4af37;
-            border-radius: 50%;
-            opacity: 0.6;
-            box-shadow: 0 0 8px #d4af37;
-            animation: melayangNaik 7s linear infinite;
-        }
-
-        @keyframes melayangNaik {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-        }
+        .ukiran-left-1 { top: 5%; left: -30px; }
+        .ukiran-right-1 { top: 25%; right: -30px; transform: scaleX(-1); }
+        .ukiran-left-2 { top: 55%; left: -30px; }
+        .ukiran-right-2 { top: 75%; right: -30px; transform: scaleX(-1); }
 
         /* Cover Layar Penuh */
         #cover {
@@ -156,7 +117,7 @@
             transform: scale(1.05);
         }
 
-        /* KONTEN UTAMA - Transparan sedikit agar ukiran dibelakang nampak */
+        /* KONTEN UTAMA */
         #main-content { 
             padding: 0 0 40px 0; text-align: center; max-width: 600px; margin: 0 auto; 
             opacity: 0; transform: translateY(30px);
@@ -334,38 +295,27 @@
 </head>
 <body>
 
-    <!-- LAYER ORNAMEN UKIRAN GERAK LAYAR PENUH -->
-    <div class="bg-ukiran-fixed">
-        <!-- SVG UKIRAN JELAS DI 4 SUDUT LAYAR -->
-        <svg class="ukiran-item ukiran-1" viewBox="0 0 100 100" fill="#8b5a2b">
-            <path d="M 0,0 C 50,0 100,20 100,100 C 70,70 50,20 0,0 Z"></path>
-            <circle cx="25" cy="25" r="10" fill="#d4af37"/>
-            <path d="M 10,40 Q 40,40 40,10" stroke="#8b5a2b" stroke-width="3" fill="none"/>
+    <!-- ORNAMEN UKIRAN DENGAN PARALLAX SCROLL EFFECT -->
+    <div class="parallax-bg-wrapper">
+        <svg class="ukiran-parallax ukiran-left-1" data-speed="0.25" viewBox="0 0 120 200">
+            <path d="M0,0 C60,20 100,60 100,100 C100,140 60,180 0,200 C40,160 60,130 60,100 C60,70 40,40 0,0 Z"></path>
+            <circle cx="70" cy="100" r="8" fill="#d4af37"/>
         </svg>
 
-        <svg class="ukiran-item ukiran-2" viewBox="0 0 100 100" fill="#8b5a2b">
-            <path d="M 100,0 C 50,0 0,20 0,100 C 30,70 50,20 100,0 Z"></path>
-            <circle cx="75" cy="25" r="10" fill="#d4af37"/>
-            <path d="M 90,40 Q 60,40 60,10" stroke="#8b5a2b" stroke-width="3" fill="none"/>
+        <svg class="ukiran-parallax ukiran-right-1" data-speed="-0.3" viewBox="0 0 120 200">
+            <path d="M0,0 C60,20 100,60 100,100 C100,140 60,180 0,200 C40,160 60,130 60,100 C60,70 40,40 0,0 Z"></path>
+            <circle cx="70" cy="100" r="8" fill="#d4af37"/>
         </svg>
 
-        <svg class="ukiran-item ukiran-3" viewBox="0 0 100 100" fill="#8b5a2b">
-            <path d="M 0,100 C 50,100 100,80 100,0 C 70,30 50,80 0,100 Z"></path>
-            <circle cx="25" cy="75" r="10" fill="#d4af37"/>
-            <path d="M 10,60 Q 40,60 40,90" stroke="#8b5a2b" stroke-width="3" fill="none"/>
+        <svg class="ukiran-parallax ukiran-left-2" data-speed="0.2" viewBox="0 0 120 200">
+            <path d="M0,0 C60,20 100,60 100,100 C100,140 60,180 0,200 C40,160 60,130 60,100 C60,70 40,40 0,0 Z"></path>
+            <circle cx="70" cy="100" r="8" fill="#d4af37"/>
         </svg>
 
-        <svg class="ukiran-item ukiran-4" viewBox="0 0 100 100" fill="#8b5a2b">
-            <path d="M 100,100 C 50,100 0,80 0,0 C 30,30 50,80 100,100 Z"></path>
-            <circle cx="75" cy="75" r="10" fill="#d4af37"/>
-            <path d="M 90,60 Q 60,60 60,90" stroke="#8b5a2b" stroke-width="3" fill="none"/>
+        <svg class="ukiran-parallax ukiran-right-2" data-speed="-0.25" viewBox="0 0 120 200">
+            <path d="M0,0 C60,20 100,60 100,100 C100,140 60,180 0,200 C40,160 60,130 60,100 C60,70 40,40 0,0 Z"></path>
+            <circle cx="70" cy="100" r="8" fill="#d4af37"/>
         </svg>
-
-        <!-- Bintik Emas Berkilau Melayang Naik -->
-        <div class="partikel-emas" style="width:10px; height:10px; left:10%; animation-delay: 0s;"></div>
-        <div class="partikel-emas" style="width:14px; height:14px; left:30%; animation-delay: 2s;"></div>
-        <div class="partikel-emas" style="width:8px; height:8px; left:70%; animation-delay: 4s;"></div>
-        <div class="partikel-emas" style="width:12px; height:12px; left:90%; animation-delay: 1s;"></div>
     </div>
 
     <audio id="bg-music" src="musik-pernikahan.mp3" loop></audio>
@@ -623,7 +573,11 @@
     }
     setInterval(hitungMundur, 1000);
 
-    function cekScroll() {
+    /* LOGIKA PARALLAX SCROLL EFEK GERAK HALUS DARI UKIRAN */
+    function gulingLayar() {
+        const wScroll = window.scrollY;
+        
+        // Animasi elemen konten
         const targetAnimasi = document.querySelectorAll('.scroll-animasi');
         targetAnimasi.forEach(elemen => {
             const batasAtas = elemen.getBoundingClientRect().top;
@@ -632,9 +586,23 @@
                 elemen.classList.add('muncul');
             }
         });
+
+        // Animasi ukiran melayang sesuai arah dan jarak scroll
+        const elemenUkiran = document.querySelectorAll('.ukiran-parallax');
+        elemenUkiran.forEach(ukiran => {
+            const speed = parseFloat(ukiran.getAttribute('data-speed'));
+            const isFlipped = ukiran.classList.contains('ukiran-right-1') || ukiran.classList.contains('ukiran-right-2');
+            const scaleText = isFlipped ? 'scaleX(-1) ' : '';
+            
+            // Menggeser posisi vertikal dan merotasi sedikit saat di-scroll
+            const yPos = wScroll * speed;
+            const rotasi = (wScroll * 0.05 * speed);
+            ukiran.style.transform = `${scaleText}translateY(${yPos}px) rotate(${rotasi}deg)`;
+        });
     }
-    window.addEventListener('scroll', cekScroll);
-    window.addEventListener('load', () => { getGuestName(); cekScroll(); });
+
+    window.addEventListener('scroll', gulingLayar);
+    window.addEventListener('load', () => { getGuestName(); gulingLayar(); });
 
     const slider = document.getElementById('sliderGaleri');
     let intervalAutoplay;
