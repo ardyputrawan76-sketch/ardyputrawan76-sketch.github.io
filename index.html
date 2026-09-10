@@ -29,36 +29,37 @@
             background-image: linear-gradient(90deg, rgba(218,196,171,0.4) 1px, transparent 1px),
                               linear-gradient(rgba(218,196,171,0.4) 1px, transparent 1px);
             background-size: 20px 20px;
-            overflow-x: hidden; font-family: 'Montserrat', sans-serif; 
-            overflow-y: hidden;
+            overflow-x: hidden; 
+            overflow-y: hidden; /* Terkunci sementara sebelum cover dibuka */
+            font-family: 'Montserrat', sans-serif; 
             position: relative;
         }
 
-        /* --- BACKGROUND PARALLAX UKIRAN ELEGAN --- */
-        .parallax-bg-wrapper {
+        /* --- BACKGROUND UKIRAN BALINIS MOVING PARALLAX --- */
+        .ukiran-container {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             pointer-events: none;
-            z-index: 5;
+            z-index: 1;
             overflow: hidden;
         }
 
-        /* Ukiran Samping Kiri & Kanan Layar */
-        .ukiran-parallax {
+        .ukiran-balis {
             position: absolute;
-            width: clamp(160px, 32vw, 280px);
-            opacity: 0.45;
-            fill: #724720;
-            filter: drop-shadow(2px 4px 8px rgba(74, 48, 22, 0.25));
+            width: clamp(160px, 35vw, 280px);
+            fill: #6d421d; /* Warna ukiran kayu klasik */
+            opacity: 0.5;
+            filter: drop-shadow(2px 3px 5px rgba(60, 35, 15, 0.3));
             will-change: transform;
-            transition: transform 0.1s ease-out; /* Menjaga animasi scroll terasa halus */
+            transition: transform 0.08s cubic-bezier(0.1, 1, 0.1, 1);
         }
 
-        .ukiran-left-1 { top: 5%; left: -30px; }
-        .ukiran-right-1 { top: 25%; right: -30px; transform: scaleX(-1); }
-        .ukiran-left-2 { top: 55%; left: -30px; }
-        .ukiran-right-2 { top: 75%; right: -30px; transform: scaleX(-1); }
+        /* Posisi Ukiran Khas Sudut & Samping Bali */
+        .ub-top-left { top: -20px; left: -20px; }
+        .ub-top-right { top: 10vh; right: -20px; transform: scaleX(-1); }
+        .ub-mid-left { top: 45vh; left: -25px; }
+        .ub-bot-right { top: 70vh; right: -25px; transform: scaleX(-1); }
 
         /* Cover Layar Penuh */
         #cover {
@@ -123,7 +124,7 @@
             opacity: 0; transform: translateY(30px);
             transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.215, 0.610, 0.355, 1); 
             position: relative;
-            z-index: 20;
+            z-index: 10;
         }
 
         #main-content.muncul-konten {
@@ -174,7 +175,7 @@
             width: 100%; max-width: 280px; background: rgba(255, 253, 250, 0.88); padding: 20px; 
             border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); 
             border: 1px solid #eaddca; box-sizing: border-box;
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(4px);
         }
         
         .avatar-frame { 
@@ -194,16 +195,16 @@
         .dan-simbol { font-family: 'Great Vibes', cursive; font-size: 2rem; color: #8b5a2b; }
 
         .timer-container { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
-        .timer-box { background: rgba(255, 253, 250, 0.88); width: 65px; padding: 10px 5px; border-radius: 8px; border: 1px solid #d2b48c; box-shadow: 0 2px 8px rgba(92,64,51,0.04); }
+        .timer-box { background: rgba(255, 253, 250, 0.88); width: 65px; padding: 10px 5px; border-radius: 8px; border: 1px solid #d2b48c; box-shadow: 0 2px 8px rgba(92,64,51,0.04); backdrop-filter: blur(4px); }
         .timer-box span { font-size: 1.3rem; font-weight: 600; color: #8b5a2b; display: block; }
         .timer-box p { font-size: 0.7rem; color: #5c4033; margin: 2px 0 0; }
         
-        .section-acara { background-color: rgba(255, 253, 250, 0.88); padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); border: 1px solid #eaddca; }
+        .section-acara { background-color: rgba(255, 253, 250, 0.88); padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); border: 1px solid #eaddca; backdrop-filter: blur(4px); }
         .acara-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #5c4033; margin-bottom: 15px; }
         .btn-maps { display: inline-block; background-color: #25d366; color: #fff; text-decoration: none; padding: 12px 25px; border-radius: 25px; font-size: 0.9rem; margin-top: 15px; transition: 0.3s; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
         .btn-maps:hover { background-color: #1ebd58; transform: scale(1.03); }
 
-        .section-galeri { background-color: rgba(255, 253, 250, 0.88); padding: 35px 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); position: relative; border: 1px solid #eaddca; }
+        .section-galeri { background-color: rgba(255, 253, 250, 0.88); padding: 35px 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); position: relative; border: 1px solid #eaddca; backdrop-filter: blur(4px); }
         .galeri-wrapper { position: relative; margin-top: 20px; display: flex; align-items: center; }
         .galeri-slider { display: flex; gap: 15px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 5px 5px 15px 5px; -webkit-overflow-scrolling: touch; }
         .galeri-slider::-webkit-scrollbar { display: none; }
@@ -246,9 +247,9 @@
         .lightbox-close { position: absolute; top: -45px; right: 0; color: white; font-size: 2rem; background: none; border: none; cursor: pointer; }
         .lightbox-hint { color: #caa; font-size: 0.8rem; letter-spacing: 1px; margin-top: 15px; text-align: center; }
 
-        .section-kado { background-color: rgba(255, 253, 250, 0.88); padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); border: 1px solid #eaddca; }
+        .section-kado { background-color: rgba(255, 253, 250, 0.88); padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); border: 1px solid #eaddca; backdrop-filter: blur(4px); }
         
-        .section-rsvp { background-color: rgba(255, 253, 250, 0.88); padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); border: 1px solid #eaddca; text-align: left; }
+        .section-rsvp { background-color: rgba(255, 253, 250, 0.88); padding: 35px 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06); border: 1px solid #eaddca; text-align: left; backdrop-filter: blur(4px); }
         .rsvp-inputs { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
         .rsvp-inputs input, .rsvp-inputs select, .rsvp-inputs textarea { width: 100%; padding: 12px; border: 1px solid #eaddca; border-radius: 8px; font-family: inherit; font-size: 0.9rem; background-color: #fbfbfa; box-sizing: border-box; color: #2c1e15; }
         .btn-submit { background-color: #8b5a2b; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; }
@@ -295,26 +296,34 @@
 </head>
 <body>
 
-    <!-- ORNAMEN UKIRAN DENGAN PARALLAX SCROLL EFFECT -->
-    <div class="parallax-bg-wrapper">
-        <svg class="ukiran-parallax ukiran-left-1" data-speed="0.25" viewBox="0 0 120 200">
-            <path d="M0,0 C60,20 100,60 100,100 C100,140 60,180 0,200 C40,160 60,130 60,100 C60,70 40,40 0,0 Z"></path>
-            <circle cx="70" cy="100" r="8" fill="#d4af37"/>
+    <!-- LAYER ORNAMEN UKIRAN KLASIK BALI (PATRA PUNGGEL / PEPATRAN) DENGAN EFEK PARALLAX -->
+    <div class="ukiran-container">
+        <!-- Ukiran Bali Sudut Kiri Atas -->
+        <svg class="ukiran-balis ub-top-left" data-speed="0.3" viewBox="0 0 200 200">
+            <path d="M10,10 C40,10 80,30 90,70 C100,110 60,130 30,120 C15,115 10,100 25,95 C40,90 70,100 60,70 C50,40 20,30 10,10 Z"></path>
+            <path d="M10,10 C20,50 50,90 90,90 C110,90 120,70 110,60 C100,50 90,70 80,70 C60,70 40,40 20,20 Z" fill="#d4af37" opacity="0.7"></path>
+            <circle cx="100" cy="40" r="8" fill="#d4af37"/>
+            <circle cx="40" cy="100" r="6" fill="#d4af37"/>
         </svg>
 
-        <svg class="ukiran-parallax ukiran-right-1" data-speed="-0.3" viewBox="0 0 120 200">
-            <path d="M0,0 C60,20 100,60 100,100 C100,140 60,180 0,200 C40,160 60,130 60,100 C60,70 40,40 0,0 Z"></path>
-            <circle cx="70" cy="100" r="8" fill="#d4af37"/>
+        <!-- Ukiran Bali Sudut Kanan Atas -->
+        <svg class="ukiran-balis ub-top-right" data-speed="-0.25" viewBox="0 0 200 200">
+            <path d="M10,10 C40,10 80,30 90,70 C100,110 60,130 30,120 C15,115 10,100 25,95 C40,90 70,100 60,70 C50,40 20,30 10,10 Z"></path>
+            <path d="M10,10 C20,50 50,90 90,90 C110,90 120,70 110,60 C100,50 90,70 80,70 C60,70 40,40 20,20 Z" fill="#d4af37" opacity="0.7"></path>
+            <circle cx="100" cy="40" r="8" fill="#d4af37"/>
+            <circle cx="40" cy="100" r="6" fill="#d4af37"/>
         </svg>
 
-        <svg class="ukiran-parallax ukiran-left-2" data-speed="0.2" viewBox="0 0 120 200">
-            <path d="M0,0 C60,20 100,60 100,100 C100,140 60,180 0,200 C40,160 60,130 60,100 C60,70 40,40 0,0 Z"></path>
-            <circle cx="70" cy="100" r="8" fill="#d4af37"/>
+        <!-- Ukiran Bali Samping Tengah Kiri -->
+        <svg class="ukiran-balis ub-mid-left" data-speed="0.2" viewBox="0 0 200 200">
+            <path d="M10,10 C40,10 80,30 90,70 C100,110 60,130 30,120 C15,115 10,100 25,95 C40,90 70,100 60,70 C50,40 20,30 10,10 Z"></path>
+            <circle cx="100" cy="40" r="8" fill="#d4af37"/>
         </svg>
 
-        <svg class="ukiran-parallax ukiran-right-2" data-speed="-0.25" viewBox="0 0 120 200">
-            <path d="M0,0 C60,20 100,60 100,100 C100,140 60,180 0,200 C40,160 60,130 60,100 C60,70 40,40 0,0 Z"></path>
-            <circle cx="70" cy="100" r="8" fill="#d4af37"/>
+        <!-- Ukiran Bali Samping Bawah Kanan -->
+        <svg class="ukiran-balis ub-bot-right" data-speed="-0.35" viewBox="0 0 200 200">
+            <path d="M10,10 C40,10 80,30 90,70 C100,110 60,130 30,120 C15,115 10,100 25,95 C40,90 70,100 60,70 C50,40 20,30 10,10 Z"></path>
+            <circle cx="100" cy="40" r="8" fill="#d4af37"/>
         </svg>
     </div>
 
@@ -534,6 +543,7 @@
         musicBtn.innerText = "🎵";
 
         mulaiAutoplayGaleri();
+        prosesParallax();
     }
 
     function toggleMusik() {
@@ -573,11 +583,10 @@
     }
     setInterval(hitungMundur, 1000);
 
-    /* LOGIKA PARALLAX SCROLL EFEK GERAK HALUS DARI UKIRAN */
-    function gulingLayar() {
-        const wScroll = window.scrollY;
-        
-        // Animasi elemen konten
+    /* PROSES ANIMASI GERAK PARALLAX UKIRAN BALI SAAT SCROLL */
+    function prosesParallax() {
+        const posScroll = window.scrollY || window.pageYOffset;
+
         const targetAnimasi = document.querySelectorAll('.scroll-animasi');
         targetAnimasi.forEach(elemen => {
             const batasAtas = elemen.getBoundingClientRect().top;
@@ -587,22 +596,21 @@
             }
         });
 
-        // Animasi ukiran melayang sesuai arah dan jarak scroll
-        const elemenUkiran = document.querySelectorAll('.ukiran-parallax');
-        elemenUkiran.forEach(ukiran => {
-            const speed = parseFloat(ukiran.getAttribute('data-speed'));
-            const isFlipped = ukiran.classList.contains('ukiran-right-1') || ukiran.classList.contains('ukiran-right-2');
-            const scaleText = isFlipped ? 'scaleX(-1) ' : '';
+        const itemUkiran = document.querySelectorAll('.ukiran-balis');
+        itemUkiran.forEach(ukiran => {
+            const kelajuan = parseFloat(ukiran.getAttribute('data-speed'));
+            const offset = posScroll * kelajuan;
+            const putaran = (posScroll * 0.03 * kelajuan);
             
-            // Menggeser posisi vertikal dan merotasi sedikit saat di-scroll
-            const yPos = wScroll * speed;
-            const rotasi = (wScroll * 0.05 * speed);
-            ukiran.style.transform = `${scaleText}translateY(${yPos}px) rotate(${rotasi}deg)`;
+            const balikKanan = ukiran.classList.contains('ub-top-right') || ukiran.classList.contains('ub-bot-right');
+            const cermin = balikKanan ? 'scaleX(-1) ' : '';
+
+            ukiran.style.transform = `${cermin}translateY(${offset}px) rotate(${putaran}deg)`;
         });
     }
 
-    window.addEventListener('scroll', gulingLayar);
-    window.addEventListener('load', () => { getGuestName(); gulingLayar(); });
+    window.addEventListener('scroll', prosesParallax);
+    window.addEventListener('load', () => { getGuestName(); prosesParallax(); });
 
     const slider = document.getElementById('sliderGaleri');
     let intervalAutoplay;
